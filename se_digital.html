@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superpoderes Emocionais - Versão Digital Interativa</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        
+        .back-button {
+            background: linear-gradient(45deg, #e17055, #d63031);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 30px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-weight: bold;
+        }
+
+        .game-container {
+            width: 95%;
+            max-width: 1200px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .scene {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .scene.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .scene-title {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .scene-subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            padding: 25px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 3px solid transparent;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .card.need {
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            background: #ffd700;
+        }
+
+        .card.emotion {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            background: #ff4757;
+            color: white;
+        }
+
+        .card.action {
+            background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
+            background: #2ed573;
+            color: white;
+        }
+
+        .final-scene {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .key-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.1;
+            width: 300px;
+            height: 300px;
+        }
+
+        .selected-cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .selected-card {
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            min-width: 180px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #ff4757, #2ed573);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cover-container {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .game-logo {
+            margin-bottom: 40px;
+        }
+
+        .logo-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .game-title {
+            font-size: 3.5rem;
+            color: white;
+            margin: 0 0 10px 0;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            font-weight: 700;
+            background: linear-gradient(45deg, #ffd700, #ff4757, #2ed573);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        .game-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.8);
+            margin: 0;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .cover-description {
+            margin-bottom: 50px;
+        }
+
+        .cover-description p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #ffd700 0%, #ff4757 50%, #2ed573 100%);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .btn-icon {
+            font-size: 1.2rem;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @media (max-width: 768px) {
+            .game-title {
+                font-size: 2.5rem;
+            }
+            
+            .game-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .logo-icon {
+                font-size: 3rem;
+            }
+            
+            .cover-description p {
+                font-size: 1rem;
+            }
+            
+            .start-btn {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+            
+            .scene-title {
+                font-size: 2rem;
+            }
+            
+            .cards-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+            }
+            
+            .card {
+                padding: 20px 15px;
+                font-size: 1rem;
+            }
+            
+            .selected-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .final-scene {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- Capa do Jogo -->
+        <img src="imagens/logo_se.png" height="200" />
+        <div class="scene active" id="coverScene">
+            <div class="cover-container">
+                <div class="game-logo">
+                    <h1 class="game-title">Superpoderes Emocionais</h1>
+                    <p class="game-subtitle">Versão Digital Interativa</p>
+                </div>
+                <div class="cover-description">
+                    <p>Descubra sua chave para o autoconhecimento através de uma jornada de reflexão emocional</p>
+                </div>
+                <button class="start-btn" onclick="startGame()">
+                    <span class="btn-icon">🚀</span>
+                    Começar
+                </button>
+                <br />
+                <br />
+                <p align="right">
+                
+                
+                <button class="back-button" onclick="window.location.href='index.html'">
+                ← Voltar para o menu inicial
+            </button>
+            </div>
+        </div>
+
+        <!-- Barra de Progresso -->
+        <div class="progress-bar" id="progressBar" style="display: none;">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <!-- Cena 1: Necessidades -->
+        <div class="scene" id="needScene">
+            <h1 class="scene-title">🌟 Escolha uma Necessidade</h1>
+            <p class="scene-subtitle">Selecione o que mais ressoa com você neste momento</p>
+            <div class="cards-grid" id="needCards"></div>
+        </div>
+
+        <!-- Cena 2: Emoções -->
+        <div class="scene" id="emotionScene">
+            <h1 class="scene-title">❤️ Escolha uma Emoção</h1>
+            <p class="scene-subtitle">Que emoção você está sentindo?</p>
+            <div class="cards-grid" id="emotionCards"></div>
+        </div>
+
+        <!-- Cena 3: Ações -->
+        <div class="scene" id="actionScene">
+            <h1 class="scene-title">🎯 Escolha uma Ação</h1>
+            <p class="scene-subtitle">Como você gostaria de responder?</p>
+            <div class="cards-grid" id="actionCards"></div>
+        </div>
+
+        <!-- Cena Final -->
+        <div class="scene" id="finalScene">
+            <div class="final-scene">
+                <!-- Chave de fundo -->
+                <svg class="key-background" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M7 14c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm0-4c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm12.93-3.94l-1.41 1.41C19.44 8.39 20 9.64 20 11c0 2.76-2.24 5-5 5h-4v-2h4c1.65 0 3-1.35 3-3 0-.87-.36-1.66-.93-2.23l1.41-1.41C19.59 8.47 20 9.68 20 11c0 3.87-3.13 7-7 7H9v2H7v-2H5v-2h2v-2H5v-2h2V8h2v2h4c1.32 0 2.59.53 3.52 1.46z"/>
+                </svg>
+
+                <h1 class="scene-title">🔑 Sua Chave do Autoconhecimento</h1>
+                <p class="scene-subtitle">Estas são suas escolhas para reflexão</p>
+                
+                <div class="selected-cards" id="selectedCards"></div>
+                
+                <button class="restart-btn" onclick="restartGame()">🔄 Recomeçar Jornada</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Arrays com os dados dos cartões
+        const needs = [
+            'Autonomia', 'Autoestima', 'Comemorar', 'Justiça', 'Pertencimento',
+            'Conexão', 'Respeito', 'Segurança', 'Luto', 'Diversão'
+        ];
+
+        const emotions = [
+            'Vergonha', 'Inveja', 'Alegria', 'Culpa', 'Raiva',
+            'Ciúmes', 'Comoção', 'Medo', 'Tristeza', 'Ansiedade', 'Solidariedade'
+        ];
+
+        const actions = [
+            'Contar até 10', 'Caminhar', 'Dançar', 'Pedir desculpa', 'Pular corda',
+            'Conversar', 'Abraçar', 'Respirar', 'Chorar', 'Desenhar', 'Ajudar'
+        ];
+
+        // Variáveis para armazenar as escolhas
+        let selectedNeed = '';
+        let selectedEmotion = '';
+        let selectedAction = '';
+        let currentScene = 1;
+
+        // Inicializar o jogo
+        function initGame() {
+            // Jogo começa na capa, não precisa criar cartões ainda
+        }
+
+        // Começar o jogo (sair da capa)
+        function startGame() {
+            playClickSound();
+            document.getElementById('progressBar').style.display = 'block';
+            switchScene('coverScene', 'needScene');
+            createCards('needCards', needs, 'need', selectNeed);
+            updateProgress();
+        }
+
+        // Criar cartões dinamicamente
+        function createCards(containerId, items, cardClass, clickHandler) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = `card ${cardClass}`;
+                card.textContent = item;
+                card.addEventListener('click', () => {
+                    playClickSound();
+                    clickHandler(item);
+                });
+                container.appendChild(card);
+            });
+        }
+
+        // Handlers para seleção de cartões
+        function selectNeed(need) {
+            selectedNeed = need;
+            currentScene = 2;
+            updateProgress();
+            switchScene('needScene', 'emotionScene');
+            createCards('emotionCards', emotions, 'emotion', selectEmotion);
+        }
+
+        function selectEmotion(emotion) {
+            selectedEmotion = emotion;
+            currentScene = 3;
+            updateProgress();
+            switchScene('emotionScene', 'actionScene');
+            createCards('actionCards', actions, 'action', selectAction);
+        }
+
+        function selectAction(action) {
+            selectedAction = action;
+            currentScene = 4;
+            updateProgress();
+            switchScene('actionScene', 'finalScene');
+            showFinalResults();
+        }
+
+        // Alternar entre cenas
+        function switchScene(fromScene, toScene) {
+            const from = document.getElementById(fromScene);
+            const to = document.getElementById(toScene);
+            
+            from.style.opacity = '0';
+            setTimeout(() => {
+                from.classList.remove('active');
+                to.classList.add('active');
+                setTimeout(() => {
+                    to.style.opacity = '1';
+                }, 50);
+            }, 300);
+        }
+
+        // Mostrar resultados finais
+        function showFinalResults() {
+            const container = document.getElementById('selectedCards');
+            container.innerHTML = `
+                <div class="selected-card need" style="background: #ffd700; color: #333;">
+                    <strong>Necessidade:</strong><br>${selectedNeed}
+                </div>
+                <div class="selected-card emotion" style="background: #ff4757; color: white;">
+                    <strong>Emoção:</strong><br>${selectedEmotion}
+                </div>
+                <div class="selected-card action" style="background: #2ed573; color: white;">
+                    <strong>Ação:</strong><br>${selectedAction}
+                </div>
+            `;
+        }
+
+        // Atualizar barra de progresso
+        function updateProgress() {
+            const progressFill = document.getElementById('progressFill');
+            const progress = (currentScene / 4) * 100;
+            progressFill.style.width = progress + '%';
+        }
+
+        // Reiniciar o jogo
+        function restartGame() {
+            selectedNeed = '';
+            selectedEmotion = '';
+            selectedAction = '';
+            currentScene = 1;
+            
+            // Esconder barra de progresso
+            document.getElementById('progressBar').style.display = 'none';
+            
+            // Resetar todas as cenas
+            document.querySelectorAll('.scene').forEach(scene => {
+                scene.classList.remove('active');
+                scene.style.opacity = '0';
+            });
+            
+            // Voltar para a capa
+            setTimeout(() => {
+                document.getElementById('coverScene').classList.add('active');
+                document.getElementById('coverScene').style.opacity = '1';
+            }, 300);
+        }
+
+        // Simular som de clique (visual feedback)
+        function playClickSound() {
+            // Criar feedback visual ao clicar
+            const clickFeedback = document.createElement('div');
+            clickFeedback.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(255,255,255,0.8);
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                pointer-events: none;
+                animation: clickPulse 0.3s ease-out;
+                z-index: 1000;
+            `;
+            
+            // Adicionar animação CSS
+            if (!document.getElementById('clickAnimation')) {
+                const style = document.createElement('style');
+                style.id = 'clickAnimation';
+                style.textContent = `
+                    @keyframes clickPulse {
+                        0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+                        100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            document.body.appendChild(clickFeedback);
+            setTimeout(() => clickFeedback.remove(), 300);
+        }
+
+        // Inicializar quando a página carregar
+        window.addEventListener('load', initGame);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9899942b14878461',t:'MTc1OTYzMjI4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
