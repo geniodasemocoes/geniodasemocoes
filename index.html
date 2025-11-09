@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornada Digital Intetativa</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #ffeaa7;
+            background: linear-gradient(135deg, #fff1e6 0%, #fdd1c4 50%, #f8a5c2 100%);
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+        
+        @media (forced-colors: active) {
+          body {
+            background-color: #ffeaa7 !important;
+            color: #2d3436 !important;
+          }
+        }
+
+        html {
+            height: 100%;
+        }
+
+        .container {
+            min-height: 100%;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Tela Principal */
+        .main-screen {
+            display: block;
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .scene-screen {
+            display: none;
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .title {
+            font-size: 3.5rem;
+            color: #2d3436;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            margin: 30px 0;
+            text-align: center;
+            background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { filter: drop-shadow(0 0 10px rgba(108, 92, 231, 0.3)); }
+            to { filter: drop-shadow(0 0 20px rgba(162, 155, 254, 0.6)); }
+        }
+
+        .story-button {
+            background: linear-gradient(45deg, #00b894, #00cec9);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 20px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-weight: bold;
+        }
+
+        .story-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #00a085, #00b7b3);
+        }
+
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .character-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .character-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #fd79a8, #fdcb6e, #6c5ce7, #00b894, #e17055);
+            background-size: 200% 100%;
+            animation: rainbow 3s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .character-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .character-avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            margin: 20px auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .character-name {
+            font-size: 1.8rem;
+            color: #2d3436;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .scene-button {
+            display: block;
+            width: 100%;
+            background: linear-gradient(45deg, #a29bfe, #6c5ce7);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .scene-button:hover {
+            background: linear-gradient(45deg, #9085e2, #5f4fcf);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        .scene-button:active {
+            transform: translateY(0);
+        }
+
+        /* Tela de Cena */
+        .scene-title {
+            font-size: 2.5rem;
+            color: #2d3436;
+            margin: 30px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .video-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px auto;
+            max-width: 800px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border: 3px solid #ddd;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 600px;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+/* 
+        .video-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-left: 30px solid white;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            transform: translate(-50%, -50%);
+            animation: pulse 2s ease-in-out infinite;
+        }
+*/
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .scene-description {
+            font-size: 1.3rem;
+            color: #636e72;
+            line-height: 1.6;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .back-button {
+            background: linear-gradient(45deg, #e17055, #d63031);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 30px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #d63031, #b71c1c);
+        }
+
+        .emotion-tag {
+            display: inline-block;
+            background: red;
+            color: #000000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 5px;
+            border: 2px solid #000000;
+            font-weight: bold;
+        }
+        
+        .need-tag {
+            display: inline-block;
+            background: yellow;
+            color: #000000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 5px;
+            border: 2px solid #000000;
+            font-weight: bold;
+        }
+        
+        .action-tag {
+            display: inline-block;
+            background: green;
+            color: #000000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 5px;
+            border: 2px solid #000000;
+            font-weight: bold;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .characters-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 10px;
+            }
+            
+            .character-card {
+                padding: 20px;
+            }
+            
+            .video-container {
+                padding: 20px;
+                margin: 20px 10px;
+            }
+            
+            .video-placeholder {
+                height: 200px;
+            }
+        }
+
+        /* Efeitos de partículas */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffeaa7;
+            border-radius: 50%;
+            animation: sparkle 3s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-100px) rotate(360deg); }
+        }
+    </style>
+    <meta name="color-scheme" content="light">
+</head>
+<div id="imageModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center;">
+  <img id="modalImage" src="" style="max-width:100%; max-height:100%; border-radius:10px;" />
+</div>
+<body>
+    <div class="container">
+        <!-- Tela Principal -->
+        <div id="mainScreen" class="main-screen">
+            <img src="imagens/logomarca.png" height="100" />
+            <br />
+            
+            <button class="story-button" onclick="window.location.href='livro_completo.html'">
+                📖 Ver história completa
+            </button>
+
+            <div class="characters-grid">
+                <!-- Carol -->
+                <div class="character-card">
+                    <div class="character-avatar" style="background: linear-gradient(45deg, #fd79a8, #fdcb6e);">
+                        <img src="imagens/carol.png" height="200" />
+                    </div>
+                    <h3 class="character-name">Carol</h3>
+                    <h3 class="character-name"></h3>
+                    <button class="scene-button" onclick="showScene('carol', 1, 'Autonomia', 'Vergonha')">
+                        Cena 1: Autonomia – Vergonha
+                    </button>
+                    <button class="scene-button" onclick="showScene('carol', 2, 'Autoestima', 'Inveja')">
+                        Cena 2: Autoestima – Inveja
+                    </button>
+                </div>
+
+                <!-- Nina -->
+                <div class="character-card">
+                    <div class="character-avatar" style="background: linear-gradient(45deg, #00b894, #00cec9);">
+                        <img src="imagens/nina.png" height="200" />
+                    </div>
+                    <h3 class="character-name">Nina</h3>
+                    <button class="scene-button" onclick="showScene('nina', 1, 'Comemorar', 'Alegria')">
+                        Cena 1: Comemorar – Alegria
+                    </button>
+                    <button class="scene-button" onclick="showScene('nina', 2, 'Justiça', 'Culpa')">
+                        Cena 2: Justiça – Culpa
+                    </button>
+                </div>
+
+                <!-- Eric -->
+                <div class="character-card">
+                    <div class="character-avatar" style="background: linear-gradient(45deg, #6c5ce7, #a29bfe);">
+                        <img src="imagens/eric.png" height="200" />
+                    </div>
+                    <h3 class="character-name">Eric</h3>
+                    <button class="scene-button" onclick="showScene('eric', 1, 'Pertencimento', 'Raiva')">
+                        Cena 1: Pertencimento – Raiva
+                    </button>
+                    <button class="scene-button" onclick="showScene('eric', 2, 'Conexão', 'Ciúmes')">
+                        Cena 2: Conexão – Ciúmes
+                    </button>
+                </div>
+
+                <!-- Laís -->
+                <div class="character-card">
+                    <div class="character-avatar" style="background: linear-gradient(45deg, #e17055, #d63031);">
+                        <img src="imagens/lais.png" height="200" />
+                    </div>
+                    <h3 class="character-name">Laís</h3>
+                    <button class="scene-button" onclick="showScene('lais', 1, 'Respeito', 'Comoção')">
+                        Cena 1: Respeito – Comoção
+                    </button>
+                    <button class="scene-button" onclick="showScene('lais', 2, 'Segurança', 'Medo')">
+                        Cena 2: Segurança – Medo
+                    </button>
+                </div>
+
+                <!-- Gael -->
+                <div class="character-card">
+                    <div class="character-avatar" style="background: linear-gradient(45deg, #74b9ff, #0984e3);">
+                        <img src="imagens/gael.png" height="200" />
+                    </div>
+                    <h3 class="character-name">Gael</h3>
+                    <button class="scene-button" onclick="showScene('gael', 1, 'Luto', 'Tristeza')">
+                        Cena 1: Luto – Tristeza
+                    </button>
+                    <button class="scene-button" onclick="showScene('gael', 2, 'Diversão', 'Ansiedade')">
+                        Cena 2: Diversão – Ansiedade
+                    </button>
+                </div>
+                
+                
+                <!-- Kit SE -->
+                <div class="character-card">
+                    <div class="character-avatar" style="background: linear-gradient(45deg, #74b9ff, #0984e3);">
+                        <img src="imagens/logo_SE.png" height="200" />
+                    </div>
+                    <h3 class="character-name">Kit Superpoderes Emocionais</h3>
+                    <button class="scene-button" onclick="window.location.href='se_digital.html'">
+                        Acessar o Kit Digital
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela de Cena -->
+        <div id="sceneScreen" class="scene-screen">
+            <h2 id="sceneTitle" class="scene-title"></h2>
+            
+            <div class="video-container">
+                <div class="video-placeholder">
+                   
+                   
+                    <img id="cena" height="100%" />
+                  
+                </div>
+                
+                <div class="scene-description" id="sceneDescription"></div>
+                
+                <div id="needTags" style="display: inline-block;"></div>
+                <div id="emotionTags" style="display: inline-block;"></div>
+                <div id="actionTags" style="display: inline-block;"></div>
+            </div>
+
+            <button class="back-button" onclick="backToMain()">
+                ← Voltar para o menu inicial
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Dados das cenas
+        const sceneData = {
+            carol: {
+                1: {
+                    title: "Carol - Autonomia e Vergonha",
+                    //description: "Um novo dia, Carol corria com a bola... Até que a professora amarrou seu tênis, na frente de toda a escola! seu rosto ficou vermelho como caqui, as mãos suadas e ela queria sumir dali. Em um impulso, ela correu e, com uma fumaça dourada, o gênio apareceu:— Autonomia é a necessidade de fazer sozinha. Quando alguém faz por nós, na frente dos demais, vergonha traz. Contar até dez pode restaurar a paz!Ela contou e não adiantou! continuava a se preocupar com o que os outros iam pensar. Então contou outra vez e mais uma... Até a vergonha ir parar na lua.",
+                    cena: "paginas/p05.jpg",
+                    need: ["Autonomia"],
+                    emotions: ["Vergonha"],
+                    action: ["Contar até 10"]
+                },
+                2: {
+                    title: "Carol - Autoestima e Inveja",
+                    cena: "paginas/p06.jpg",
+                    //description: "Carol vê outras crianças fazendo coisas que ela gostaria de fazer e sente inveja. Vamos descobrir como ela pode transformar essa emoção em motivação!",
+                    need: ["Autoestima"],
+                    emotions: ["Inveja"],
+                    action: ["Caminhar"]
+                }
+            },
+            nina: {
+                1: {
+                    title: "Nina - Comemorar e Alegria",
+                    //description: "Nina conquistou algo especial e quer comemorar! Vamos ver como ela expressa sua alegria e compartilha momentos felizes com os amigos.",
+                    cena: "paginas/p07.jpg",                   
+                    need: ["Comemorar"],
+                    emotions: ["Alegria"],
+                    action: ["Dançar"]
+                },
+                2: {
+                    title: "Nina - Justiça e Culpa",
+                    //description: "Nina viu algo injusto acontecer e se sente culpada por não ter agido. Vamos ajudá-la a entender como lidar com essas emoções complexas.",
+                    cena: "paginas/p08.jpg",                   
+                    need: ["Justiça"],
+                    emotions: ["Culpa"],
+                    action: ["Pedir desculpa"]
+                }
+            },
+            eric: {
+                1: {
+                    title: "Eric - Pertencimento e Raiva",
+                    //description: "Eric se sentiu excluído de uma brincadeira e ficou com raiva. Vamos explorar como ele pode expressar seus sentimentos de forma saudável.",
+                    cena: "paginas/p09.jpg",  
+                    need: ["Pertencimento"],
+                    emotions: ["Raiva"],
+                    action: ["Pular corda"]
+                },
+                2: {
+                    title: "Eric - Conexão e Ciúmes",
+                    //description: "Eric sente ciúmes quando vê seu melhor amigo brincando com outras crianças. Vamos descobrir como fortalecer conexões sem possessividade.",
+                    cena: "paginas/p10.jpg",  
+                    need: ["Conexão"],
+                    emotions: ["Ciúmes"],
+                    action: ["Conversar"]
+                }
+            },
+            lais: {
+                1: {
+                    title: "Laís - Respeito e Comoção",
+                    //description: "Laís presenciou uma situação que a comoveu profundamente. Vamos ver como ela processa essas emoções intensas com respeito e empatia.",
+                    cena: "paginas/p11.jpg",  
+                    need: ["Respeito"],
+                    emotions: ["Comoção"],
+                    action: ["Abraçar"]
+                },
+                2: {
+                    title: "Laís - Segurança e Medo",
+                    //description: "Laís está enfrentando seus medos e buscando se sentir mais segura. Vamos acompanhar sua jornada de coragem e autoconfiança.",
+                    cena: "paginas/p12.jpg",  
+                    need: ["Segurança"],
+                    emotions: ["Medo"],
+                    action: ["Respirar"]
+                }
+            },
+            gael: {
+                1: {
+                    title: "Gael - Luto e Tristeza",
+                    //description: "Gael está passando por um momento de perda e precisa processar sua tristeza. Vamos ajudá-lo a entender que é normal sentir saudade.",
+                    cena: "paginas/p13.jpg",  
+                    need: ["Luto"],
+                    emotions: ["Tristeza"],
+                    action: ["Chorar"]
+                },
+                2: {
+                    title: "Gael - Diversão e Ansiedade",
+                    //description: "Gael quer se divertir, mas a ansiedade às vezes atrapalha. Vamos descobrir estratégias para ele aproveitar os momentos de alegria.",
+                    cena: "paginas/p14.jpg",  
+                    need: ["Diversão"],
+                    emotions: ["Ansiedade"],
+                    action: ["Desenhar"]
+                }
+            }
+        };
+
+        function showScene(character, sceneNum, need, emotion) {
+            const scene = sceneData[character][sceneNum];
+            
+            document.getElementById('mainScreen').style.display = 'none';
+            document.getElementById('sceneScreen').style.display = 'block';
+            
+            document.getElementById('sceneTitle').textContent = scene.title;
+            document.getElementById('sceneDescription').textContent = scene.description;
+            
+            document.getElementById('cena').src = scene.cena;
+            
+            // Criar tags de emoção
+            const emotionTags = document.getElementById('emotionTags');
+            emotionTags.innerHTML = '';
+            scene.emotions.forEach(emotion => {
+                const tag = document.createElement('span');
+                tag.className = 'emotion-tag';
+                tag.textContent = emotion;
+                emotionTags.appendChild(tag);
+            });
+            
+            needTags.innerHTML = '';
+            scene.need.forEach(need => {
+                const tag = document.createElement('span');
+                tag.className = 'need-tag';
+                tag.textContent = need;
+                needTags.appendChild(tag);
+            });
+            
+            actionTags.innerHTML = '';
+            scene.action.forEach(action => {
+                const tag = document.createElement('span');
+                tag.className = 'action-tag';
+                tag.textContent = action;
+                actionTags.appendChild(tag);
+            });
+
+            // Efeito sonoro simulado
+            playClickSound();
+        }
+
+        function backToMain() {
+            document.getElementById('sceneScreen').style.display = 'none';
+            document.getElementById('mainScreen').style.display = 'block';
+            playClickSound();
+        }
+
+        function playFullStory() {
+            // Criar tela para história completa
+            document.getElementById('mainScreen').style.display = 'none';
+            
+            // Criar nova tela se não existir
+            let fullStoryScreen = document.getElementById('fullStoryScreen');
+            if (!fullStoryScreen) {
+                fullStoryScreen = document.createElement('div');
+                fullStoryScreen.id = 'fullStoryScreen';
+                fullStoryScreen.className = 'scene-screen';
+                fullStoryScreen.innerHTML = `
+                    <h2 class="scene-title">🎬 História Completa - O Gênio das Emoções</h2>
+                    
+                    <div class="video-container">
+                        <div class="video-placeholder" style="height: 400px;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 1.5rem; margin-bottom: 15px;">✨ Reproduzindo história completa ✨</div>
+                                <div style="font-size: 1rem; opacity: 0.9;">Uma jornada mágica através das emoções</div>
+                                <div style="font-size: 0.9rem; opacity: 0.7; margin-top: 10px;">Carol, Nina, Eric, Laís e Gael</div>
+                            </div>
+                        </div>
+                        
+                        <div class="scene-description">
+                            Acompanhe a aventura completa de nossos cinco amigos enquanto eles descobrem o mundo das emoções! 
+                            Cada personagem enfrenta desafios únicos e aprende valiosas lições sobre sentimentos, necessidades e como lidar com eles de forma saudável. 
+                            Uma história sobre crescimento, empatia e autoconhecimento! 🌟
+                        </div>
+                        
+                        <div id="storyEmotionTags">
+                            <span class="emotion-tag">Aventura Completa</span>
+                            <span class="emotion-tag">Todas as Emoções</span>
+                            <span class="emotion-tag">Aprendizado</span>
+                        </div>
+                    </div>
+
+                    <button class="back-button" onclick="backToMainFromStory()">
+                        ← Voltar para o menu inicial
+                    </button>
+                `;
+                document.querySelector('.container').appendChild(fullStoryScreen);
+            }
+            
+            fullStoryScreen.style.display = 'block';
+            playClickSound();
+        }
+
+        function backToMainFromStory() {
+            document.getElementById('fullStoryScreen').style.display = 'none';
+            document.getElementById('mainScreen').style.display = 'block';
+            playClickSound();
+        }
+
+        function playClickSound() {
+            // Simulação de efeito sonoro através de vibração (em dispositivos móveis)
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+        }
+
+        // Criar efeito de partículas
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 3 + 's';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 3000);
+        }
+
+        // Criar partículas periodicamente
+        setInterval(createSparkle, 2000);
+
+        // Adicionar interatividade aos cartões
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.character-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+        
+        // Abrir imagem em tela cheia ao clicar
+document.getElementById('cena').addEventListener('click', function() {
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImage');
+  modalImg.src = this.src;
+  modal.style.display = 'flex';
+});
+
+// Fechar ao clicar fora da imagem
+document.getElementById('imageModal').addEventListener('click', function(e) {
+  if (e.target.id === 'imageModal') {
+    this.style.display = 'none';
+  }
+});
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98be1ac5d4d93553',t:'MTc2MDAxNTI4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
