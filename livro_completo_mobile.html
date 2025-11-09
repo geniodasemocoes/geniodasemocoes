@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Livro Digital</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .flipbook {
+      width: 100%;
+      max-width: 360px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .flipbook img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      transition: opacity 0.3s ease;
+    }
+
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .btn {
+      flex: 1;
+      margin: 0 5px;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 25px;
+      background: linear-gradient(45deg, #74b9ff, #0984e3);
+      color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: linear-gradient(45deg, #6c8eff, #0652dd);
+    }
+
+    .page-counter {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #2d3436;
+    }
+    
+    .back-button {
+            background: linear-gradient(45deg, #e17055, #d63031);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 30px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-weight: bold;
+        }
+        
+    /* ======== Responsividade aprimorada ======== */
+@media (min-width: 600px) {
+  :root {
+    --max-mobile: 480px;
+  }
+
+  .flipbook {
+    max-width: 900px;
+  }
+
+  .page img {
+    max-height: 80vh;
+  }
+
+  .controls {
+    max-width: 900px;
+  }
+
+  .btn {
+    font-size: 1.1rem;
+    height: 60px;
+  }
+}
+
+@media (min-width: 900px) {
+  .flipbook {
+    max-width: 1100px;
+    justify-content: center;
+  }
+
+  /* Exibe duas páginas lado a lado */
+  .pages {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .page {
+    flex: 1 1 50%;
+    max-width: 48%;
+  }
+
+  .page img {
+    max-height: 85vh;
+  }
+
+  .controls {
+    max-width: 1100px;
+  }
+
+  .page-counter {
+    font-size: 1.1rem;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .page img:hover {
+    transform: scale(1.02);
+  }
+}
+
+  </style>
+</head>
+<!-- Modal fullscreen -->
+<div id="imageModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center;">
+  <img id="modalImage" src="" style="max-width:100%; max-height:100%; border-radius:10px;" />
+</div>
+
+<body>
+  <div class="flipbook">
+    <img id="flipImage" src="" alt="Página do livro" />
+  </div>
+
+ <div class="controls">
+  <button class="btn" id="prevBtn" onclick="prevPage()">←</button>
+  <button class="btn" id="nextBtn" onclick="nextPage()">→</button>
+</div>
+
+
+  <div class="page-counter" id="pageCounter">Página 1</div>
+
+
+  <script>
+    const pages = [
+      'paginas/cover.jpg',
+      'paginas/p02.jpg',
+      'paginas/p03.jpg',
+      'paginas/p04.jpg',
+      'paginas/p05.jpg',
+      'paginas/p06.jpg',
+'paginas/p07.jpg',
+'paginas/p08.jpg',
+'paginas/p09.jpg',
+'paginas/p10.jpg',
+'paginas/p11.jpg',
+'paginas/p12.jpg',
+'paginas/p13.jpg',
+'paginas/p14.jpg',
+'paginas/p15.jpg',
+'paginas/p16.jpg',
+'paginas/p17.jpg',
+'paginas/backcover.jpg'
+    ];
+
+    let currentPage = 0;
+    const flipImage = document.getElementById('flipImage');
+    const pageCounter = document.getElementById('pageCounter');
+
+
+
+function updatePage() {
+  flipImage.src = pages[currentPage];
+  pageCounter.textContent = `Página ${currentPage + 1}`;
+  updateButtons();
+}
+
+
+
+function updateButtons() {
+  document.getElementById('prevBtn').style.display = currentPage === 0 ? 'none' : 'inline-block';
+  document.getElementById('nextBtn').style.display = currentPage === pages.length - 1 ? 'none' : 'inline-block';
+}
+
+
+    function nextPage() {
+      if (currentPage < pages.length - 1) {
+        currentPage++;
+        updatePage();
+      }
+    }
+
+    function prevPage() {
+      if (currentPage > 0) {
+        currentPage--;
+        updatePage();
+      }
+    }
+
+    updatePage();
+
+// Abrir imagem em fullscreen ao clicar
+document.getElementById('flipImage').addEventListener('click', function() {
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImage');
+  modalImg.src = this.src;
+  modal.style.display = 'flex';
+});
+
+// Fechar ao clicar fora da imagem
+document.getElementById('imageModal').addEventListener('click', function(e) {
+  if (e.target.id === 'imageModal') {
+    this.style.display = 'none';
+  }
+});
+
+  </script>
+</body>
+</html>

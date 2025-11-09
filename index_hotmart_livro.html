@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livro Digital</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+     
+        @media .game-container {
+            max-width: 100px;
+            min-height: 400px;
+        }
+        
+        .game-container {
+            width: 95%;
+            max-width: 1200px;
+            text-align: center;
+        }
+
+
+        .game-title {
+            font-size: 2.5rem;
+            color: white;
+            margin: 0 0 10px 0;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            font-weight: 700;
+            background: linear-gradient(45deg, #ffd700, #ff4757, #2ed573);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+            font-family: Ketupat Ramadhan;
+        }
+
+        .game-subtitle {
+            font-size: 1rem;
+            color: #aa82e3ff;
+            margin: 0;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #ffd700 0%, #ff4757 50%, #2ed573 100%);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+            @media .game-title {
+                font-size: 1rem;
+            }
+           @media .game-subtitle {
+                font-size: 1rem;
+            }
+
+            .start-btn {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+            
+
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- Capa do Jogo -->
+
+                <div class="game-logo">
+                <img src="paginas/cover.jpg" height="100" />
+                    <p class="game-subtitle">Livro Digital</p>
+                </div>
+                <br />
+                <button class="start-btn" onclick="window.open('livro_completo_mobile.html', '_blank')">
+                
+                    <span class="btn-icon">🚀</span>
+                    Acessar
+                </button>
+                <br />
+                <br />
+                <p align="right">
+    </div>
+
+</html>

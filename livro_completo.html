@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livro Digital Interativo</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        
+         .back-button {
+            background: linear-gradient(45deg, #e17055, #d63031);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 30px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-weight: bold;
+        }
+
+        .flipbook-container {
+            position: relative;
+            perspective: 2000px;
+            perspective-origin: center center;
+        }
+
+        .book {
+            position: relative;
+            width: 24cm;
+            height: 17cm;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .book.open {
+            height: 34cm;
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            transition: all 2s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            display: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            overflow: visible;
+            border-radius: 2px;
+        }
+
+        .page.top {
+            top: 0;
+            transform-origin: center bottom;
+            z-index: 5;
+        }
+
+        .page.bottom {
+            bottom: 0;
+            transform-origin: center top;
+            z-index: 4;
+        }
+
+        /* Camadas de curvatura 3D */
+        .page-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            background-size: inherit;
+            background-position: inherit;
+            transform-style: preserve-3d;
+            border-radius: inherit;
+        }
+
+        .page-layer-1 { transform: translateZ(0px); }
+        .page-layer-2 { transform: translateZ(1px); opacity: 0.95; }
+        .page-layer-3 { transform: translateZ(2px); opacity: 0.9; }
+        .page-layer-4 { transform: translateZ(3px); opacity: 0.85; }
+        .page-layer-5 { transform: translateZ(4px); opacity: 0.8; }
+
+        /* Efeito 3D realista com curvatura apenas para página inferior */
+        .page.flipping-down {
+            animation: flipDownCurved 2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            z-index: 20;
+        }
+
+        @keyframes flipDownCurved {
+            0% {
+                transform: rotateX(0deg) translateZ(0px) scale(1);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                filter: brightness(1) contrast(1);
+            }
+            10% {
+                transform: rotateX(15deg) translateZ(8px) translateY(3px) scale(1.02);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+                filter: brightness(1.05) contrast(1.1);
+            }
+            25% {
+                transform: rotateX(45deg) translateZ(20px) translateY(8px) scale(1.05);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+                filter: brightness(1.1) contrast(1.2);
+            }
+            50% {
+                transform: rotateX(90deg) translateZ(35px) translateY(15px) scale(1.08);
+                box-shadow: 0 35px 70px rgba(0, 0, 0, 0.5);
+                filter: brightness(1.15) contrast(1.3);
+            }
+            75% {
+                transform: rotateX(135deg) translateZ(20px) translateY(8px) scale(1.05);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+                filter: brightness(1.1) contrast(1.2);
+            }
+            90% {
+                transform: rotateX(165deg) translateZ(8px) translateY(3px) scale(1.02);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+                filter: brightness(1.05) contrast(1.1);
+            }
+            100% {
+                transform: rotateX(180deg) translateZ(0px) scale(1);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                filter: brightness(1) contrast(1);
+            }
+        }
+
+
+
+        .page.dropping {
+            transform: rotateX(15deg) translateZ(8px) translateY(3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Gradientes de sombra e iluminação 3D dinâmica */
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.2) 0%,
+                rgba(255, 255, 255, 0.1) 20%,
+                transparent 40%,
+                rgba(0, 0, 0, 0.05) 60%,
+                rgba(0, 0, 0, 0.15) 100%
+            );
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .page.dropping::before {
+            opacity: 0.6;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.3) 0%,
+                rgba(255, 255, 255, 0.15) 25%,
+                transparent 50%,
+                rgba(0, 0, 0, 0.08) 75%,
+                rgba(0, 0, 0, 0.2) 100%
+            );
+        }
+
+        .page.flipping-down::before {
+            opacity: 1;
+            animation: lightingEffect 2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        @keyframes lightingEffect {
+            0% {
+                background: linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.2) 0%,
+                    rgba(255, 255, 255, 0.1) 20%,
+                    transparent 40%,
+                    rgba(0, 0, 0, 0.05) 60%,
+                    rgba(0, 0, 0, 0.15) 100%
+                );
+            }
+            25% {
+                background: linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0.4) 0%,
+                    rgba(255, 255, 255, 0.2) 30%,
+                    transparent 50%,
+                    rgba(0, 0, 0, 0.1) 70%,
+                    rgba(0, 0, 0, 0.25) 100%
+                );
+            }
+            50% {
+                background: linear-gradient(
+                    45deg,
+                    rgba(255, 255, 255, 0.5) 0%,
+                    rgba(255, 255, 255, 0.3) 25%,
+                    transparent 50%,
+                    rgba(0, 0, 0, 0.15) 75%,
+                    rgba(0, 0, 0, 0.35) 100%
+                );
+            }
+            75% {
+                background: linear-gradient(
+                    0deg,
+                    rgba(255, 255, 255, 0.4) 0%,
+                    rgba(255, 255, 255, 0.2) 30%,
+                    transparent 50%,
+                    rgba(0, 0, 0, 0.1) 70%,
+                    rgba(0, 0, 0, 0.25) 100%
+                );
+            }
+            100% {
+                background: linear-gradient(
+                    315deg,
+                    rgba(255, 255, 255, 0.2) 0%,
+                    rgba(255, 255, 255, 0.1) 20%,
+                    transparent 40%,
+                    rgba(0, 0, 0, 0.05) 60%,
+                    rgba(0, 0, 0, 0.15) 100%
+                );
+            }
+        }
+
+        /* Sombra de curvatura lateral com efeito 3D */
+        .page::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(
+                to left,
+                rgba(0, 0, 0, 0.25) 0%,
+                rgba(0, 0, 0, 0.15) 20%,
+                rgba(0, 0, 0, 0.08) 50%,
+                transparent 100%
+            );
+            transition: all 0.3s ease;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 2;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .page.corner-fold::after {
+            width: 100px;
+            opacity: 1;
+            background: linear-gradient(
+                to left,
+                rgba(0, 0, 0, 0.3) 0%,
+                rgba(0, 0, 0, 0.2) 25%,
+                rgba(0, 0, 0, 0.1) 60%,
+                transparent 100%
+            );
+        }
+
+        .page.dropping::after {
+            width: 60px;
+            opacity: 0.8;
+            background: linear-gradient(
+                to left,
+                rgba(0, 0, 0, 0.2) 0%,
+                rgba(0, 0, 0, 0.12) 30%,
+                rgba(0, 0, 0, 0.06) 70%,
+                transparent 100%
+            );
+        }
+
+        .page.flipping-down::after {
+            animation: curvatureShadow 2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        @keyframes curvatureShadow {
+            0% {
+                width: 0px;
+                opacity: 0;
+            }
+            25% {
+                width: 120px;
+                opacity: 0.9;
+                background: linear-gradient(
+                    to left,
+                    rgba(0, 0, 0, 0.4) 0%,
+                    rgba(0, 0, 0, 0.25) 30%,
+                    rgba(0, 0, 0, 0.12) 70%,
+                    transparent 100%
+                );
+            }
+            50% {
+                width: 150px;
+                opacity: 1;
+                background: linear-gradient(
+                    to left,
+                    rgba(0, 0, 0, 0.5) 0%,
+                    rgba(0, 0, 0, 0.35) 25%,
+                    rgba(0, 0, 0, 0.18) 60%,
+                    transparent 100%
+                );
+            }
+            75% {
+                width: 120px;
+                opacity: 0.9;
+                background: linear-gradient(
+                    to left,
+                    rgba(0, 0, 0, 0.4) 0%,
+                    rgba(0, 0, 0, 0.25) 30%,
+                    rgba(0, 0, 0, 0.12) 70%,
+                    transparent 100%
+                );
+            }
+            100% {
+                width: 0px;
+                opacity: 0;
+            }
+        }
+
+        /* Efeito de dobra nos cantos */
+        .corner-fold-effect {
+            position: absolute;
+            width: 0;
+            height: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .page.top .corner-fold-effect {
+            top: 0;
+            right: 0;
+            border-left: 0px solid transparent;
+            border-bottom: 0px solid transparent;
+            border-top: 0px solid rgba(255, 255, 255, 0.9);
+            border-right: 0px solid rgba(255, 255, 255, 0.9);
+            box-shadow: -2px 2px 8px rgba(0, 0, 0, 0);
+        }
+
+        .page.bottom .corner-fold-effect {
+            bottom: 0;
+            right: 0;
+            border-left: 0px solid transparent;
+            border-top: 0px solid transparent;
+            border-bottom: 0px solid rgba(255, 255, 255, 0.9);
+            border-right: 0px solid rgba(255, 255, 255, 0.9);
+            box-shadow: -2px -2px 8px rgba(0, 0, 0, 0);
+        }
+
+        .page.top.corner-fold .corner-fold-effect {
+            border-left: 35px solid transparent;
+            border-bottom: 35px solid transparent;
+            border-top: 35px solid rgba(255, 255, 255, 0.95);
+            border-right: 35px solid rgba(255, 255, 255, 0.95);
+            box-shadow: -4px 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .page.bottom.corner-fold .corner-fold-effect {
+            border-left: 35px solid transparent;
+            border-top: 35px solid transparent;
+            border-bottom: 35px solid rgba(255, 255, 255, 0.95);
+            border-right: 35px solid rgba(255, 255, 255, 0.95);
+            box-shadow: -4px -4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Área sensível para hover nos cantos */
+        .corner-trigger {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            z-index: 6;
+            cursor: pointer;
+        }
+
+        .corner-trigger.top-right {
+            top: 0;
+            right: 0;
+        }
+
+        .corner-trigger.bottom-right {
+            bottom: 0;
+            right: 0;
+        }
+
+        .cover {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 10;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: center bottom;
+            border-radius: 4px;
+        }
+
+        .cover.opening {
+            transform: rotateX(-180deg) translateZ(10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .backcover {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .controls {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            background: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+        }
+
+        .btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .page-counter {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: #333;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+        }
+
+        .modal-book {
+            width: 48cm;
+            height: 34cm;
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: #fff;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .error-placeholder {
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 14px;
+            border: 2px dashed #dee2e6;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .book {
+                width: 20cm;
+                height: 14.17cm;
+            }
+            
+            .book.open {
+                height: 28.34cm;
+            }
+            
+            .controls {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .book {
+                width: 16cm;
+                height: 11.33cm;
+            }
+            
+            .book.open {
+                height: 22.66cm;
+            }
+        }
+
+        /* Indicadores de interação */
+        .interaction-hint {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .flipbook-container:hover .interaction-hint {
+            opacity: 1;
+        }
+
+        .book {
+            cursor: pointer;
+        }
+
+        .book:hover .page.top {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23333" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>'), auto;
+        }
+
+        .book:hover .page.bottom {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23333" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>'), auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="flipbook-container">
+        <div class="book" id="book">
+            <!-- Capa -->
+            <div class="cover" id="cover"></div>
+            
+            <!-- Páginas internas -->
+            <div class="page top" id="page-top">
+                <div class="corner-trigger top-right" id="corner-top"></div>
+                <div class="corner-fold-effect"></div>
+            </div>
+            <div class="page bottom" id="page-bottom">
+                <div class="corner-trigger bottom-right" id="corner-bottom"></div>
+                <div class="corner-fold-effect"></div>
+            </div>
+            
+            <!-- Contra-capa -->
+            <div class="backcover" id="backcover"></div>
+        </div>
+        
+        <div class="interaction-hint">
+            Passe o mouse no canto das páginas • Clique para navegar
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn" id="prevBtn">← Anterior</button>
+        <div class="page-counter" id="pageCounter">Capa</div>
+        <button class="btn" id="nextBtn">Próxima →</button>
+    </div>
+
+            <button class="back-button" onclick="window.location.href='index.html'">
+                ← Voltar para o menu inicial
+            </button>
+
+
+    <script>
+        class Flipbook {
+            constructor() {
+                this.currentPage = 0; // 0 = capa, 1-8 = pares de páginas, 9 = contra-capa
+                this.totalPages = 10;
+                this.isAnimating = false;
+                this.touchStartY = 0;
+                this.touchEndY = 0;
+                
+                // ⭐ CONFIGURAÇÃO DE IMAGENS - Altere apenas esta URL base
+                this.imageBaseUrl = 'paginas/';
+                
+                this.book = document.getElementById('book');
+                this.cover = document.getElementById('cover');
+                this.pageTop = document.getElementById('page-top');
+                this.pageBottom = document.getElementById('page-bottom');
+                this.backcover = document.getElementById('backcover');
+                this.prevBtn = document.getElementById('prevBtn');
+                this.nextBtn = document.getElementById('nextBtn');
+                this.pageCounter = document.getElementById('pageCounter');
+                this.modalBook = document.getElementById('modalBook');
+                this.closeModal = document.getElementById('closeModal');
+                this.cornerTop = document.getElementById('corner-top');
+                this.cornerBottom = document.getElementById('corner-bottom');
+                
+                this.init();
+            }
+            
+            init() {
+                this.loadImages();
+                this.setupEventListeners();
+                this.updateDisplay();
+            }
+            
+            loadImages() {
+                // Carregar capa
+                this.loadImage(this.getImageUrl('cover'), this.cover);
+                
+                // Carregar contra-capa
+                this.loadImage(this.getImageUrl('backcover'), this.backcover);
+                
+                // Pré-carregar algumas páginas
+                this.preloadPages();
+            }
+            
+            getImageUrl(imageName) {
+                // Gera URLs baseadas no nome da imagem
+                const colors = {
+                    'cover': 'cover.jpg',
+                    'backcover': 'backcover.jpg',
+                    'p01': 'p01.jpg',
+                    'p02': 'p02.jpg',
+                    'p03': 'p03.jpg',
+                    'p04': 'p04.jpg',
+                    'p05': 'p05.jpg',
+                    'p06': 'p06.jpg',
+                    'p07': 'p07.jpg',
+                    'p08': 'p08.jpg',
+                    'p09': 'p09.jpg',
+                    'p10': 'p10.jpg',
+                    'p11': 'p11.jpg',
+                    'p12': 'p12.jpg',
+                    'p13': 'p13.jpg',
+                    'p14': 'p14.jpg',
+                    'p15': 'p15.jpg',
+                    'p16': 'p16.jpg',
+                    'p17': 'p17.jpg',
+                    'p18': 'p18.jpg'
+                };
+                
+                return this.imageBaseUrl + (colors[imageName] || 'cccccc/333333?text=' + imageName);
+            }
+            
+            loadImage(src, element) {
+                const img = new Image();
+                img.onload = () => {
+                    element.style.backgroundImage = `url(${src})`;
+                };
+                img.onerror = () => {
+                    console.warn(`Erro ao carregar imagem: ${src}`);
+                    element.classList.add('error-placeholder');
+                    element.innerHTML = `<div>Imagem não encontrada<br>${src}</div>`;
+                };
+                img.src = src;
+            }
+            
+            preloadPages() {
+                // Pré-carregar as primeiras páginas
+                for (let i = 1; i <= 4; i++) {
+                    const img = new Image();
+                    img.src = this.getImageUrl(`p${i.toString().padStart(2, '0')}`);
+                }
+            }
+            
+            setupEventListeners() {
+                // Botões
+                this.prevBtn.addEventListener('click', () => this.previousPage());
+                this.nextBtn.addEventListener('click', () => this.nextPage());
+                
+                // Teclado
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        this.nextPage();
+                    } else if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        this.previousPage();
+                    }
+                });
+                
+                // Clique no livro
+                this.book.addEventListener('click', (e) => {
+                    if (this.isAnimating) return;
+                    
+                    const rect = this.book.getBoundingClientRect();
+                    const y = e.clientY - rect.top;
+                    const height = rect.height;
+                    
+                    if (y < height / 2) {
+                        this.previousPage();
+                    } else {
+                        this.nextPage();
+                    }
+                });
+
+                // Efeitos de dobra nos cantos
+                this.cornerTop.addEventListener('mouseenter', () => {
+                    if (!this.isAnimating && this.currentPage > 0 && this.currentPage < this.totalPages) {
+                        this.pageTop.classList.add('corner-fold');
+                    }
+                });
+
+                this.cornerTop.addEventListener('mouseleave', () => {
+                    this.pageTop.classList.remove('corner-fold');
+                });
+
+                this.cornerBottom.addEventListener('mouseenter', () => {
+                    if (!this.isAnimating && this.currentPage > 0 && this.currentPage < this.totalPages) {
+                        this.pageBottom.classList.add('corner-fold');
+                    }
+                });
+
+                this.cornerBottom.addEventListener('mouseleave', () => {
+                    this.pageBottom.classList.remove('corner-fold');
+                });
+
+                // Hover effects apenas para página inferior
+                this.book.addEventListener('mousemove', (e) => {
+                    if (this.isAnimating || this.currentPage === 0 || this.currentPage === this.totalPages) return;
+                    
+                    const rect = this.book.getBoundingClientRect();
+                    const y = e.clientY - rect.top;
+                    const x = e.clientX - rect.left;
+                    const height = rect.height;
+                    const width = rect.width;
+                    
+                    // Detectar se está próximo do canto direito
+                    const nearRightEdge = x > width - 100;
+                    
+                    if (y >= height / 2 && !nearRightEdge) {
+                        this.pageBottom.classList.add('dropping');
+                        this.pageBottom.classList.remove('corner-fold');
+                    } else {
+                        this.pageBottom.classList.remove('dropping');
+                    }
+                });
+
+                this.book.addEventListener('mouseleave', () => {
+                    this.pageTop.classList.remove('corner-fold');
+                    this.pageBottom.classList.remove('dropping', 'corner-fold');
+                });
+                
+                // Touch events
+                this.book.addEventListener('touchstart', (e) => {
+                    this.touchStartY = e.touches[0].clientY;
+                }, { passive: true });
+                
+                this.book.addEventListener('touchend', (e) => {
+                    this.touchEndY = e.changedTouches[0].clientY;
+                    this.handleSwipe();
+                }, { passive: true });
+                
+
+            }
+            
+            handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = this.touchStartY - this.touchEndY;
+                
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        // Swipe para cima = próxima página
+                        this.nextPage();
+                    } else {
+                        // Swipe para baixo = página anterior
+                        this.previousPage();
+                    }
+                }
+            }
+            
+            nextPage() {
+                if (this.isAnimating || this.currentPage >= this.totalPages) return;
+                
+                this.isAnimating = true;
+                this.currentPage++;
+                
+                if (this.currentPage === 1) {
+                    // Abrir capa
+                    this.openCover();
+                } else if (this.currentPage === this.totalPages) {
+                    // Fechar para contra-capa
+                    this.closeToBacker();
+                } else {
+                    // Virar página normal
+                    this.flipPageForward();
+                }
+            }
+            
+            previousPage() {
+                if (this.isAnimating || this.currentPage <= 0) return;
+                
+                this.isAnimating = true;
+                this.currentPage--;
+                
+                if (this.currentPage === 0) {
+                    // Fechar para capa
+                    this.closeToCover();
+                } else if (this.currentPage === this.totalPages - 1) {
+                    // Abrir da contra-capa
+                    this.openFromBacker();
+                } else {
+                    // Virar página normal para trás
+                    this.flipPageBackward();
+                }
+            }
+            
+            openCover() {
+                // Primeiro expandir o livro
+                this.book.classList.add('open');
+                
+                // Preparar as páginas internas durante a expansão
+                setTimeout(() => {
+                    this.pageTop.style.backgroundImage = '';
+                    this.pageBottom.style.backgroundImage = '';
+                    this.pageTop.classList.remove('error-placeholder');
+                    this.pageBottom.classList.remove('error-placeholder');
+                    this.pageTop.innerHTML = '';
+                    this.pageBottom.innerHTML = '';
+                    
+                    // Recriar os triggers dos cantos e efeitos
+                    this.pageTop.innerHTML = '<div class="corner-trigger top-right" id="corner-top"></div><div class="corner-fold-effect"></div>';
+                    this.pageBottom.innerHTML = '<div class="corner-trigger bottom-right" id="corner-bottom"></div><div class="corner-fold-effect"></div>';
+                    
+                    // Reatribuir referências
+                    this.cornerTop = document.getElementById('corner-top');
+                    this.cornerBottom = document.getElementById('corner-bottom');
+                    this.setupCornerListeners();
+                    
+                    // Mostrar páginas internas
+                    this.pageTop.style.display = 'block';
+                    this.pageBottom.style.display = 'block';
+                    
+                    // Carregar primeiras páginas
+                    this.loadImage(this.getImageUrl('p01'), this.pageTop);
+                    this.loadImage(this.getImageUrl('p02'), this.pageBottom);
+                }, 200);
+                
+                // Depois de expandir completamente, virar a capa
+                setTimeout(() => {
+                    this.cover.classList.add('opening');
+                }, 700); // Aguardar a expansão do livro terminar
+                
+                setTimeout(() => {
+                    this.cover.style.display = 'none';
+                    this.isAnimating = false;
+                    this.updateDisplay();
+                }, 1500); // Tempo total ajustado
+            }
+            
+            setupCornerListeners() {
+                if (this.cornerTop) {
+                    this.cornerTop.addEventListener('mouseenter', () => {
+                        if (!this.isAnimating && this.currentPage > 0 && this.currentPage < this.totalPages) {
+                            this.pageTop.classList.add('corner-fold');
+                        }
+                    });
+
+                    this.cornerTop.addEventListener('mouseleave', () => {
+                        this.pageTop.classList.remove('corner-fold');
+                    });
+                }
+
+                if (this.cornerBottom) {
+                    this.cornerBottom.addEventListener('mouseenter', () => {
+                        if (!this.isAnimating && this.currentPage > 0 && this.currentPage < this.totalPages) {
+                            this.pageBottom.classList.add('corner-fold');
+                        }
+                    });
+
+                    this.cornerBottom.addEventListener('mouseleave', () => {
+                        this.pageBottom.classList.remove('corner-fold');
+                    });
+                }
+            }
+            
+            closeToCover() {
+                this.cover.style.display = 'block';
+                this.cover.classList.remove('opening');
+                this.book.classList.remove('open');
+                
+                setTimeout(() => {
+                    this.isAnimating = false;
+                    this.updateDisplay();
+                }, 1200);
+            }
+            
+            closeToBacker() {
+                // Transição suave sem animação 3D
+                setTimeout(() => {
+                    this.book.classList.remove('open');
+                    this.pageTop.style.display = 'none';
+                    this.pageBottom.style.display = 'none';
+                    this.backcover.style.display = 'block';
+                    this.isAnimating = false;
+                    this.updateDisplay();
+                }, 300);
+            }
+            
+            openFromBacker() {
+                this.backcover.style.display = 'none';
+                this.book.classList.add('open');
+                
+                // Limpar páginas antes de mostrar
+                this.pageTop.style.backgroundImage = '';
+                this.pageBottom.style.backgroundImage = '';
+                this.pageTop.classList.remove('error-placeholder');
+                this.pageBottom.classList.remove('error-placeholder');
+                this.pageTop.innerHTML = '';
+                this.pageBottom.innerHTML = '';
+                
+                // Recriar os triggers dos cantos e efeitos
+                this.pageTop.innerHTML = '<div class="corner-trigger top-right" id="corner-top"></div><div class="corner-fold-effect"></div>';
+                this.pageBottom.innerHTML = '<div class="corner-trigger bottom-right" id="corner-bottom"></div><div class="corner-fold-effect"></div>';
+                
+                // Reatribuir referências
+                this.cornerTop = document.getElementById('corner-top');
+                this.cornerBottom = document.getElementById('corner-bottom');
+                this.setupCornerListeners();
+                
+                this.pageTop.style.display = 'block';
+                this.pageBottom.style.display = 'block';
+                
+                // Carregar últimas páginas
+                this.loadImage(this.getImageUrl('p17'), this.pageTop);
+                this.loadImage(this.getImageUrl('p18'), this.pageBottom);
+                
+                setTimeout(() => {
+                    this.isAnimating = false;
+                    this.updateDisplay();
+                }, 1200);
+            }
+            
+            flipPageForward() {
+                // Remover efeitos de hover
+                this.pageTop.classList.remove('corner-fold');
+                this.pageBottom.classList.remove('dropping', 'corner-fold');
+                
+                // Fazer transição suave sem animação 3D na página superior
+                setTimeout(() => {
+                    // Limpar páginas antes de carregar novas
+                    this.pageTop.style.backgroundImage = '';
+                    this.pageBottom.style.backgroundImage = '';
+                    this.pageTop.classList.remove('error-placeholder');
+                    this.pageBottom.classList.remove('error-placeholder');
+                    this.pageTop.innerHTML = '';
+                    this.pageBottom.innerHTML = '';
+                    
+                    // Recriar os triggers dos cantos e efeitos
+                    this.pageTop.innerHTML = '<div class="corner-trigger top-right" id="corner-top"></div><div class="corner-fold-effect"></div>';
+                    this.pageBottom.innerHTML = '<div class="corner-trigger bottom-right" id="corner-bottom"></div><div class="corner-fold-effect"></div>';
+                    
+                    // Reatribuir referências
+                    this.cornerTop = document.getElementById('corner-top');
+                    this.cornerBottom = document.getElementById('corner-bottom');
+                    this.setupCornerListeners();
+                    
+                    // Carregar próximas páginas
+                    const pageNum = (this.currentPage - 1) * 2 + 1;
+                    this.loadImage(this.getImageUrl(`p${pageNum.toString().padStart(2, '0')}`), this.pageTop);
+                    this.loadImage(this.getImageUrl(`p${(pageNum + 1).toString().padStart(2, '0')}`), this.pageBottom);
+                    
+                    this.isAnimating = false;
+                    this.updateDisplay();
+                }, 300);
+            }
+            
+            flipPageBackward() {
+                // Remover efeitos de hover
+                this.pageTop.classList.remove('corner-fold');
+                this.pageBottom.classList.remove('dropping', 'corner-fold');
+                    
+                    setTimeout(() => {
+                        // Limpar páginas antes de carregar novas
+                        this.pageTop.style.backgroundImage = '';
+                        this.pageBottom.style.backgroundImage = '';
+                        this.pageTop.classList.remove('error-placeholder');
+                        this.pageBottom.classList.remove('error-placeholder');
+                        this.pageTop.innerHTML = '';
+                        this.pageBottom.innerHTML = '';
+                        
+                        // Recriar os triggers dos cantos e efeitos
+                        this.pageTop.innerHTML = '<div class="corner-trigger top-right" id="corner-top"></div><div class="corner-fold-effect"></div>';
+                        this.pageBottom.innerHTML = '<div class="corner-trigger bottom-right" id="corner-bottom"></div><div class="corner-fold-effect"></div>';
+                        
+                        // Reatribuir referências
+                        this.cornerTop = document.getElementById('corner-top');
+                        this.cornerBottom = document.getElementById('corner-bottom');
+                        this.setupCornerListeners();
+                        
+                        // Carregar páginas anteriores
+                        const pageNum = (this.currentPage - 1) * 2 + 1;
+                        this.loadImage(this.getImageUrl(`p${pageNum.toString().padStart(2, '0')}`), this.pageTop);
+                        this.loadImage(this.getImageUrl(`p${(pageNum + 1).toString().padStart(2, '0')}`), this.pageBottom);
+                        
+                        this.pageBottom.classList.remove('flipping-down');
+                        this.isAnimating = false;
+                        this.updateDisplay();
+                    }, 2000);
+        
+            }
+            
+            updateDisplay() {
+                // Atualizar contador
+                if (this.currentPage === 0) {
+                    this.pageCounter.textContent = 'Capa';
+                } else if (this.currentPage === this.totalPages) {
+                    this.pageCounter.textContent = 'Contra-capa';
+                } else {
+                    const pageNum = (this.currentPage - 1) * 2 + 1;
+                    this.pageCounter.textContent = `Páginas ${pageNum}-${pageNum + 1}`;
+                }
+                
+                // Atualizar botões
+                this.prevBtn.disabled = this.currentPage === 0;
+                this.nextBtn.disabled = this.currentPage === this.totalPages;
+            }
+            
+
+            
+
+        }
+        
+        // Inicializar flipbook quando a página carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            new Flipbook();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98d7ce6693013553',t:'MTc2MDI4NDc4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
