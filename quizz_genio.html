@@ -670,6 +670,8 @@ Basta seguir um protocolo de 5 passos, <b>simples e executável</b>, que você p
         let currentSlide = 0;
         let userAnswers = [];
         
+        let quizStartTime = Date.now();
+        
         const profileScores = {
             autoritario: 0,
             permissivo: 0,
@@ -913,34 +915,51 @@ Basta seguir um protocolo de 5 passos, <b>simples e executável</b>, que você p
             `;
     }
     
-    function salvarRespostas() {
+            function getAnswer(questionNumber){
+              const item = userAnswers.find(a => a.question === questionNumber);
+              return item ? item.answer : "";
+            }
 
-                const dados = {
-                    relacao: userAnswers[1],
-                    ano_nascimento: userAnswers[2],
-                    infancia: userAnswers[3],
-                    padrao_reacao: userAnswers[4],
-                    pensamento_automatico: userAnswers[5],
-                    reacao_pos_pensamento: userAnswers[6],
-                    parquinho: userAnswers[7],
-                    almoco: userAnswers[8],
-                    medo: userAnswers[10],
-                    resultado: "teste",
-                };
+           function salvarRespostas(resultadoFinal){
 
-                fetch("https://script.google.com/macros/s/AKfycbwNGdWrUN3KU90LiXIAJ-AA9Xb46TV_mCIWqJOOieWDr17_K8LYtidIr2r9SpiA7JtR/exec", {
-                    method: "POST",
-                    body: JSON.stringify(dados)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log("Salvo na planilha");
-                })
-                .catch(error => {
-                    console.error("Erro:", error);
-                });
+            const tempoQuiz = Math.round((Date.now() - quizStartTime) / 1000);
 
-                }
+            const dispositivo = /Mobi|Android/i.test(navigator.userAgent) ? "mobile" : "desktop";
+
+            const params = new URLSearchParams(window.location.search);
+
+            const dados = {
+
+            relacao: getAnswer(1),
+            ano_nascimento: getAnswer(2),
+            infancia: getAnswer(3),
+
+            padrao_reacao: getAnswer(4),
+            pensamento_automatico: getAnswer(5),
+            reacao_pos_pensamento: getAnswer(6),
+
+            parquinho: getAnswer(7),
+            almoco: getAnswer(8),
+
+            medo: getAnswer(10),
+
+            resultado: resultadoFinal,
+
+            tempo_quiz: tempoQuiz,
+            dispositivo: dispositivo,
+
+            utm_source: params.get("utm_source"),
+            utm_campaign: params.get("utm_campaign"),
+            utm_medium: params.get("utm_medium")
+
+            };
+
+            fetch("https://script.google.com/macros/s/AKfycbwNGdWrUN3KU90LiXIAJ-AA9Xb46TV_mCIWqJOOieWDr17_K8LYtidIr2r9SpiA7JtR/exec",{
+            method:"POST",
+            body: JSON.stringify(dados)
+            });
+
+            }
 
         function showResults() 
         {
@@ -972,6 +991,8 @@ Basta seguir um protocolo de 5 passos, <b>simples e executável</b>, que você p
             const resultText = dominantProfiles
                 .map(p => profileLabels[p])
                 .join(' + ');
+                
+                salvarRespostas(resultText);
 
             document.getElementById('finalScore').textContent = resultText;
 
@@ -1005,10 +1026,8 @@ Basta seguir um protocolo de 5 passos, <b>simples e executável</b>, que você p
                    document.getElementById('resultMessage').innerHTML += '🌱 Você já demonstra sensibilidade para identificar a necessidade por trás da emoção. Esse é um sinal claro de consciência emocional em desenvolvimento.';
                 }
 
-            console.log("Respostas do usuário:");
-            salvarRespostas(userAnswers);
-            
-            
+            console.log("Respostas do usuário:", userAnswers);
+
         }
 
         if (window.elementSdk) {
