@@ -1,0 +1,1073 @@
+<!doctype html>
+<html lang="pt-BR" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Interativo</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #e6e5e1 ;
+            color: #000000;
+            overflow: auto;
+        }
+
+        .quiz-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .progress-bar-container {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #F2F1EC ;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #70aaa3 0%, #4A9C92 100%);
+            border-radius: 10px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .slide_imagem {
+            text-align: center;
+            padding: 10px 0px 40px 0px;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-screen {
+            text-align: center;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 72px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .welcome-subtitle {
+            color: #4A9C92;
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .welcome-rules {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            opacity: 0.95;
+            text-align: left;
+        }
+
+        .start-button {
+            background: linear-gradient(135deg, #70aaa3 0%, #4A9C92 100%);
+            color: white;
+            border: none;
+            padding: 18px 60px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+        }
+
+        .start-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.6);
+        }
+
+        .start-button:active {
+            transform: translateY(0);
+        }
+
+        .question-screen {
+            width: 100%;
+            max-width: 800px;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-title {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+            line-height: 1.4;
+        }
+        
+        .question-subtitle {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .answers-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .answer-button {
+            background: #e6e5e1;
+            color: #000000;
+            border: 3px solid transparent;
+            padding: 20px 25px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .answer-button:hover {
+            background: #ffffff;
+            border-color: #4A9C92;
+            transform: translateX(5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .answer-button:active {
+            transform: translateX(3px);
+        }
+
+        .result-screen {
+            text-align: center;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .result-title {
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .result-score {
+            font-size: 50px;
+            font-weight: bold;
+            color: #4A9C92;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .result-message {
+            
+            white-space: pre-line;
+            text-align: left;
+        }
+
+        .answers-review {
+            text-align: left;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .answers-review h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .answer-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border-left: 4px solid #4A9C92;
+        }
+
+        .answer-item strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #4A9C92;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-container {
+                padding: 15px;
+            }
+
+            .welcome-title {
+                font-size: 36px;
+            }
+
+            .logo {
+                font-size: 56px;
+            }
+
+            .welcome-rules {
+                font-size: 16px;
+            }
+
+            .start-button {
+                padding: 16px 50px;
+                font-size: 20px;
+            }
+
+            .question-title {
+                font-size: 22px;
+            }
+
+            .answer-button {
+                font-size: 16px;
+                padding: 18px 20px;
+            }
+
+            .result-title {
+                font-size: 32px;
+            }
+
+            .result-score {
+                font-size: 56px;
+            }
+
+            .result-message {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) 
+        {
+            .welcome-title {
+                font-size: 28px;
+            }
+
+            .logo {
+                font-size: 48px;
+            }
+
+            .question-title {
+                font-size: 20px;
+            }
+
+            .answer-button {
+                font-size: 15px;
+                padding: 16px 18px;
+            }
+
+            .result-title {
+                font-size: 28px;
+            }
+
+            .result-score {
+                font-size: 48px;
+            }
+        }
+            
+            
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="quiz-container">
+   <div class="progress-bar-container" id="progressContainer" style="display: none;">
+    <div class="progress-info"><span id="phaseText">Fase 1</span> <span id="progressPercent">0%</span>
+    </div>
+    <div class="progress-bar">
+     <div class="progress-fill" id="progressFill"></div>
+    </div>
+   </div>
+   <div class="slide active" id="slide0">
+    <div class="welcome-screen">
+     <h1 class="welcome-title" id="quizTitle">Você está ATRASADO.</h1>
+     Já era para estar no carro, mas ainda não conseguiu levar seu filho para o banho.
+     <br/>E agora? Você sabe o que fazer?
+
+            <!--<h1 class="welcome-subtitle" id="quizTitle">Experimento Prático</h2>-->
+           <p align="center"> <img src="imagens/capa.jpg" /></p>
+     <p class="welcome-rules" id="rulesText">
+     Em 2 minutos, faça o teste e descubra se você tem tendência <b>Autoritária</b>, <b>Permissiva</b>, <b>Evitativa</b> ou <b>Consciente</b> nos momentos de crise.
+     <br/>No final, receba um <b>diagnóstico da sua maior dificuldade</b> e um plano de solução.
+</p><button class="start-button" id="startButton" onclick="startQuiz()">Começar</button>
+    </div>
+   </div>
+   <div class="slide" id="slide1">
+    <div class="question-screen">
+     <h2 class="question-title">1. Se você está por aqui, é porque quer ajudar uma criança, né? </h2>
+     <h2 class="question-subtitle">Me conta, qual sua relação com ela(s)?</h2>
+     <div class="answers-container"><button class="answer-button" onclick="selectAnswer(1, 'Mãe', 0)">🤱 Mãe</button> <button class="answer-button" onclick="selectAnswer(1, 'Pai', 0)">👨‍🍼 Pai</button> <button class="answer-button" onclick="selectAnswer(1, 'Avos', 0)">👩‍🦳 Avô/Avó</button><button class="answer-button" onclick="selectAnswer(1, 'Familiar', 0)">🏠 Outro Familiar Próximo</button><button class="answer-button" onclick="selectAnswer(1, 'Educador', 0)">👨‍🏫 Educador(a)/Professora(a)</button><button class="answer-button" onclick="selectAnswer(1, 'Profissional', 0)">🧑‍⚕️ Psicólogo/Terapeuta</button>
+     </div>
+    </div>
+   </div>
+   <div class="slide" id="slide2">
+    <div class="question-screen">
+     <h2 class="question-title">2. Qual o ano de nascimento da(s) criança(s)? </h2>
+     <h2 class="question-subtitle">(Apenas para termos uma noção média da faixa etária)</h2>
+     <div class="answers-container"> 
+            <button class="answer-button" onclick="selectAnswer(2, '2025', 0)">2025</button>
+            <button class="answer-button" onclick="selectAnswer(2, '2024', 0)">2024</button>
+            <button class="answer-button" onclick="selectAnswer(2, '2023', 0)">2023</button>
+            <button class="answer-button" onclick="selectAnswer(2, '2022', 0)">2022</button>
+            <button class="answer-button" onclick="selectAnswer(2, '2021', 0)">2021</button>
+            <button class="answer-button" onclick="selectAnswer(2, '2020', 0)">2020</button>
+            <button class="answer-button" onclick="selectAnswer(2, '2019', 0)">2019</button>
+            <button class="answer-button" onclick="selectAnswer(2, '2018', 0)">2018</button>
+            <button class="answer-button" onclick="selectAnswer(2, '2017', 0)">2017</button>
+            <button class="answer-button" onclick="selectAnswer(2, '2016', 0)">2016</button>
+            <button class="answer-button" onclick="selectAnswer(2, '2015', 0)">2015</button>
+            <button class="answer-button" onclick="selectAnswer(2, '2014', 0)">2014 ou antes</button>
+
+     </div>
+    </div>
+   </div>
+   <div class="slide" id="slide3">
+    <div class="question-screen">
+     <h2 class="question-title">3. Legal! Agora me conte um pouco de você…</h2>
+      <h2 class="question-subtitle">Quando você tinha emoções intensas na infância (choro, raiva, medo), o que costumava acontecer?</h2>
+     <div class="answers-container"><button class="answer-button" onclick="selectAnswer(3, 'Repressão', 0)">💥 Me repreendiam, às vezes de forma um pouco agressiva</button> <button class="answer-button" onclick="selectAnswer(3, 'Sem Limites', 0)">👍 Acabavam cedendo e fazendo o que eu queria</button> <button class="answer-button" onclick="selectAnswer(3, 'Solidão', 0)">🍬 Tentavam me distrair ou deixavam eu me acalmar sozinho(a)</button> <button class="answer-button" onclick="selectAnswer(3, 'Ajuda', 0)">🫂 Alguém ficava comigo e tentava entender o que eu sentia</button> <button class="answer-button" onclick="selectAnswer(3, 'Neutro', 0)">🤍 Não lembro / prefiro não responder</button>
+     </div>
+    </div>
+   </div>
+   <div class="slide" id="slide4">
+    <div class="question-screen">
+     <h2 class="question-title">4. Hoje, quando emoções fortes aparecem, o que você mais reconhece em você?</h2>
+     <div class="answers-container"><button class="answer-button" onclick="selectAnswer(4, 'Autoritário', 1)">💥 Reajo no impulso e depois me arrependo</button><button class="answer-button" onclick="selectAnswer(4, 'Permissivo', 1)">👍 Acabo me anulando e cedendo para evitar conflitos</button><button class="answer-button" onclick="selectAnswer(4, 'Evitativo', 1)">🍬  Evito lidar com o sentimento buscando algo que dá prazer (mexer no celular, comer chocolate...)</button><button class="answer-button" onclick="selectAnswer(4, 'Assertivo', 1)">😮‍💨 Na maioria das vezes, consigo identificar o que estou sentindo e faço algo conscientemente para me regular</button>
+     </div>
+    </div>
+   </div>
+   <div class="slide" id="slide5">
+    <div class="question-screen">
+     <h2 class="question-title">5. Agora vamos analisar sua relação com a(s) criança(s) que você quer ajudar.</h2>
+     <h2 class="question-subtitle">Quando ela tem uma crise intensa, qual pensamento mais comum surge na sua mente?</h2>
+     <div class="answers-container">
+     <button class="answer-button" onclick="selectAnswer(5, 'Autoritário', 1)">😠 "Tenho que impor autoridade, senão ela nunca vai me respeitar”</button><button class="answer-button" onclick="selectAnswer(5, 'Permissivo', 1)">🤔 "Ele está chorando muito, pode ficar traumatizado”</button><button class="answer-button" onclick="selectAnswer(5, 'Evitativo', 1)">😓 “Eu só queria 5 minutos de descanso”</button>
+     <button class="answer-button" onclick="selectAnswer(5, 'Assertivo', 1)">‍‍‍💨 “Estou com raiva, preciso respirar fundo para me acalmar”</button> <button class="answer-button" onclick="selectAnswer(5, 'Assertivo', 1); markNeedsAwareness()">🔍 “Esse choro acontece sempre antes da soneca… Será que é sono?”</button>
+     </div>
+    </div>
+   </div>
+   <div class="slide" id="slide6">
+    <div class="question-screen">
+     <h2 class="question-title">6. E depois desses pensamentos, o que costuma acontecer?</h2>
+     <div class="answers-container"><button class="answer-button" onclick="selectAnswer(6, 'Autoritário', 1)">😠 Corrijo na hora para ela entender que eu que estou no comando</button><button class="answer-button" onclick="selectAnswer(6, 'Permissivo', 1)">👍 Faço o que ela quer para o choro passar logo</button><button class="answer-button" onclick="selectAnswer(6, 'Evitativo', 1)">👤 Deixo ela sozinho(a) até se acalmar</button><button class="answer-button" onclick="selectAnswer(6, 'Assertivo', 1)">🫂  Acolho e nomeio a emoção que ela está sentindo</button><button class="answer-button" onclick="selectAnswer(6, 'Assertivo', 1); markNeedsAwareness()">🧭  Acolho, nomeio a emoção e ensino formas mais saudáveis de pedir o que precisa</button>
+     </div>
+     </div>
+    </div>
+   <div class="slide" id="slide7">
+    <div class="question-screen">
+     <h2 class="question-title">7. Sua criança não quer ir embora do parquinho</h2>
+     <h2 class="question-subtitle">Como você reage geralmente:</h2>
+     <div class="answers-container"><button class="answer-button" onclick="selectAnswer(7, 'Autoritário', 1)">💥 Perco a paciência, acabo reagindo e levo a força mesmo</button> <button class="answer-button" onclick="selectAnswer(7, 'Permissivo', 1)">👍 Eu tento, mas sinto culpa quando ela chora e acabo cedendo</button> <button class="answer-button" onclick="selectAnswer(7, 'Evitativo', 1)">🚶 Vou andando na frente, até ela vir atrás</button> <button class="answer-button" onclick="selectAnswer(7, 'Assertivo', 1)">🤝 Aviso que vou pegá-la minutos antes e sigo o combinado</button> <button class="answer-button" onclick="selectAnswer(7, 'Assertivo', 1); markNeedsAwareness()">⚽ Tento identificar a necessidade dela, se é diversão, por exemplo, pego um brinquedo para despertar o interesse dela no caminho</button>
+     </div>
+    </div>
+   </div>
+   <div class="slide" id="slide8">
+    <div class="question-screen">
+     <h2 class="question-title">8. Imagine que sua criança não quer almoçar</h2>
+    <h2 class="question-subtitle">Você está preocupado(a) porque ela não se alimentou bem no café da manhã. Como você reage geralmente:</h2>
+     <div class="answers-container"><button class="answer-button" onclick="selectAnswer(8, 'Autoritário', 1)">💥 Insisto e acabo reagindo com irritação</button><button class="answer-button" onclick="selectAnswer(8, 'Permissivo', 1)">👍 Insisto, mas acabo cedendo para evitar o choro</button><button class="answer-button" onclick="selectAnswer(8, 'Evitativo', 1)">📱️ Coloco um desenho para distrair e evitar estresse</button><button class="answer-button" onclick="selectAnswer(8, 'Assertivo', 1)">🤝 Explico que é hora de almoçar e acolho a frustração, mesmo que coma pouco</button><button class="answer-button" onclick="selectAnswer(8, 'Assertivo', 1); markNeedsAwareness()">🐊 Tento entender a necessidade por trás da resistência, se é conexão, por exemplo, brinco de abrir a boca como jacaré e comer uma colherada para que ela me imite</button>
+     </div>
+    </div>
+   </div>
+   <div class="slide" id="slide9">
+<div class="question-screen">
+     <h1 class="result-title">9. Você sabia?</h1>
+    
+     <div class="slide_imagem"><img src="imagens/birra.jpg" /></div>
+     <div class="answers-container">
+     <button class="answer-button" onclick="selectAnswer(9, 'Não sabia', 0)">😲 Nossa, não sabia</button>
+     <button class="answer-button" onclick="selectAnswer(9, 'Ouvi falar', 0)">🤓 Já ouvi falar</button>
+     </div>
+ </div>
+   </div>
+   <div class="slide" id="slide10">
+    <div class="question-screen">
+     <h2 class="question-title">10. Quando você pensa no futuro emocional dessa criança, o que mais te preocupa?</h2>
+     <div class="answers-container">
+        <button class="answer-button" onclick="selectAnswer(10, 'Autoritário', 1)">🥺 Que ela fique muito dependente</button>
+        <button class="answer-button" onclick="selectAnswer(10, 'Permissivo', 1)">💥 Que ela se rebele e tenha dificuldade em aceitar limites no futuro</button>
+        <button class="answer-button" onclick="selectAnswer(10, 'Evitativo', 1)">🤷  Prefiro não pensar sobre isso</button>
+        <button class="answer-button" onclick="selectAnswer(10, 'Assertivo', 1)">❤️‍🩹 Repetir, sem perceber, padrões da minha própria infância</button>
+     </div>
+    </div>
+   </div>
+
+   <div class="slide" id="slide11">
+    <div class="question-screen">
+     <h2 class="question-title">Diante de uma explosão emocional, muitas mães relatam viver esse dilema:</h2>
+     <div class="slide_imagem"><img src="imagens/dilema.jpg" style="height: 500px;" /></div>
+     Um grande conflito interno, com pensamentos oscilando entre <b>ceder</b> e ser <b>mais firme</b>.
+     <br/>Muitas buscam soluções, decoram teorias, escutam opiniões...
+     <br/>Mas, no meio da crise, é <b>difícil pensar com clareza.</b>
+      <br/>Aí acabam reagindo… De novo, no <b>impulso</b>.
+      <br/>E depois vem a culpa e o <b>arrependimento</b>.
+      <br/>
+      <br/>
+      Isso ocorre com você? Com que frequência?
+    <br/>
+    <br />
+     <div class="answers-container">
+     <button class="answer-button" onclick="selectAnswer(11, 'Mais de 60', 0)">🤯 Sim, mais de 60% das vezes</button>
+     <button class="answer-button" onclick="selectAnswer(11, 'Entre 30 e 60', 0)">🤯 Sim, entre 30% e 60% das vezes</button>
+     <button class="answer-button" onclick="selectAnswer(11, 'Não muito', 0)">🙃 Não muito</button>
+     </div>
+    </div>
+   </div>
+   
+      <div class="slide" id="slide12">
+    <div class="question-screen">
+     <h2 class="question-title">O Que Você Ainda <u>Não Está Vendo</u></h2>
+     
+     Quando estamos sob pressão, temos dificuldade de acessar áreas do cérebro ligadas à autorregulação, ao raciocínio ou à empatia.
+     <br/>
+     Por isso, em primeiro lugar, é importante ter um <b>plano simples e executável</b> para saber <b><u>exatamente o que fazer</u></b> a hora da crise.
+     <br/>
+     <br/>
+     Além disso, a maioria das soluções ensina a <b>lidar com o comportamento</b>.
+     <br />
+        Mas e se o comportamento não for o problema?
+        <br />
+        E se ele for apenas um sinal?
+        <br />
+        Enquanto o foco estiver no comportamento, estamos apenas <b>apagando incêndios</b>. 🔥
+        <br/>
+        <br />
+        Existe uma <b>mensagem silenciosa</b> por trás de cada explosão emocional.
+        <br />
+        E quando você aprende a decifrá-la, você atua na <b>raíz do problema</b>. 
+        <br />
+        Você aprender <b>Ver, Entender e Responder</b> às crises emocionais com consciência e direção.
+        <br/>
+        <br/>
+        Essa é a <b>diferença estrutural</b>. 🎯
+        <br />
+        Não é mais teoria sobre comportamento.
+        <br />
+        É <b>leitura emocional aplicada</b>.
+<br />
+<br />
+       <p align="center"><button class="start-button" onclick="passarSlide()">➜ Quero aprender a ler as emoções</button> </p>
+    </div>
+   </div>
+   
+   <div class="slide" id="slide13">
+    <div class="question-screen">
+     <h2 class="question-title">Afinal, o que as emoções querem dizer?</h2>
+    <h2 class="question-subtitle">É comum acreditarmos que o comportamento da criança ou outras situações externas nos fazem sentir raiva, como se as nossas emoções fossem provocadas de fora para dentro, mas observe essa situação:</h2>
+        <div class="slide_imagem"><img src="imagens/necessidade_adulto.jpg" /></div>
+     <div class="answers-container"><button class="answer-button" onclick="selectAnswer(13, 'Sabia', 0)">🎯 É assim mesmo que acontece aqui!</button>
+     <button class="answer-button" onclick="selectAnswer(13, 'Às vezes', 0)">🤷 Às vezes</button> 
+    </div>
+   </div>
+   </div>
+   
+   
+   <div class="slide" id="slide14">
+    <div class="question-screen">
+     <h2 class="question-title">Voltemos à cena do início</h2>
+     <h2 class="question-subtitle">A criança não quer tomar banho...<br/>Mas agora você sabe fazer leitura emocional...</h2>
+     <div class="slide_imagem">
+     <img src="imagens/leitura_emocional.jpg" />
+     </div>
+     <br />
+     Quando você compreende a necessidade que deu origem à crise, você entende o problema.
+     <br/>E quando você <b>entende o problema</b>, consegue dar uma <b>solução de verdade</b>...
+     
+<br />
+<br />
+        <div class="answers-container"><button class="answer-button" onclick="selectAnswer(14, 'Sabia', 0)">🎯 É isso!</button>
+            <button class="answer-button" onclick="selectAnswer(14, 'Às vezes', 0)">🤷 Como dar a solução?</button> 
+    </div>
+    </div>
+   </div>
+
+ <div class="slide" id="slide15">
+    <div class="question-screen">
+     <h2 class="question-title">Por exemplo, se a necessidade da criança é de diversão...</h2>
+     <h2 class="question-subtitle">Você pode usar a técnica do convite lúdico:</h2>
+     <div class="slide_imagem">
+     <img src="imagens/convite_ludico.jpg" />
+     </div>
+    <br />
+     <div class="answers-container"><button class="answer-button" onclick="selectAnswer(15, 'Legal', 0)">😲 Que legal!</button>
+     <button class="answer-button" onclick="selectAnswer(15, 'Objeção', 0)">🤷 É legal, mas ainda não sei se consigo aplicar</button>
+     </div>
+    </div>
+   </div>
+   
+            <div class="slide" id="slide16">
+<div class="question-screen">
+     <h1 class="result-title">🎊 Análise de Perfil</h1>
+     Ao longo do teste, identificamos um <b><u>padrão consistente</u></b> de como você reage em momentos de pressão e tensão emocional.
+     <br />
+     <br />
+Estudos em parentalidade descrevem quatro perfis:
+<br />
+<p align="center"><img src="imagens/perfis.png" /><p>
+ <br />
+Todos nós <b>transitamos entre eles</b> ao longo da vida.
+<br />
+O que muda é perceber qual deles <b>assume o controle</b> quando a pressão aumenta.
+<br />
+Há algo que todos têm em comum: são tentativas de <b>lidar com situações emocionalmente desafiadoras</b>.
+<br />
+<br />
+      <p align="center"><button class="start-button" onclick="passarSlide()">➜ Quero ver meu resultado</button> </p>
+ </div>
+   </div>
+
+   <div class="slide" id="slide17">
+    <div class="result-screen">
+     <h2 class="result-title">Diagnóstico:</h2>
+     <div class="result-score" id="finalScore">
+      0
+     </div>
+     <p class="result-message" id="resultMessage"></p>
+     <br />
+        <div id="profileFields" class="text-left"></div>
+
+      <!--<div id="answersReviewList"></div>-->
+      <br/>
+      <br/>
+         <h2 class="question-subtitle">Seu Plano de Evolução Emocional</h2>
+         <div class="text-left">
+         Com base nas suas respostas, posicionamos você em nosso <b>Mapa de Consciência Parental</b>, um modelo que mostra como os adultos tendem a reagir emocionalmente em momentos de pressão.
+       
+         <br/>
+         Seu mapa mostra dois pontos importantes:
+<br/>
+🔴 Onde você está hoje
+<br/>
+🟢  A versão de pai/mãe que deseja se tornar: mais consciente e conectada
+
+</div>
+
+         <p align="center"><img id="resultImage" style="max-width:100%; margin-top:20px;"></p>
+          <div class="text-left">
+         <br/>
+        
+         <br/>
+           A boa notícia é que a mudança entre esses dois pontos não depende de personalidade, estudos extensos ou força de vontade infinita.
+Ela depende de um <b>caminho claro</b>.
+<br/>
+Um caminho para mudar a sua forma de <b>VER</b> as crises:
+<br/>
+<br/>
+<p align="center"><img src="imagens/ver.jpg"></p>
+<br/>
+Para isso, preparamos um protocolo simples e prático, estruturado para te ajudar nesse processo.
+<br/>
+Você não precisa memorizar teorias nem estudar conteúdos extensos.
+<br/>
+Basta seguir um protocolo de 5 passos, <b>simples e executável</b>, que você pode começar a aplicar <b>hoje</b>.
+</div>
+            <br />
+            <br />
+            <br />
+            <button class="start-button" onclick="window.location.href='protocolo/index.html'">👉 Quero ver esse protocolo</button> 
+    </div>
+   </div>
+   
+  </div>
+  
+  
+  <script>
+        const defaultConfig = {
+            quiz_title: "Quiz Interativo",
+            start_button_text: "Começar",
+            rules_text: "Responda 13 perguntas e descubra seu resultado! Cada resposta possui uma pontuação. No final, você verá sua pontuação total e poderá revisar suas escolhas.",
+            background_color: "#667eea",
+            surface_color: "#ffffff",
+            text_color: "#667eea",
+            primary_action_color: "#4ade80",
+            secondary_action_color: "#22c55e"
+        };
+
+        let currentSlide = 0;
+        let userAnswers = [];
+        
+        const profileScores = {
+            autoritario: 0,
+            permissivo: 0,
+            evitativo: 0,
+            assertivo: 0
+        };
+        
+        const profileResults = {
+          autoritario: {
+            titulo: "Perfil Autoritário",
+            valor: "Segurança, Ordem e Respeito",
+            medo: "Perder autoridade ou criar uma criança fraca",
+            forca: "Capacidade de colocar limites claros",
+            risco: "Desconexão emocional e reatividade",
+            tendencia: "reagir com rigidez e agressiividade",
+            mensagem: "(Quando a necessidade de segurança assume o controle)",
+            texto: "Quando algo acontece, você aprendeu a reagir rápido e com firmeza, às vezes até com dureza. Não porque queira machucar, mas porque sente que, se não assumir o controle, tudo pode sair do eixo. Por trás dessa reação, costuma existir uma <u>necessidade forte de segurança, ordem ou respeito</u>.<br /> A raiva aparece rápido, como um alarme interno, para proteger a criança, a situação e você mesmo(a): da sensação de impotência e do medo de falhar. Essa força que emerge no impulso também nasce do cuidado. Você se importa. Você quer preparar a criança para o mundo. Só que, às vezes, o excesso de pressão deixa pouco espaço para conexão, inclusive com você mesmo(a). A mudança começa quando você percebe a necessidade por trás da reação e ganha espaço para escolher como colocar limites, com menos impulso e mais presença."
+          },
+          permissivo: {
+            titulo: "Perfil Permissivo",
+            valor: "Harmonia, Conexão e Bem-estar Emocional",
+            medo: "Machucar emocionalmente a criança",
+            forca: "Empatia e sensibilidade",
+            risco: "Dificuldade em sustentar limites",
+            tendencia: "ceder para evitar conflitos",
+            mensagem: "(Quando o amor tenta evitar a dor)",
+            texto: "Quando a criança sofre, algo em você sofre junto e isso dói demais para ignorar. O choro intenso desperta um medo silencioso: “E se ela não conseguir lidar?” Por isso, muitas vezes, você cede.  Não por fraqueza, mas por empatia.  Seu coração busca proteger, aliviar, garantir que a criança se sinta amada e segura. Por trás da tendência de ceder, existe também uma necessidade profunda de conexão. Evitar o sofrimento do outro é, muitas vezes, uma forma de tentar manter o vínculo intacto. O desafio é que, na tentativa de poupar a criança da dor, você pode silenciar suas próprias necessidades, que acabam transbordando em algum momento. E o limite, que também protege e orienta a criança, acaba sendo adiado. A mudança começa quando você percebe que mais valioso do que dar o que a criança quer, é dar o que ela precisa."
+          },
+          evitativo: {
+            titulo: "Perfil Evitativo",
+            valor: "Paz, Descanso e Harmonia",
+            medo: "Entrar em contato com emoções difíceis e perder estabilidade",
+            forca: "Autonomia e praticidade",
+            risco: "Distanciamento emocional",
+            tendencia: "ativar gatilhos de afastamento e distração, evitando lidar com a situação",
+            mensagem: "(Quando o silêncio é um pedido de descanso)",
+            texto: "Você aprendeu a seguir em frente. Quando as emoções ficam intensas demais, sua mente tende a se afastar, distrair ou silenciar. Não é indiferença, é sobrecarga. Por trás desse comportamento, geralmente existe uma necessidade legítima de descanso, espaço e autorregulação. Se afastar vira uma forma de sobreviver emocionalmente. O problema é que, quando essa necessidade não é reconhecida, o afastamento acontece no automático e a conexão pode se perder quando a criança mais precisa. A mudança começa quando você aprende a reconhecer o que está por trás desse impulso de se afastar. Assim, mesmo quando não é possível pausar, estratégias simples de autorregulação ajudam você a seguir presente, sem se desligar emocionalmente."
+          },
+          assertivo: {
+            titulo: "Perfil Consciente",
+            valor: "Equilíbrio entre Limite e Acolhimento",
+            medo: "Repetir padrões da própria infância",
+            forca: "Consciência emocional",
+            tendencia: "buscar auto regulação para lidar com a situação",
+            risco: "Sobrecarga e autocobrança para fazer tudo certo",
+            mensagem: "(Quando a consciência guia a resposta)",
+            texto: "Você tenta observar antes de agir. Nem sempre consegue, mas existe um desejo genuíno de quebrar ciclos, de não repetir padrões da própria infância e de entender o que está acontecendo por dentro. O desafio é que essa consciência pode vir acompanhada de autocobrança:  -Eu deveria lidar melhor com isso. Mesmo assim, você segue tentando e isso já diz muito sobre o caminho que você está construindo. Na prática, você já consegue se ouvir, se acalmar e se cuidar,  mesmo que de forma intuitiva, e, nesse espaço, a escuta da criança surge naturalmente. A mudança começa quando você reconhece esse processo conscientemente e passa a conduzi-lo de forma intencional."
+          }
+        };
+        
+        const resultado = { 
+          autoritario: "grafico1.jpg", 
+          permissivo: "grafico2.jpg",  
+          evitativo: "grafico3.jpg",  
+          assertivo: "grafico4.jpg",  
+
+          "permissivo+autoritario": "grafico10.jpg",  
+          "autoritario+permissivo": "grafico10.jpg", 
+          
+          "autoritario+assertivo": "grafico6.jpg",  
+          "assertivo+autoritario": "grafico6.jpg",
+          
+          "permissivo+assertivo": "grafico7.jpg",  
+          "assertivo+permissivo": "grafico7.jpg",  
+          
+          "autoritario+evitativo": "grafico8.jpg",  
+          "evitativo+autoritario": "grafico8.jpg",
+          
+          "evitativo+permissivo": "grafico9.jpg",  
+          "permissivo+evitativo": "grafico9.jpg",  
+          
+          "evitativo+assertivo": "grafico10.jpg",
+          "assertivo+evitativo": "grafico10.jpg" 
+        };
+        
+        let showsNeedsAwareness = false;
+
+        function markNeedsAwareness() {
+          showsNeedsAwareness = true;
+        }
+
+        async function onConfigChange(config) {
+            const quizTitle = config.quiz_title || defaultConfig.quiz_title;
+            const startButtonText = config.start_button_text || defaultConfig.start_button_text;
+            const rulesText = config.rules_text || defaultConfig.rules_text;
+            const backgroundColor = config.background_color || defaultConfig.background_color;
+            const surfaceColor = config.surface_color || defaultConfig.surface_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+            const primaryActionColor = config.primary_action_color || defaultConfig.primary_action_color;
+            const secondaryActionColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+
+            document.getElementById('quizTitle').textContent = quizTitle;
+            document.getElementById('startButton').textContent = startButtonText;
+            document.getElementById('rulesText').textContent = rulesText;
+
+            document.body.style.background = `linear-gradient(135deg, ${backgroundColor} 0%, ${secondaryActionColor} 100%)`;
+
+            const answerButtons = document.querySelectorAll('.answer-button');
+            answerButtons.forEach(button => {
+                button.style.color = textColor;
+            });
+
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.background = `linear-gradient(90deg, ${primaryActionColor} 0%, ${secondaryActionColor} 100%)`;
+
+            const startButton = document.getElementById('startButton');
+            startButton.style.background = `linear-gradient(135deg, ${primaryActionColor} 0%, ${secondaryActionColor} 100%)`;
+        }
+
+        function startQuiz() {
+            currentSlide = 1;
+            document.getElementById('progressContainer').style.display = 'block';
+            updateSlide();
+        }
+        
+        function normalizeProfile(answerText) {
+            if (!answerText) return null;
+
+            const text = answerText.toLowerCase();
+
+            if (text.includes('autorit')) return 'autoritario';
+            if (text.includes('permiss')) return 'permissivo';
+            if (text.includes('evit')) return 'evitativo';
+            if (text.includes('assert')) return 'assertivo';
+
+            return null;
+        }
+        
+        function buildProfileResult(dominantProfiles) {
+          if (dominantProfiles.length === 1) {
+            const p = dominantProfiles[0];
+            const data = profileResults[p];
+
+            return `
+            <strong> ${data.mensagem}</strong><br />
+            ${data.texto}
+            `;
+          }
+          
+       // PERFIL HÍBRIDO — baseado nos perfis ganhadores
+        return `
+        <p>Você tem mais de um perfil dominante, ou seja: reage de acordo com a situação, o nível de cansaço e a intensidade emocional do momento.</p>
+        ${dominantProfiles.map(profile => {
+          const data = profileResults[profile];
+          const intro = hybridIntroByProfile[profile];
+
+          return `
+            <p><strong>${intro}</strong></p>
+            ${data.texto}
+          `;
+        }).join('')}
+        
+         `;
+      
+     
+        
+        
+    }
+
+      
+        function selectAnswer(questionNumber, answerText, points) {
+            // salva resposta (continua igual)
+            userAnswers.push({
+                question: questionNumber,
+                answer: answerText,
+                points: points
+            });
+
+            // tenta identificar perfil
+            const profile = normalizeProfile(answerText);
+
+            // só soma se for pergunta de perfil
+            if (profile && profileScores[profile] !== undefined) {
+                profileScores[profile] += points;
+                console.log('Perfil somado:', profile, profileScores);
+            }
+
+            currentSlide++;
+            updateSlide();
+        }
+        
+        function passarSlide()
+        {
+            currentSlide++;
+            updateSlide();
+        }
+
+        function updateSlide() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            const activeSlide = document.getElementById(`slide${currentSlide}`);
+            if (activeSlide) {
+                activeSlide.classList.add('active');
+            }
+            
+            if (currentSlide > 0 && currentSlide <= 17) {
+                updateProgress();
+            }
+            
+            if (currentSlide === 17) {
+                showResults();
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentSlide / 17) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressPercent').textContent = Math.round(progress) + '%';
+            
+            let phaseText = '';
+            if (currentSlide >= 1 && currentSlide <= 9) {
+                phaseText = 'Fase 1: Descubra seu Perfil Parental';
+            } else if (currentSlide >= 10 && currentSlide <= 12) {
+                phaseText = 'Fase 2:  Raio-X das Emoções';
+            } else if (currentSlide === 13) {
+                phaseText = 'Fase 3: Missão Prática';
+            } else if (currentSlide === 17) {
+                phaseText = 'Resultado';
+            }
+            
+            document.getElementById('phaseText').textContent = phaseText;
+        }
+        
+        const hybridIntroByProfile = {
+          autoritario: "Em situações de maior pressão, o perfil autoritário tende a assumir o controle.",
+          permissivo: "Em situações onde a criança demonstra emoções intensas, o perfil permissivo tende a assumir o controle.",
+          evitativo: "Em situações de sobrecarga, o perfil evitativo tende a assumir o controle.",
+          assertivo: "Em momentos de mais consciência, o perfil consciente tende a assumir o controle."
+        };
+        
+        function buildProfileFields(profile)
+        {
+            const data = profileResults[profile];
+
+            return `
+                <b>Valores principais:</b> ${data.valor}<br>
+                <b>Medo comum:</b> ${data.medo}<br>
+                <b>Força:</b> ${data.forca}<br>
+                <b>Risco:</b> ${data.risco}<br><br>
+            `;
+    }
+    
+    function salvarRespostas() {
+
+                const dados = {
+                    relacao: userAnswers[1],
+                    ano_nascimento: userAnswers[2],
+                    infancia: userAnswers[3],
+                    padrao_reacao: userAnswers[4],
+                    pensamento_automatico: userAnswers[5],
+                    reacao_pos_pensamento: userAnswers[6],
+                    parquinho: userAnswers[7],
+                    almoco: userAnswers[8],
+                    medo: userAnswers[10],
+                    resultado: "teste",
+                };
+
+                fetch("https://script.google.com/macros/s/AKfycbwNGdWrUN3KU90LiXIAJ-AA9Xb46TV_mCIWqJOOieWDr17_K8LYtidIr2r9SpiA7JtR/exec", {
+                    method: "POST",
+                    body: JSON.stringify(dados)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Salvo na planilha");
+                })
+                .catch(error => {
+                    console.error("Erro:", error);
+                });
+
+                }
+
+        function showResults() 
+        {
+         console.log(userAnswers);
+            console.log('Scores finais:', profileScores);
+
+            const entries = Object.entries(profileScores)
+              .sort((a, b) => b[1] - a[1]);
+
+            const [topProfile, topScore] = entries[0];
+            const [secondProfile, secondScore] = entries[1];
+
+            let dominantProfiles = [];
+
+            // regra: só perfil único se houver diferença REAL
+            if (topScore >= secondScore + 2) {
+              dominantProfiles = [topProfile];
+            } else {
+              dominantProfiles = [topProfile, secondProfile];
+            }
+
+            const profileLabels = {
+                autoritario: 'Autoritário',
+                permissivo: 'Permissivo',
+                evitativo: 'Evitativo',
+                assertivo: 'Consciente'
+            };
+
+            const resultText = dominantProfiles
+                .map(p => profileLabels[p])
+                .join(' + ');
+
+            document.getElementById('finalScore').textContent = resultText;
+
+            const resultMessage = buildProfileResult(dominantProfiles);
+            document.getElementById('resultMessage').innerHTML = resultMessage;
+            
+            // CAMPOS (VALORES / MEDO / FORÇA / RISCO)
+                if (dominantProfiles.length === 1) {
+
+                    const fields = buildProfileFields(dominantProfiles[0]);
+
+                    document.getElementById("profileFields").innerHTML = fields;
+
+                } else {
+
+                    // se for híbrido não mostra nada
+                    document.getElementById("profileFields").innerHTML = "";
+
+                }
+            
+            const key = dominantProfiles.join('+');
+
+            const img = document.getElementById("resultImage");
+
+            if (resultado[key]) 
+            {
+                img.src = "imagens/" + resultado[key];
+                }
+                                
+                if (showsNeedsAwareness) {
+                   document.getElementById('resultMessage').innerHTML += '🌱 Você já demonstra sensibilidade para identificar a necessidade por trás da emoção. Esse é um sinal claro de consciência emocional em desenvolvimento.';
+                }
+
+            console.log("Respostas do usuário:");
+            salvarRespostas(userAnswers);
+            
+            
+        }
+
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig: defaultConfig,
+                onConfigChange: onConfigChange,
+                mapToCapabilities: (config) => ({
+                    recolorables: [
+                        {
+                            get: () => config.background_color || defaultConfig.background_color,
+                            set: (value) => {
+                                config.background_color = value;
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.surface_color || defaultConfig.surface_color,
+                            set: (value) => {
+                                config.surface_color = value;
+                                window.elementSdk.setConfig({ surface_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.text_color || defaultConfig.text_color,
+                            set: (value) => {
+                                config.text_color = value;
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                            set: (value) => {
+                                config.primary_action_color = value;
+                                window.elementSdk.setConfig({ primary_action_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+                            set: (value) => {
+                                config.secondary_action_color = value;
+                                window.elementSdk.setConfig({ secondary_action_color: value });
+                            }
+                        }
+                    ],
+                    borderables: [],
+                    fontEditable: undefined,
+                    fontSizeable: undefined
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ["quiz_title", config.quiz_title || defaultConfig.quiz_title],
+                    ["start_button_text", config.start_button_text || defaultConfig.start_button_text],
+                    ["rules_text", config.rules_text || defaultConfig.rules_text]
+                ])
+            });
+        }
+        
+        
+ 
+
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9aff443187c73559',t:'MTc2NjA2NzI2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
