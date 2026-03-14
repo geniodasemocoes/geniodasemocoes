@@ -648,7 +648,7 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
 
       </div><!-- O que está incluído -->
 
-      <!-- CTA --> <a href="http://www.x.com" class="cta-button block w-full bg-primary hover:bg-primary-dark text-white text-center font-bold text-lg py-4 rounded-xl transition-all duration-300 cta-pulse" onclick="fbq('track','InitiateCheckout')"> QUERO COMEÇAR AGORA </a> <!-- Segurança -->
+      <!-- CTA --> <button class="cta-button block w-full bg-primary hover:bg-primary-dark text-white text-center font-bold text-lg py-4 rounded-xl transition-all duration-300 cta-pulse" onclick="goCheckOut()"> QUERO COMEÇAR AGORA </button> <!-- Segurança -->
       <div class="flex items-center justify-center gap-4 mt-6 text-sm text-text-light"><span>🔒 Pagamento Seguro</span> <span>💳 Todos os cartões</span>
       
       
@@ -768,27 +768,46 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
       font_size: 16
     };
     
-    
-    
-    //Pixel
-    function trackPixel(eventName)
-    {
-
-        if(typeof fbq === "function"){
-
-        fbq('trackCustom', eventName);
-        console.log(eventName + " enviado ao pixel");
-
-        } 
-        else 
+    function goCheckOut() 
         {
+            //Envia para o Pixel clique no CTA para ver o protocolo
+            fbq('trackCustom', 'InitiateCheckout');
 
-        console.log("Pixel ainda não carregado");
+            const params = window.location.search;
+
+            window.location.href = "index_protocolo.html" + params;
+
+        }
+        
+        
+        //Avisa o Pixel se a pessoa chegou a seção de preço
+  
+        let priceTracked = false;
+
+        window.addEventListener("scroll", function(){
+
+        const priceSection = document.getElementById("pricing");
+
+        if(!priceTracked && priceSection){
+
+        const rect = priceSection.getBoundingClientRect();
+
+        if(rect.top < window.innerHeight && rect.bottom > 0){
+
+        priceTracked = true;
+
+        fbq('trackCustom','PriceView');
+
+        console.log("PriceView enviado");
 
         }
 
-    }
-    //Pixel do video
+        }
+
+        });
+  
+    
+    //Avisa o Pixel de play no video
         let player;
 
         function onYouTubeIframeAPIReady() {
@@ -806,14 +825,13 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
         function onPlayerStateChange(event){
 
         if(event.data === YT.PlayerState.PLAYING){
-        console.log("Pixel video");
-        trackPixel("VideoPlay");
+        fbq('trackCustom', 'VideoPlay');
 
         }
 
         }
         
-    
+        //Clique em qualquer botão da página para ver oferta
        function scrollToPrice(e)
        {
         if(e){
@@ -830,14 +848,11 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
 
         }
 
-        priceTracked = true; // impede duplicação
-
-        trackPixel("PriceView");
+        fbq('trackCustom', 'PriceView');
+        
 
         }
         
-        //Envia o pixel de quem rolou mais de 50% da página e ficou mais de 60 segundos 
-        let scrolled50 = false; window.addEventListener("scroll", function(){ let scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100; if(scrollPercent > 50){ scrolled50 = true; console.log("Passou de 50%"); } }); setTimeout(function(){ if(scrolled50){ trackPixel("StrongInterest"); } },60000);
     
 
 
