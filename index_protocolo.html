@@ -18,6 +18,7 @@ fbq('init', '25353629854325778');
 fbq('track', 'PageView');
 fbq('trackCustom', 'SalesPageView');
 </script>
+<!-- API do YouTube -->
 <script src="https://www.youtube.com/iframe_api"></script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
@@ -417,7 +418,14 @@ A crise deixa de ser <s>enfrentamento.</s>&nbsp;&nbsp;➔&nbsp;E passa a ser <b>
         <br/>
         <p align="center">
         
-        <iframe id="ytplayer" width="560" height="315" src="https://www.youtube.com/embed/uWR3uJip_PE?si=PPdAQkoYFlO3lM0f" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe id="ytplayer"  width="560"
+            height="315"
+            src="https://www.youtube.com/embed/mxFL37kdoCg?enablejsapi=1"
+            title="YouTube video player"
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+            </iframe>
         
        <p>
        </div>
@@ -771,9 +779,35 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
         fbq('trackCustom', eventName);
         console.log(eventName + " enviado ao pixel");
 
-        } else {
+        } 
+        else 
+        {
 
         console.log("Pixel ainda não carregado");
+
+        }
+
+    }
+    //Pixel do video
+        let player;
+
+        function onYouTubeIframeAPIReady() {
+
+        player = new YT.Player('ytplayer', {
+
+        events: {
+        'onStateChange': onPlayerStateChange
+        }
+
+        });
+
+        }
+
+        function onPlayerStateChange(event){
+
+        if(event.data === YT.PlayerState.PLAYING){
+
+        trackPixel("VideoPlay");
 
         }
 
@@ -805,32 +839,7 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
         //Envia o pixel de quem rolou mais de 50% da página e ficou mais de 60 segundos 
         let scrolled50 = false; window.addEventListener("scroll", function(){ let scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100; if(scrollPercent > 50){ scrolled50 = true; console.log("Passou de 50%"); } }); setTimeout(function(){ if(scrolled50){ trackPixel("StrongInterest"); } },60000);
     
-    //Pixel do video
-    let player;
 
-        function onYouTubeIframeAPIReady() {
-
-        player = new YT.Player('ytplayer', {
-
-        events: {
-
-        'onStateChange': onPlayerStateChange
-
-        }
-
-        });
-
-        }
-
-        function onPlayerStateChange(event){
-
-        if(event.data === YT.PlayerState.PLAYING){
-
-        trackPixel("VideoPlay");
-
-        }
-
-        }
 
     
     // ===== FUNÇÕES DE TOGGLE PARA ACCORDION =====
