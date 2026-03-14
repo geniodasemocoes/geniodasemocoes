@@ -760,32 +760,6 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
       font_size: 16
     };
     
-    //Pixel do video
-    let player;
-
-        function onYouTubeIframeAPIReady() {
-
-        player = new YT.Player('ytplayer', {
-
-        events: {
-
-        'onStateChange': onPlayerStateChange
-
-        }
-
-        });
-
-        }
-
-        function onPlayerStateChange(event){
-
-        if(event.data === YT.PlayerState.PLAYING){
-
-        trackPixel("VideoPlay");
-
-        }
-
-        }
     
     
     //Pixel
@@ -828,9 +802,35 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
 
         }
         
-        
+        //Envia o pixel de quem rolou mais de 50% da página e ficou mais de 60 segundos 
+        let scrolled50 = false; window.addEventListener("scroll", function(){ let scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100; if(scrollPercent > 50){ scrolled50 = true; console.log("Passou de 50%"); } }); setTimeout(function(){ if(scrolled50){ trackPixel("StrongInterest"); } },60000);
     
+    //Pixel do video
+    let player;
 
+        function onYouTubeIframeAPIReady() {
+
+        player = new YT.Player('ytplayer', {
+
+        events: {
+
+        'onStateChange': onPlayerStateChange
+
+        }
+
+        });
+
+        }
+
+        function onPlayerStateChange(event){
+
+        if(event.data === YT.PlayerState.PLAYING){
+
+        trackPixel("VideoPlay");
+
+        }
+
+        }
 
     
     // ===== FUNÇÕES DE TOGGLE PARA ACCORDION =====
