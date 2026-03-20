@@ -356,10 +356,10 @@
     <div class="container">
         <!-- Tela Principal -->
         <div id="mainScreen" class="main-screen">
-            <img src="imagens/logomarca.png" height="100" />
+            <img src="../../imagens/logomarca.png" height="100" />
             <br />
             
-            <button class="story-button" onclick="window.location.href='livro_completo.html'">
+            <button id="verLivro" class="story-button">
                 📖 Ver história completa
             </button>
 
@@ -568,6 +568,16 @@
                 }
             }
         };
+        
+       
+        const linkDesktop = "livro_completo.html";
+        const linkMobile  = "livro_completo_mobile.html";
+        const dispositivo = window.innerWidth < 768 ? "mobile" : "desktop";
+        const botao = document.getElementById("verLivro");
+
+        botao.addEventListener("click", () => {
+          window.location.href = dispositivo === "mobile" ? linkMobile : linkDesktop;
+        });
 
         function showScene(character, sceneNum, need, emotion) {
             const scene = sceneData[character][sceneNum];
