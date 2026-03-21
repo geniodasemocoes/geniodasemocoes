@@ -1,0 +1,10 @@
+{
+  "headers": [
+    {
+      "source": "/jornada/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    }
+  ]
+}
