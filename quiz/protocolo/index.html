@@ -14,9 +14,11 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
+if (typeof fbq !== 'undefined') {
 fbq('init', '25353629854325778');
 fbq('track', 'PageView');
 fbq('trackCustom', 'SalesPageView');
+}
 </script>
 <!-- API do YouTube -->
 <script src="https://www.youtube.com/iframe_api"></script>
@@ -758,8 +760,10 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
     
     function verCheckOut() 
         {
-            //Envia para o Pixel clique no CTA para ver o checkout
-            fbq('trackCustom', 'InitiateCheckout');
+            if (typeof fbq !== 'undefined') {
+                //Envia para o Pixel clique no CTA para ver o checkout
+                fbq('trackCustom', 'InitiateCheckout');
+            } 
             
             // 1. Pega os parâmetros da URL atual (ex: ?utm_source=fb)
             const searchParams = window.location.search;
@@ -797,9 +801,9 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
         if(entry.isIntersecting && !priceTracked){
 
         priceTracked = true;
-
+        if (typeof fbq !== 'undefined') {
         fbq('trackCustom','PriceView');
-
+        }
         console.log("PriceView enviado via scroll");
 
         }
@@ -832,8 +836,12 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
 
         function onPlayerStateChange(event){
 
-        if(event.data === YT.PlayerState.PLAYING){
-        fbq('trackCustom', 'VideoPlay');
+        if(event.data === YT.PlayerState.PLAYING)
+        {
+            if (typeof fbq !== 'undefined') 
+            {
+                fbq('trackCustom', 'VideoPlay');
+            }
 
         }
 
@@ -855,9 +863,10 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
         });
 
         }
-
-        fbq('trackCustom', 'PriceView');
-        
+        if (typeof fbq !== 'undefined') 
+        {
+            fbq('trackCustom', 'PriceView');
+        }
 
         }
         
