@@ -43,12 +43,12 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #e6e5e1 ;
             color: #000000;
-            overflow: auto;
+            overflow-x: hidden;
         }
 
         .quiz-container {
             width: 100%;
-            height: 100%;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             padding: 20px;
@@ -91,7 +91,8 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
         .slide {
             display: none;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
+            padding-top: 10px;
             align-items: center;
             flex: 1;
             animation: slideIn 0.5s ease-out;
@@ -385,14 +386,13 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
    </div>
    <div class="slide active" id="slide0">
     <div class="welcome-screen">
-     <h1 class="welcome-title" id="quizTitle">Você está ATRASADO.</h1>
-     Já era para estar no carro, mas ainda não conseguiu levar seu filho para o banho.
-     <br/>E agora? Você sabe o que fazer?
+     <h1 class="welcome-title" id="quizTitle">Você tenta manter a calma...</h1>
+     Mas na hora da crise, acaba gritando, cedendo ou travando.
 
             <!--<h1 class="welcome-subtitle" id="quizTitle">Experimento Prático</h2>-->
            <p align="center"> <img src="/quiz/imagens/capa.jpg" /></p>
      <p class="welcome-rules" id="rulesText">
-     Em 3 minutos, faça o teste e descubra se você tem tendência <b>Autoritária</b>, <b>Permissiva</b>, <b>Evitativa</b> ou <b>Consciente</b> nos momentos de crise.
+     Em 3 minutos, faça o teste e descubra se você tem tendência <b>Autoritária</b>, <b>Permissiva</b>, <b>Evitativa</b> ou <b>Consciente</b>.
      <br/>No final, receba um <b>diagnóstico da sua maior dificuldade</b> e um plano de solução.
 </p><button class="start-button" id="startButton" onclick="startQuiz()">Começar</button>
     </div>
@@ -499,13 +499,11 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
 
    <div class="slide" id="slide11">
     <div class="question-screen">
-     <h2 class="question-title">Diante de uma explosão emocional, muitas mães relataram viver esse conflito interno:</h2>
-      <h2 class="question-subtitle">Pensamentos oscilando entre <u>ceder</u> e ser <u>mais firme</u>.</h2>
+     <h2 class="question-title">Diante de uma explosão emocional, muitas mães relatam viver esse conflito interno:</h2>
      <div class="slide_imagem"><p align="center"><img src="/quiz/imagens/dilema.jpg" style="text-align: center;" /></p></div>
-     <br/>Muitas relataram buscar soluções, decorar teorias, escutar opiniões...
-     <br/>Mas, no meio da crise, relatam que é <b>difícil pensar com clareza.</b>
+     <br/>Buscam soluções, decoram teorias, escutam opiniões...
+     <br/>Mas, no meio da crise é <b>difícil pensar com clareza.</b>
       <br/>E acabam <b>reagindo</b>… De novo, no <b>impulso</b>.
-      <br/>E depois vem a <b>culpa</b> e o <b>arrependimento</b>.
       <br/>
       <br/>
       Isso ocorre com você? Com que frequência?
@@ -523,12 +521,12 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
     <div class="question-screen">
      <h2 class="question-title">O Que Você <u>Ainda Não Está Vendo</u></h2>
      
-     Quando estamos sob pressão, temos dificuldade de acessar áreas do cérebro ligadas à autorregulação, ao raciocínio ou à empatia.
+     Sob pressão, temos dificuldade de acessar áreas do cérebro ligadas à autorregulação, ao raciocínio ou à empatia.
      <br/>
-     Por isso, em primeiro lugar, <b>na hora da crise</b>, é importante ter um <b>plano simples e executável</b> para saber <b>exatamente o que fazer</b> .
+     Por isso,<b>na hora da crise</b>, é importante ter um <b>plano simples e executável</b> para saber <b>exatamente o que fazer</b> .
      <br/>
      <br/>
-     Além disso, a maioria das soluções ensina a <b>lidar com o comportamento</b>.
+     Além disso, a maioria das soluções direciona a <b>lidar com o comportamento</b>.
      <br />
      <!--
         Mas e se o comportamento não for o problema?
@@ -540,15 +538,6 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
         Existe um <b>pedido silencioso</b> por trás de cada explosão emocional.
         <br />
         E quando você aprende a decifrá-lo, você atua na <b>raíz do problema</b>. 
-        <br />
-        Você aprende a <b>Ver, Entender e Responder</b> às crises emocionais com consciência e direção.
-        <br/>
-        <br/>
-        Essa é a <b>diferença estrutural</b>. 🎯
-        <br />
-        Não é mais teoria sobre comportamento.
-        <br />
-        É <b>leitura emocional aplicada</b>.
 <br />
 <br />
        <p align="center"><button class="start-button" onclick="passarSlide()">➜ Quero aprender a ler as emoções</button> </p>
@@ -569,7 +558,7 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
    
    <div class="slide" id="slide14">
     <div class="question-screen">
-     <h2 class="question-title">Voltemos à cena do início</h2>
+     <h2 class="question-title">Imagine a cena...</h2>
      <h2 class="question-subtitle">Você está atrasado e a criança explode ao tentar levá-la para o banho...<br/>Mas agora você sabe fazer <u>leitura emocional</u>...</h2>
      <div class="slide_imagem">
      <img src="/quiz/imagens/leitura_emocional.jpg" />
@@ -805,6 +794,9 @@ Basta seguir um <b>protocolo de 5 passos, simples e prático</b>, que você pode
 
         function startQuiz() 
         {            
+            //Envia para o Pixel clique para começar Quiz
+            fbq('trackCustom', 'QuizStart');
+            
             currentSlide = 1;
             document.getElementById('progressContainer').style.display = 'block';
             updateSlide();
@@ -904,6 +896,12 @@ Basta seguir um <b>protocolo de 5 passos, simples e prático</b>, que você pode
             if (activeSlide) 
             {
                 activeSlide.classList.add('active');
+                
+                // volta para o topo da tela
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'instant' // importante: evita bug no mobile
+                });
                 
                  // informa ao pixel qual pergunta o usuário chegou
                 fbq('trackCustom', 'QuizStep', 
