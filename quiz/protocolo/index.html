@@ -789,34 +789,38 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
         
         //Avisa o Pixel se a pessoa chegou a seção de preço
   
-        const priceSection = document.getElementById("pricing");
-        let priceTracked = false;
+        document.addEventListener("DOMContentLoaded", function () {
 
-        if(priceSection){
+          const priceSection = document.getElementById("pricing");
+          let priceTracked = false;
 
-        const observer = new IntersectionObserver((entries)=>{
+          if(priceSection){
 
-        entries.forEach(entry => {
+            const observer = new IntersectionObserver((entries)=>{
 
-        if(entry.isIntersecting && !priceTracked){
+              entries.forEach(entry => {
 
-        priceTracked = true;
-        if (typeof fbq !== 'undefined') {
-        fbq('trackCustom','PriceView');
-        }
-        console.log("PriceView enviado via scroll");
+                if(entry.isIntersecting && !priceTracked){
 
-        }
+                  priceTracked = true;
+
+                  if (typeof fbq !== 'undefined') {
+                    fbq('trackCustom','PriceView');
+                  }
+
+                }
+
+              });
+
+            },{
+              threshold:0.4
+            });
+
+            observer.observe(priceSection);
+
+          }
 
         });
-
-        },{
-        threshold:0.4
-        });
-
-        observer.observe(priceSection);
-
-        }
   
     
     //Avisa o Pixel de play no video
