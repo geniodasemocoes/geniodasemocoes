@@ -846,11 +846,10 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
         }
         
         //Clique em qualquer botão da página para ver oferta
-        function scrollToPrice()
-        {
+        window.scrollToPrice = function() {
           const priceSection = document.getElementById("pricing");
 
-          if(priceSection){
+          if (priceSection) {
             const y = priceSection.getBoundingClientRect().top + window.pageYOffset;
 
             window.scrollTo({
