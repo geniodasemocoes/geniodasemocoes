@@ -846,19 +846,22 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
         }
         
         //Clique em qualquer botão da página para ver oferta
-       function scrollToPrice()
+function scrollToPrice()
 {
   const priceSection = document.getElementById("pricing");
+  const wrapper = document.getElementById("app-wrapper");
 
-  if(priceSection){
-    priceSection.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
+  if(priceSection && wrapper){
+
+    const y = priceSection.offsetTop - 20; // margem opcional
+
+    wrapper.scrollTo({
+      top: y,
+      behavior: "smooth"
     });
   }
 
-  if (typeof fbq !== 'undefined') 
-  {
+  if (typeof fbq !== 'undefined') {
     fbq('trackCustom', 'PriceViewButton');
   }
 }
