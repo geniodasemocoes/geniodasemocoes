@@ -15,8 +15,10 @@ t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '25353629854325778');
-fbq('track', 'PageView');
-fbq('trackCustom', 'QuizView');
+window.addEventListener('load', function() {
+    fbq('track', 'PageView');
+    fbq('trackCustom', 'QuizView');
+});
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
@@ -49,6 +51,7 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
         .quiz-container {
             width: 100%;
             min-height: 100vh;
+            justify-content: flex-start;
             display: flex;
             flex-direction: column;
             padding: 20px;
@@ -94,7 +97,7 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
             justify-content: flex-start;
             padding-top: 10px;
             align-items: center;
-            flex: 1;
+            width: 100%;
             animation: slideIn 0.5s ease-out;
         }
         
@@ -369,13 +372,15 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
             
     </style>
   <style>@view-transition { navigation: auto; }</style>
-  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
   
   
 
   
  </head>
  <body>
+ <div id="loader" style="text-align:center; padding:40px;">
+Carregando...
+</div>
   <div class="quiz-container">
    <div class="progress-bar-container" id="progressContainer" style="display: none;">
     <div class="progress-info"><span id="phaseText">Fase 1</span> <span id="progressPercent">0%</span>
@@ -390,7 +395,7 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
      Mas na hora da crise, acaba gritando, cedendo ou travando.
 
             <!--<h1 class="welcome-subtitle" id="quizTitle">Experimento Prático</h2>-->
-           <p align="center"> <img src="/quiz/imagens/capa.jpg" /></p>
+           <p align="center"> <img src="/quiz/imagens/capa.jpg" style="max-width:100%; height:auto;" loading="lazy" /></p>
      <p class="welcome-rules" id="rulesText">
      Em 3 minutos, faça o teste e descubra se você tem tendência <b>Autoritária</b>, <b>Permissiva</b>, <b>Evitativa</b> ou <b>Consciente</b>.
      <br/>No final, receba um <b>diagnóstico da sua maior dificuldade</b> e um plano de solução.
@@ -478,7 +483,7 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
 <div class="question-screen">
      <h1 class="result-title">Você sabia?</h1>
     
-     <div class="slide_imagem"><p align="center"><img src="/quiz/imagens/birra.jpg" /></p></div>
+     <div class="slide_imagem"><p align="center"><img src="/quiz/imagens/birra.jpg" style="max-width:100%; height:auto;" loading="lazy" /></p></div>
      <div class="answers-container">
      <button class="answer-button" onclick="selectAnswer(9, 'Não sabia', 0)">😲 Nossa, não sabia</button>
      <button class="answer-button" onclick="selectAnswer(9, 'Ouvi falar', 0)">🤓 Já ouvi falar</button>
@@ -500,7 +505,7 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
    <div class="slide" id="slide11">
     <div class="question-screen">
      <h2 class="question-title">Diante de uma explosão emocional, muitas mães relatam viver esse conflito interno:</h2>
-     <div class="slide_imagem"><p align="center"><img src="/quiz/imagens/dilema.jpg" style="text-align: center;" /></p></div>
+     <div class="slide_imagem"><p align="center"><img src="/quiz/imagens/dilema.jpg" style="max-width:100%; height:auto; text-align:center;" loading="lazy" /></p></div>
      <br/>Buscam soluções, decoram teorias, escutam opiniões...
      <br/>Mas, no meio da crise é <b>difícil pensar com clareza.</b>
       <br/>E acabam <b>reagindo</b>… De novo, no <b>impulso</b>.
@@ -548,7 +553,7 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
     <div class="question-screen">
      <h2 class="question-title">Afinal, o que as emoções querem dizer?</h2>
     É comum acreditarmos que o comportamento da criança <b>nos faz sentir raiva</b>, como se as nossas emoções fossem provocadas de <b>fora para dentro</b>, mas observe essa situação:
-        <div class="slide_imagem"><img src="/quiz/imagens/necessidade_adulto.jpg" /></div>
+        <div class="slide_imagem"><img src="/quiz/imagens/necessidade_adulto.jpg" style="max-width:100%; height:auto;" loading="lazy" /></div>
      <div class="answers-container"><button class="answer-button" onclick="selectAnswer(13, 'Sabia', 0)">🎯 É assim mesmo que acontece aqui!</button>
      <button class="answer-button" onclick="selectAnswer(13, 'Às vezes', 0)">🤷 Às vezes</button> 
     </div>
@@ -561,7 +566,7 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
      <h2 class="question-title">Imagine a cena...</h2>
      <h2 class="question-subtitle">Você está atrasado e a criança explode ao tentar levá-la para o banho...<br/>Mas agora você sabe fazer <u>leitura emocional</u>...</h2>
      <div class="slide_imagem">
-     <img src="/quiz/imagens/leitura_emocional.jpg" />
+     <img src="/quiz/imagens/leitura_emocional.jpg" style="max-width:100%; height:auto;" loading="lazy" />
      </div>
      <br />
      Quando você compreende a necessidade que deu origem à crise, você entende o problema.
@@ -580,7 +585,7 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
      <h2 class="question-title">Por exemplo, se a necessidade da criança é de diversão...</h2>
      <h2 class="question-subtitle">Você pode usar a técnica do convite lúdico:</h2>
      <div class="slide_imagem">
-     <img src="/quiz/imagens/convite_ludico.jpg" />
+     <img src="/quiz/imagens/convite_ludico.jpg" style="max-width:100%; height:auto;" loading="lazy" />
      </div>
     <br />
      <div class="answers-container"><button class="answer-button" onclick="selectAnswer(15, 'Legal', 0)">😲 Que legal!</button>
@@ -598,7 +603,7 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
 Estudos em parentalidade descrevem quatro perfis:
 <br />
 <br />
-<p align="center"><img src="/quiz/imagens/perfis.png" /><p>
+<p align="center"><img src="/quiz/imagens/perfis.png" style="max-width:100%; height:auto;" loading="lazy" /><p>
  <br />
 Todos nós <b>transitamos entre eles</b> ao longo da vida.
 <br />
@@ -637,7 +642,7 @@ Há algo que todos têm em comum: são tentativas de <b>lidar com situações em
 
 </div>
 
-         <p align="center"><img id="resultImage" style="max-width:100%; margin-top:20px;"></p>
+         <p align="center"><img id="resultImage" style="max-width:100%; height:auto;" loading="lazy"></p>
           <div class="text-left">
          <br/>
         
@@ -648,7 +653,7 @@ Ela depende de um <b>caminho claro</b>.
 Um caminho para mudar a sua forma de <b>VER</b> as crises:
 <br/>
 <br/>
-<p align="center"><img src="/quiz/imagens/ver.jpg"></p>
+<p align="center"><img src="/quiz/imagens/ver.jpg" style="max-width:100%; height:auto;" loading="lazy"></p>
 <br/>
 Para isso, preparamos um <b>protocolo simples e prático</b>, estruturado para te ajudar nesse processo.
 <br/>
@@ -759,6 +764,10 @@ Basta seguir um <b>protocolo de 5 passos, simples e prático</b>, que você pode
         };
         
         let showsNeedsAwareness = false;
+        
+        window.onload = function() {
+          document.getElementById('loader').style.display = 'none';
+        };
 
         function markNeedsAwareness() {
           showsNeedsAwareness = true;
@@ -898,10 +907,7 @@ Basta seguir um <b>protocolo de 5 passos, simples e prático</b>, que você pode
                 activeSlide.classList.add('active');
                 
                 // volta para o topo da tela
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'instant' // importante: evita bug no mobile
-                });
+                window.scrollTo(0, 0);
                 
                  // informa ao pixel qual pergunta o usuário chegou
                 fbq('trackCustom', 'QuizStep', 
