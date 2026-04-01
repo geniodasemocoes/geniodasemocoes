@@ -765,8 +765,10 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
               currency: 'BRL'
             });
             
+            
             // 1. Pega os parâmetros da URL atual (ex: ?utm_source=fb)
-            const searchParams = window.location.search;
+            localStorage.setItem('utm_params', window.location.search);
+            const searchParams = localStorage.getItem('utm_params');
 
             // 2. O link base - mudei para LET para permitir a alteração abaixo
             let urlFinal = "https://pay.hotmart.com/U104912409G?checkoutMode=10";
