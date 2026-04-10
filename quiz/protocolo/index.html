@@ -6,6 +6,8 @@
   <title>Transforme Explosões Emocionais em Pedidos Conscientes</title><!-- Element SDK -->
     <!-- Meta Pixel Code -->
 <script>
+const DEBUG = false;
+
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -14,9 +16,11 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
+
+if (!DEBUG) {
 fbq('init', '25353629854325778');
 fbq('track', 'PageView');
-fbq('trackCustom', 'SalesPageView');
+}
 </script>
 <!-- API do YouTube -->
 <script src="https://www.youtube.com/iframe_api"></script>
@@ -104,7 +108,9 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
      
 
     <div>
-    <h1 id="hero-title" class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6">Seu protocolo está pronto!</h1>
+    
+    <h1 id="hero-title" class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6">O que fazer na próxima crise</h1>
+    <h2 id="hero-subtitle">5 passos para transformar crise em comunicação consciente, mesmo quando a pressão tomar conta.</h2>
      <img src="/quiz/protocolo/imagens/header.jpg" />
      </div>
 
@@ -115,30 +121,32 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
    
 
    <section id="benefits" class="w-full bg-base -mt-16">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 md:py-20 relative">
 
      <div class="grid gap-2 grid-cols-2">
      
      <div class="space-y-2">
      <h3 class="font-bold mb-3 text-center">Antes</h3>
+
       <div class="flex items-center bg-[#d0e3e1] p-2 rounded-xl h-24"><span class="text-primary text-2xl mr-4">✓</span>
        <div>
-        <h4 class="font-semibold mb-1">Gritar, ceder ou reagir no impulso</h4>
+        <h4 class="font-semibold mb-1">Gritar, ceder ou fugir</h4>
        </div>
       </div>
+
       <div class="flex items-center bg-[#d0e3e1] p-2 rounded-xl h-24"><span class="text-primary text-2xl mr-4">✓</span>
        <div>
-        <h4 class="font-semibold mb-1">Opiniões, improviso e insegurança</h4>
-       </div>
-      </div>
-      <div class="flex items-center bg-[#d0e3e1] p-2 rounded-xl h-24"><span class="text-primary text-2xl mr-4">✓</span>
-       <div>
-        <h4 class="font-semibold mb-1">Controle de comportamento</h4>
+        <h4 class="font-semibold mb-1">Foco em controle de comportamento</h4>
        </div>
       </div>
       <div class="flex items-center bg-[#d0e3e1] p-2 rounded-xl h-24"><span class="text-primary text-2xl mr-4">✓</span>
        <div>
         <h4 class="font-semibold mb-1">Crises cada vez mais frequentes e intensas</h4>
+       </div>
+      </div>
+          <div class="flex items-center bg-[#d0e3e1] p-2 rounded-xl h-24"><span class="text-primary text-2xl mr-4">✓</span>
+       <div>
+        <h4 class="font-semibold mb-1">Culpa, Improviso, Frustração</h4>
        </div>
       </div>
       <div class="flex items-center bg-[#d0e3e1] p-2 rounded-xl h-24"><span class="text-primary text-2xl mr-4">✓</span>
@@ -151,19 +159,16 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
 
       <div class="space-y-2">
         <h3 class="font-bold mb-3 text-center">Depois</h3>
+
       <div class="flex items-center bg-[#d0e3e1] p-2 rounded-xl h-24"><span class="text-primary text-2xl mr-4">✓</span>
        <div>
-        <h4 class="font-semibold mb-1">Autocontrole e limites com firmeza e afeto</h4>
+        <h4 class="font-semibold mb-1">Autocontrole, clareza e direção</h4>
        </div>
        </div>
-        <div class="flex items-center bg-[#d0e3e1] p-2 rounded-xl h-24"><span class="text-primary text-2xl mr-4">✓</span>
-       <div>
-        <h4 class="font-semibold mb-1">Saber exatamente o que fazer e por quê</h4>
-       </div>
-       </div>
+
          <div class="flex items-center bg-[#d0e3e1] p-2 rounded-xl h-24"><span class="text-primary text-2xl mr-4">✓</span>
        <div>
-        <h4 class="font-semibold mb-1">Leitura emocional</h4>
+        <h4 class="font-semibold mb-1">Foco em leitura emocional</h4>
        </div>
        </div>
        <div class="flex items-center bg-[#d0e3e1] p-2 rounded-xl h-24"><span class="text-primary text-2xl mr-4">✓</span>
@@ -171,16 +176,21 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
         <h4 class="font-semibold mb-1">Crises com menos frequencia e duração</h4>
        </div>
        </div>
+      <div class="flex items-center bg-[#d0e3e1] p-2 rounded-xl h-24"><span class="text-primary text-2xl mr-4">✓</span>
+       <div>
+        <h4 class="font-semibold mb-1">Saber exatamente o que fazer e por quê</h4>
+       </div>
+       </div>
        <div class="flex items-center bg-[#d0e3e1] p-2 rounded-xl h-24"><span class="text-primary text-2xl mr-4">✓</span>
        <div>
-        <h4 class="font-semibold mb-1">Conexão e base saudável para a adolescência</h4>
+        <h4 class="font-semibold mb-1">Conexão real + Base emocional sólida</h4>
        </div>
        </div>
        </div>
       
      </div>
      <div class="text-center mt-10">
-        <button class="cta-button inline-block bg-primary hover:bg-primary-dark text-white font-bold text-lg px-8 py-4 rounded-xl transition-all duration-300 cta-pulse" onclick="scrollToPrice()">👉 QUERO EXPERIMENTAR O PROTOCOLO DE 5 PASSOS</button> 
+        <button class="cta-button inline-block bg-primary hover:bg-primary-dark text-white font-bold text-lg px-8 py-4 rounded-xl transition-all duration-300 cta-pulse" onclick="scrollToPrice()">👉 QUERO SEGUIR OS 5 PASSOS AO INVÉS DE IMPROVISAR</button> 
       <p class="mt-2 flex justify-center gap-6 text-text-secondary/60 text-sm font-sans">
          ✓ Acesso imediato &nbsp;&nbsp;
          ✓ Método 100% prático &nbsp;&nbsp;
@@ -193,7 +203,7 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
    </section>
 
    
-     
+     <!--
    <section id="ciencia" class="w-full bg-base-dark">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 relative">
      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4">A Ciência por trás do <span class="text-primary">"Pedido Silencioso"</span></h2>
@@ -201,9 +211,9 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
 
 
 <div class="relative pl-8 border-l-2 border-teal/30 space-y-12 my-12">
-  <!-- Maslow -->
+
   <div class="relative flex items-start gap-6">
-    <!-- Bolinha + texto -->
+
     <div class="flex-1">
       <div class="absolute -left-11 w-4 h-4 bg-teal rounded-full">🔵</div>
       <span class="text-teal font-semibold">Década de 1940</span>
@@ -212,13 +222,13 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
       </p>
       <p class="mt-2 text-sm text-lavender-dark">Sua teoria se tornou base da psicologia moderna.</p>
     </div>
-    <!-- Foto à direita -->
+
     <div class="w-24 h-24 flex-shrink-0">
       <img src="/quiz/protocolo/imagens/maslow.jpg" alt="Abraham Maslow" class="w-24 h-24 object-cover rounded-full border shadow-sm" />
     </div>
   </div>
 
-  <!-- Rosenberg -->
+
   <div class="relative flex items-start gap-6">
     <div class="flex-1">
       <div class="absolute -left-11 w-4 h-4 bg-lavender rounded-full">🔵</div>
@@ -233,7 +243,7 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
     </div>
   </div>
 
-  <!-- Hoje -->
+
   <div class="relative flex items-start gap-6">
     <div class="flex-1">
       <div class="absolute -left-11 w-4 h-4 bg-text-primary rounded-full">🔵</div>
@@ -242,7 +252,7 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
         Sabemos, também pela neurociência e pela teoria do apego, que <strong class="text-teal">emoções são linguagem biológica</strong>.
       </p>
     </div>
-    <!-- Se quiser, pode colocar uma ilustração genérica aqui -->
+
     <div class="w-24 h-24 flex-shrink-0">
     </div>
   </div>
@@ -268,7 +278,7 @@ A crise deixa de ser <s>enfrentamento.</s>&nbsp;&nbsp;➔&nbsp;E passa a ser <b>
     <br/>
    </section>
    
-   
+   -->
 
    <section id="how-it-works" class="w-full bg-surface relative">
    
@@ -310,7 +320,7 @@ A crise deixa de ser <s>enfrentamento.</s>&nbsp;&nbsp;➔&nbsp;E passa a ser <b>
     O Método VER não é algo que você faz com a criança, é um insight que você <b>ativa em si</b>.
 
 
-     <div class="text-center mt-10"><button class="cta-button inline-block bg-primary hover:bg-primary-dark text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300" onclick="scrollToPrice()">👉 COMEÇAR MINHA TRANSFORMAÇÃO</button>
+     <div class="text-center mt-10"><button class="cta-button inline-block bg-primary hover:bg-primary-dark text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300" onclick="scrollToPrice()">👉 QUERO SABER EXATAMENTE O QUE FAZER NA HORA DA CRISE</button>
      </div>
     </div>
    </section>
@@ -336,9 +346,8 @@ A crise deixa de ser <s>enfrentamento.</s>&nbsp;&nbsp;➔&nbsp;E passa a ser <b>
     <div class="flex-1">
       <h3 class="font-bold text-xl mb-1">Ebook Primeiros Socorros Emocionais</h3>
       <p class="text-white/80 text-sm mb-2">
-      Conheça os 5 passos para <u>transformar crises infantis em comunicação consciente</u>, decifrando o pedido silencioso por trás do comportamento.
-      <br/>Um guia <u>direto ao ponto</u>, voltado para a <u>prática</u>, sem teoria desnecessária. 
-       <br/>Você consegue ler em poucas horas, aplicar em poucos minutos, mas você desenvolve um novo olhar para as crises que dura <u>a vida toda</u>.</p>
+      5 passos para <u>transformar crises infantis em comunicação consciente</u>, decifrando o pedido silencioso por trás do comportamento.
+      Um guia <u>direto ao ponto</u>, voltado para a <u>prática</u>. Desenvolva um novo olhar que muda tudo.</p>
       </div>
       </div>
 
@@ -346,9 +355,8 @@ A crise deixa de ser <s>enfrentamento.</s>&nbsp;&nbsp;➔&nbsp;E passa a ser <b>
       <span class="text-4xl"><img src="/quiz/protocolo/imagens/mapa1.png" style="max-height: 140px;" loading="lazy" /></span>
       <div class="flex-1">
       <h3 class="font-bold text-xl mb-1">Mapa Visual para a Hora da Crise</span></h3>
-        <p class="text-white/80 text-sm mb-2">Um resumo visual dos 5 passos para você <u>saber exatamente o que fazer</u> na hora mais crítica, organizado para <u>consulta rápida</u> e <u>aplicação imediata</u>.
-        <br/>Salve no celular ou imprima e tenha <u>sempre à mão</u> quando mais precisar. 
-        <br/>Você não precisa <u>lembrar de tudo</u>, o mapa foi feito exatamente para os momentos que o cérebro trava.</p>
+        <p class="text-white/80 text-sm mb-2">Um resumo visual dos 5 passos para <u>aplicação imediata</u>: você vai <u>saber exatamente o que fazer</u> na hora mais crítica, quando o cérebro trava. Salve no celular ou imprima e tenha <u>sempre à mão</u> .
+        </p>
     </div>
   </div>
   </div>
@@ -365,18 +373,18 @@ A crise deixa de ser <s>enfrentamento.</s>&nbsp;&nbsp;➔&nbsp;E passa a ser <b>
        <div class="flex-1">
         <h3 class="font-bold text-xl mb-1">Ebook Convites Lúdicos</h3>
         <p class="text-white/80 text-sm mb-2">
-        Descubra 24 chaves para destravar resistências do dia a dia e ativar a cooperação instantânea.
-        <br/>Um guia prático para a hora do banho, da comida ou de desligar a TV, para aqueles momentos repetitivos da rotina que a criança <u>sempre resiste</u>.
-        <br/>Você aprende 24 formas de despertar <u>curiosidade</u>, diminuir <u>disputas de poder</u> e incentivar <u>colaboração</u> com mais leveza e conexão.</p>
+        24 chaves para <u>destravar resistências</u> do dia a dia e <u>ativar a cooperação</u> instantânea.
+        <br/>
+        Desperte <u>curiosidade</u>, diminua <u>disputas de poder</u> e incentive <u>colaboração</u> na hora do banho ou de desligar a TV: para aqueles momentos da rotina que a criança <u>sempre resiste</u>.</p>
        </div>
       </div>
             <div class="p-6 flex flex-col sm:flex-row items-start gap-4">
             <span class="text-4xl"><img src="/quiz/protocolo/imagens/mapa2.png" style="max-height: 140px;" loading="lazy" /></span>
        <div class="flex-1">
         <h3 class="font-bold text-xl mb-1">Mapa Visual dos Convites Lúdicos</h3>
-        <p class="text-white/80 text-sm mb-2">Um resumo visual das 24 chaves para <u>destravar resistências</u>, estruturado para <u>aplicar rápido</u>, no meio da rotina.
-        <br/>Salve no celular ou imprima para usar quando a <u>rotina começar a virar disputa</u>.
-        <br/>Você não precisa improvisar, basta consultar e aplicar.</p>
+        <p class="text-white/80 text-sm mb-2">Um resumo visual das 24 chaves que <u>destravam resistências</u> para salvar no celular ou imprimir.
+        <br/>
+        Quando a <u>rotina começar a virar disputa</u>, é só consultar e aplicar.</p>
        </div>
       </div>
       </div>
@@ -388,7 +396,7 @@ A crise deixa de ser <s>enfrentamento.</s>&nbsp;&nbsp;➔&nbsp;E passa a ser <b>
    
    
 
-   <section id="modules" class="w-full bg-base">
+   <section id="modules" class="w-full bg-base-dark">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4">🌟 Bônus Premium: Transforme o método em experiência viva com a criança</h2>
      <p class="text-text-light text-center mb-14">Jornada Gênio das Emoções (Versão Digital Interativa)</p>
@@ -491,10 +499,11 @@ A crise deixa de ser <s>enfrentamento.</s>&nbsp;&nbsp;➔&nbsp;E passa a ser <b>
      </div>
     </div>
    </section>
+   <!--
    <section id="author" class="w-full bg-surface">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12">Para Quem É Esse Método?</h2>
-     <div class="flex flex-col md:flex-row items-center gap-8"><!-- Avatar placeholder -->
+     <div class="flex flex-col md:flex-row items-center gap-8">
       <div>
          <p class="text-text-light mb-4">➜ Para pais que já perceberam que punição não resolve</p>
        <p class="text-text-light mb-4">➜ Para quem quer educar sem gritos, mas não sabe como agir</p>
@@ -506,50 +515,12 @@ A crise deixa de ser <s>enfrentamento.</s>&nbsp;&nbsp;➔&nbsp;E passa a ser <b>
       </div>
      </div>
      <div class="text-center mt-10"><button class="cta-button inline-block bg-primary hover:bg-primary-dark text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300" onclick="scrollToPrice()">👉 QUERO TRANSFORMAR CRISES EM CONEXÃO</button>
+     
      </div>
     </div>
    </section>
-   <section id="testimonials" class="w-full bg-base-dark">
-   <br/>
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 relative">
-    
-     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4">A infância não é lembrada pelos brinquedos.</h2>
-     <p class="text-text-light text-center mb-12">Ela é lembrada pela forma como nos sentimos dentro de casa.</p>
-     <div class="grid gap-4 md:grid-cols-2">
-     <div>
-Pela <b>segurança</b> ou pela <b>tensão</b>.
- <br/>
-Pela <b>escuta</b> ou pelo <b>medo</b>.
-<br/>
-Pela <b>presença</b> ou pela <b>reatividade</b>.
-<br/>
-<br/>
+   -->
 
-Um dia, seu filho <b>não vai mais precisar</b> de ajuda para atravessar uma crise.
- <br/>
-E quando você não estiver mais ali para mediar, será a <b>voz que ele internalizou</b> na infância que vai guiá-lo...
-<br/>
-Guiá-lo quando for <b>contrariado na adolescência</b>, guiá-lo para se <b>posicionar em um relacionamento</b> e guiá-lo para enfrentar as inevitáveis <b>frustrações da vida</b>.
-</div>
-
-    <div class="flex items-end">
- <img src="/quiz/protocolo/imagens/umdia.png" class="max-h-200 object-contain drop-shadow-lg" loading="lazy" />
- </div>
-</div>
-<br/>
-<p>
-Cada crise é uma oportunidade de <b>formação emocional</b>.
-Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
- <br/>
-  <br/>
-<b>Nunca é tarde</b> para mudar a dinâmica emocional de uma relação.
-</p>
-     <div class="text-center mt-10"><button class="cta-button inline-block bg-primary hover:bg-primary-dark text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300" onclick="scrollToPrice()">👉QUERO MUDAR ESSA HISTÓRIA</button>
-     </div>
-
-    </div>
-    
-   </section>
  
    <section id="pricing" class="w-full bg-base">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
@@ -645,7 +616,9 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
       </div>
      </div>
     </div>
-   </section><!-- ===== SEÇÃO 11: GARANTIA ===== -->
+   </section>
+
+   <!-- ===== SEÇÃO 11: GARANTIA ===== -->
    <section id="guarantee" class="w-full bg-surface">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
     
@@ -660,7 +633,7 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
       </p>
       <p class="text-primary font-semibold mb-8">Sem complicação, sem constrangimento, apenas respeito pela sua escolha.</p>
       <div class="text-center mt-10">
-      <button class="cta-button inline-block bg-primary hover:bg-primary-dark text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300" onclick="scrollToPrice()">👉 QUERO EXPERIMENTAR</button>
+      <button class="cta-button inline-block bg-primary hover:bg-primary-dark text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300" onclick="scrollToPrice()">👉 QUERO TESTAR POR 7 DIAS</button>
       </div>
      
       </div>
@@ -708,9 +681,50 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
        </div>
       </div>
      </div>
-     <div class="text-center mt-10"><button class="cta-button inline-block bg-primary hover:bg-primary-dark text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300" onclick="scrollToPrice()">👉 QUERO EXPERIMENTAR HOJE</button>
+     <div class="text-center mt-10"><button class="cta-button inline-block bg-primary hover:bg-primary-dark text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300" onclick="scrollToPrice()">👉 QUERO ALCANÇAR FIRMEZA SEM AUTORITARISMO E CONEXÃO SEM PERMISSIVIDADE</button>
      </div>
     </div>
+   </section>
+         <section id="testimonials" class="w-full bg-base-dark">
+   <br/>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 relative">
+    
+     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4">A infância não é lembrada pelos brinquedos.</h2>
+     <p class="text-text-light text-center mb-12">Ela é lembrada pela forma como nos sentimos dentro de casa.</p>
+     <div class="grid gap-4 md:grid-cols-2">
+     <div>
+Pela <b>segurança</b> ou pela <b>tensão</b>.
+ <br/>
+Pela <b>escuta</b> ou pelo <b>medo</b>.
+<br/>
+Pela <b>presença</b> ou pela <b>reatividade</b>.
+<br/>
+<br/>
+
+Um dia, seu filho <b>não vai mais precisar</b> de ajuda para atravessar uma crise.
+ <br/>
+E quando você não estiver mais ali para mediar, será a <b>voz que ele internalizou</b> na infância que vai guiá-lo...
+<br/>
+Guiá-lo quando for <b>contrariado na adolescência</b>, guiá-lo para se <b>posicionar em um relacionamento</b> e guiá-lo para enfrentar as inevitáveis <b>frustrações da vida</b>.
+</div>
+
+    <div class="flex items-end">
+ <img src="/quiz/protocolo/imagens/umdia.png" class="max-h-200 object-contain drop-shadow-lg" loading="lazy" />
+ </div>
+</div>
+<br/>
+<p>
+Cada crise é uma oportunidade de <b>formação emocional</b>.
+Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
+ <br/>
+  <br/>
+<b>Nunca é tarde</b> para mudar a dinâmica emocional de uma relação.
+</p>
+     <div class="text-center mt-10"><button class="cta-button inline-block bg-primary hover:bg-primary-dark text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300" onclick="scrollToPrice()">👉QUERO MUDAR ESSA HISTÓRIA</button>
+     </div>
+
+    </div>
+    
    </section>
    <!-- ===== SEÇÃO 14: FOOTER CTA ===== -->
    <section id="final-cta" class="w-full bg-text text-white">
@@ -760,10 +774,13 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
     function verCheckOut() 
         {
             //Envia para o Pixel clique no CTA para ver o checkout
-            fbq('track', 'InitiateCheckout', {
-              value: 67.00,
-              currency: 'BRL'
-            });
+            if (!DEBUG) 
+            {
+                fbq('track', 'InitiateCheckout', {
+                  value: 67.00,
+                  currency: 'BRL'
+                });
+            }
             
             
             // 1. Pega os parâmetros da URL atual (ex: ?utm_source=fb)
@@ -803,9 +820,10 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
         if(entry.isIntersecting && !priceTracked){
 
         priceTracked = true;
-
-        fbq('trackCustom','PriceView');
-
+        
+        if (!DEBUG) {
+            fbq('trackCustom','PriceView');
+        }
         console.log("PriceView enviado via scroll");
 
         }
@@ -838,8 +856,12 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
 
         function onPlayerStateChange(event){
 
-        if(event.data === YT.PlayerState.PLAYING){
-        fbq('trackCustom', 'VideoPlay');
+        if(event.data === YT.PlayerState.PLAYING)
+        {
+            if (!DEBUG) 
+            {
+                fbq('trackCustom', 'VideoPlay');
+            }
 
         }
 
@@ -861,8 +883,12 @@ function scrollToPrice()
     });
   }
 
-  if (typeof fbq !== 'undefined') {
-    fbq('trackCustom', 'PriceViewButton');
+  if (typeof fbq !== 'undefined') 
+  {
+        if (!DEBUG) 
+        {
+            fbq('trackCustom', 'PriceViewButton');
+        }
   }
 }
         
@@ -1041,5 +1067,13 @@ function scrollToPrice()
   
   
   
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d717e79e62e3559',t:'MTc3MjYzMzczNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d717e79e62e3559',t:'MTc3MjYzMzczNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+  <script>
+  if (!DEBUG) {
+      if (typeof fbq !== 'undefined') {
+        fbq('trackCustom', 'SalesPageView');
+      }
+  }
+</script>
+ </body>
 </html>
