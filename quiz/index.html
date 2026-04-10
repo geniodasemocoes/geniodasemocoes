@@ -422,7 +422,7 @@ Carregando...
             <!--<h1 class="welcome-subtitle" id="quizTitle">Experimento Prático</h2>-->
            <p align="center"><img src="/quiz/imagens/perfis.png" style="max-width:100%; height:auto;" loading="lazy" /></p>
      <p class="welcome-rules" id="rulesText">
-     <br/>No final, descubra <b>sua maior dificuldade</b> e <b>como resolver</b>.
+     <br/>No final, receba um diagnóstico da <b>sua maior dificuldade</b> e um <b>plano de solução</b>.
 </p><button class="start-button" id="startButton" onclick="startQuiz()">Quero descobrir meu padrão</button>
     </div>
    </div>
@@ -508,7 +508,7 @@ Carregando...
      <h2 class="question-title">O que mais te preocupa sobre o futuro? </h2>
      <div class="answers-container">
         <button class="answer-button" onclick="selectAnswer(9, 'Autoritário', 1)">🥺 Que ela fique muito dependente</button>
-        <button class="answer-button" onclick="selectAnswer(9, 'Permissivo', 1)">💥 Que ela se rebele e tenha dificuldade com limites no futuro</button>
+        <button class="answer-button" onclick="selectAnswer(9, 'Permissivo', 1)">💥 Que ela se rebele e não aceite limites no futuro</button>
         <button class="answer-button" onclick="selectAnswer(9, 'Evitativo', 1)">🤷  Prefiro não pensar sobre isso</button>
         <button class="answer-button" onclick="selectAnswer(9, 'Consciente', 1)">❤️‍🩹 Repetir, sem perceber, padrões da minha própria infância</button>
      </div>
@@ -519,9 +519,9 @@ Carregando...
     <div class="question-screen">
      <h2 class="question-title">Na próxima crise, o que te ajudaria mais?</h2>
      <div class="answers-container">
-        <button class="answer-button" onclick="selectAnswer(10, 'Autoritário', 1)">😮‍💨 Ter autocontrole para não reagir</button>
-        <button class="answer-button" onclick="selectAnswer(10, 'Permissivo', 1)">📝 Um passo a passo simples para saber o que fazer na hora</button>
-        <button class="answer-button" onclick="selectAnswer(10, 'Evitativo', 1)">🛡️  Tomar decisões com segurança, sem travar</button>
+        <button class="answer-button" onclick="selectAnswer(10, 'Autoritário', 1)">😮‍💨 Ter autocontrole para não gritar</button>
+        <button class="answer-button" onclick="selectAnswer(10, 'Permissivo', 1)">📝 Conseguir manter o limite sem perder conexão</button>
+        <button class="answer-button" onclick="selectAnswer(10, 'Evitativo', 1)">🛡️  Ter um passo a passo simples para saber o que fazer, sem travar</button>
         <button class="answer-button" onclick="selectAnswer(10, 'Consciente', 1)">❤️ Conseguir ajudar meu filho a lidar com as emoções</button>
      </div>
     </div>
@@ -565,11 +565,15 @@ Não por falta de vontade.
       
       <div class="slide" id="slide12">
     <div class="question-screen">
-     <h2 class="question-title">Por trás de toda crise emocional… existe uma necessidade.</h2>
-     
-         <div class="slide_imagem">
+    
+      <div class="slide_imagem">
      <img src="/quiz/imagens/leitura_emocional.jpg" style="max-width:100%; height:auto;" loading="lazy" />
      </div>
+     
+     <br/>
+     <h2 class="question-title">Por trás de toda crise emocional… existe uma necessidade.</h2>
+     <br/>
+       
     
 Quando essa necessidade não é vista:
 <br/>
@@ -621,7 +625,7 @@ Paramos de <b>controlar o comportamento</b>.
     </p>
 <br/>
     <div class="space-y-2">
-      <p>🔴 Onde você está hoje: </p>
+      <p>🔴 Onde você está hoje</p>
       <p>🟢 Sua versão mais consciente</p>
     </div>
 
@@ -700,8 +704,9 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
             forca: "Capacidade de colocar limites claros",
             risco: "Desconexão emocional e reatividade",
             tendencia: "reagir com rigidez e agressiividade",
+            crianca: "Diante de reações duras, a criança tende a se retrair, se tornar mais passiva, se anular e evitar conflitos, por medo de desagradar.",
             mensagem: "(Quando a necessidade de segurança assume o controle)",
-            texto: "Quando algo acontece, você aprendeu a reagir rápido e com firmeza, às vezes até com dureza. Não porque quer machucar, mas porque sente que, se não assumir o controle, tudo pode sair do eixo. Por trás dessa reação, costuma existir uma <u>necessidade forte de segurança, ordem ou respeito</u>. A raiva aparece rápido, como um alarme interno. Essa força que emerge no impulso também nasce do cuidado. Você se importa. E muito. Você quer preparar a criança para o mundo. Só que, às vezes, <u>a reatividade deixa pouco espaço para conexão</u>, inclusive com você mesmo(a). A mudança começa quando você percebe a necessidade por trás da reação e ganha espaço para escolher <u>como colocar limites</u>, com menos impulso e mais presença."
+            texto: "Quando algo acontece, você aprendeu a reagir rápido e com firmeza, às vezes até com dureza. Não porque quer machucar, mas porque sente que, se não assumir o controle, tudo pode sair do eixo. Por trás dessa reação, costuma existir uma <u>necessidade forte de segurança, ordem ou respeito</u>. A raiva aparece rápido, como um alarme interno. Essa força que emerge no impulso também nasce do cuidado. Você quer preparar a criança para o mundo. Só que, às vezes, <u>a reatividade deixa pouco espaço para conexão</u>, inclusive com você mesmo(a). A mudança começa quando você percebe a necessidade por trás da reação e ganha espaço para <u>colocar limites</u>, com menos impulso e mais presença."
           },
           permissivo: {
             titulo: "Perfil Permissivo",
@@ -710,8 +715,9 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
             forca: "Empatia e sensibilidade",
             risco: "Dificuldade em sustentar limites",
             tendencia: "ceder para evitar conflitos",
+            crianca: "Sem limites consistentes, a criança não reconhece as necessidades do outro, pois, seus desejos sempre prevalecem. Quando contrariada, tende a agressividade por não ter desenvolvido autorregulação.",
             mensagem: "(Quando o amor tenta evitar a dor)",
-            texto: "Quando a criança sofre, algo em você sofre junto e isso dói demais para ignorar. O choro intenso desperta um medo silencioso: “E se ela não conseguir lidar?” Por isso, muitas vezes, você cede.  Não por fraqueza, mas por empatia.  Seu coração busca proteger, aliviar, garantir que a criança se sinta amada e segura. Por trás da tendência de ceder, existe também uma <u>necessidade profunda de conexão</u>. Evitar o sofrimento do outro é, muitas vezes, uma forma de tentar manter o vínculo intacto. O desafio é que, na tentativa de poupar a criança da dor, você pode <u>silenciar suas próprias necessidades</u>, que acabam transbordando em algum momento. E o limite, que também protege e orienta a criança, acaba sendo adiado. A mudança começa quando você percebe que mais valioso do que <u>dar o que a criança quer, é dar o que ela precisa</u>."
+            texto: "O choro da criança desperta em você um medo silencioso: “E se ela não conseguir lidar?” Por isso, muitas vezes, você cede.  Não por fraqueza, mas por empatia. Por trás dessa tendência de ceder, existe também uma <u>necessidade profunda de conexão</u>. Evitar o sofrimento do outro é, muitas vezes, uma forma de tentar manter o vínculo intacto. O desafio é que, na tentativa de poupar a criança da dor, você pode <u>silenciar suas próprias necessidades</u>, que acabam transbordando em algum momento. E o limite, que também protege e orienta, acaba sendo adiado. A mudança começa quando você percebe que mais valioso do que <u>dar o que a criança quer, é dar o que ela precisa</u>."
           },
           evitativo: {
             titulo: "Perfil Evitativo",
@@ -720,8 +726,9 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
             forca: "Autonomia e praticidade",
             risco: "Distanciamento emocional",
             tendencia: "ativar gatilhos de afastamento e distração, evitando lidar com a situação",
+            crianca: "Diante do afastamento, a criança pode se fechar emocionalmente, oscilando entre comportamentos de passividade e agressividade.",
             mensagem: "(Quando o silêncio é um pedido de descanso)",
-            texto: "Quando as emoções ficam intensas, sua mente tende a se afastar, distrair ou silenciar. Não é indiferença, é sobrecarga. Por trás desse comportamento, geralmente existe uma <u>necessidade legítima de descanso, espaço e autorregulação</u>. O problema é que, quando essa necessidade não é reconhecida, o afastamento acontece no automático e a conexão <u>se perde quando a criança mais precisa</u>. A mudança começa quando você aprende a reconhecer o que está por trás desse impulso. Assim, mesmo quando não é possível pausar, estratégias simples de autorregulação ajudam você a <u>seguir presente, sem se desligar emocionalmente</u>."
+            texto: "Quando suas emoções ficam intensas, você tende a se afastar ou se distrair. Não é indiferença, é sobrecarga. Por trás desse comportamento, geralmente há uma <u>necessidade legítima de descanso e espaço</u>. O problema é quando o afastamento acontece no automático e a conexão <u>se perde quando a criança mais precisa</u>. A mudança começa quando você percebe esse impulso e aprende a usar estratégias simples de autorregulação para <u>seguir presente, sem se desligar emocionalmente</u>."
           },
           consciente: {
             titulo: "Perfil Consciente",
@@ -729,9 +736,10 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
             medo: "Repetir padrões da própria infância",
             forca: "Consciência emocional",
             tendencia: "buscar auto regulação para lidar com a situação",
-            risco: "Sobrecarga e autocobrança para fazer tudo certo",
+            crianca: "Diante de presença consciente, a criança aprende a se expressar com mais segurança, autoconfiança e habilidades sociais.",
+            risco: "Sobrecarga e autocobrança",
             mensagem: "(Quando a consciência guia a resposta)",
-            texto: "Você tenta observar antes de agir. Nem sempre consegue, mas existe um desejo genuíno de quebrar ciclos, de não repetir padrões da própria infância e isso já diz muito sobre o caminho que você está construindo. O desafio é que essa <u>consciência pode vir acompanhada de autocobrança</u>:  'Eu deveria lidar melhor com isso'. A mudança começa quando você reconhece esse processo conscientemente e passa a <u>conduzi-lo de forma intencional</u>."
+            texto: "Você tenta observar antes de agir. Nem sempre consegue, mas existe um desejo genuíno de não repetir padrões da própria infância e isso já diz muito sobre o caminho que você está construindo. O desafio é que essa <u>consciência pode vir acompanhada de autocobrança</u>:  'Eu deveria lidar melhor com isso'. A mudança começa quando você reconhece esse processo conscientemente e passa a <u>conduzi-lo de forma intencional</u>."
           }
         };
         
@@ -788,13 +796,13 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
               setTimeout(() => {
                 step1.classList.add("hidden");
                 loading.classList.remove("hidden");
-              }, 4000);
+              }, 2500);
 
               // Loading → Resultado
               setTimeout(() => {
                 loading.classList.add("hidden");
                 result.classList.remove("hidden");
-              }, 5000);
+              }, 4000);
         }
 
         async function onConfigChange(config) {
@@ -987,7 +995,7 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
           autoritario: "Em situações de maior pressão, o perfil autoritário tende a assumir o controle.",
           permissivo: "Em situações onde a criança demonstra emoções intensas, o perfil permissivo tende a assumir o controle.",
           evitativo: "Em situações de sobrecarga, o perfil evitativo tende a assumir o controle.",
-          consciente: "Em momentos de mais consciência, o perfil consciente tende a assumir o controle."
+          consciente: "Em momentos de mais presença, o perfil consciente tende a assumir o controle."
         };
         
         function buildProfileFields(profile)
@@ -995,10 +1003,10 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
             const data = profileResults[profile];
 
             return `
-                <b>Valores principais:</b> ${data.valor}<br>
-                <b>Medo comum:</b> ${data.medo}<br>
+                
                 <b>Força:</b> ${data.forca}<br>
-                <b>Risco:</b> ${data.risco}<br><br>
+                <b>Risco:</b> ${data.risco}<br>
+                <b>Impactos na criança:</b> ${data.crianca}<br><br>
             `;
     }
     
@@ -1026,9 +1034,10 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
             reacao_pos_pensamento: getAnswer(6),
 
             parquinho: getAnswer(7),
-            almoco: getAnswer(8),
+            emocao_pos_crise: getAnswer(8),
 
-            medo: getAnswer(10),
+            medo: getAnswer(9),
+            solucao: getAnswer(10),
 
             resultado: resultadoFinal,
 
@@ -1041,7 +1050,7 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
 
             };
 
-            fetch("https://script.google.com/macros/s/AKfycbyqCYSdGsDqfgYdrRMRHB2U3MREYTw9C8R51hwXKy7VqWUWG4fo4Pr1vfew4fLxjDg/exec",{
+            fetch("https://script.google.com/macros/s/AKfycbxsBlUIbnJL-_N12s-404ESg7CS_CDwYQLqZCjNNB0nJRGFxyzvaPWGZ6NVbbcolVo/exec",{
             method:"POST",
             body: JSON.stringify(dados)
             });
