@@ -685,6 +685,7 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
         let lastTrackedStep = -1;
         const quizSessionId = 'qs_' + Math.random().toString(36).substr(2, 9);
         let userAnswers = [];
+        let resultTracked = false;
         
         //Pega a sessão do usuário
         //const sessionId = localStorage.getItem('quiz_session') || Date.now().toString();
@@ -775,6 +776,13 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
         
         window.onload = function() {
           document.getElementById('loader').style.display = 'none';
+
+          // 🔥 Evento QuizView (visualização do quiz)
+          if (!DEBUG && typeof fbq === 'function') {
+            fbq('trackCustom', 'QuizView', {
+              session_id: quizSessionId
+            });
+          }
         };
 
         function markNeedsAwareness() {
@@ -850,14 +858,16 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
             startButton.style.background = `linear-gradient(135deg, ${primaryActionColor} 0%, ${secondaryActionColor} 100%)`;
         }
 
-        function startQuiz() 
-        {            
-            if (!DEBUG) 
-            {
-                //Envia para o Pixel clique para começar Quiz
-                fbq('trackCustom', 'QuizStart');
+        let quizStarted = false;
+
+        function startQuiz() {
+            if (!DEBUG && !quizStarted) {
+                fbq('trackCustom', 'QuizStart', {
+                  session_id: quizSessionId
+                });
+                quizStarted = true;
             }
-            
+
             currentSlide = 1;
             document.getElementById('progressContainer').style.display = 'block';
             updateSlide();
@@ -1073,6 +1083,7 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
             });
 
             }
+       
 
         function showResults() 
         {
@@ -1108,14 +1119,15 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
                 <!--Salva as respostas na planilha-->
                 salvarRespostas(resultText);
                 
-                if (!DEBUG) 
-                {
-                     //Envia resultado ao Pixel
-                    fbq('trackCustom', 'QuizResult', 
-                    {
-                       perfil: resultText
-                    });
-                }
+            if (!DEBUG && !resultTracked) 
+            {
+                fbq('trackCustom', 'QuizResult', {
+                    perfil: resultText,
+                    session_id: quizSessionId
+                });
+                fbq('track', 'Lead');
+                resultTracked = true;
+            }
 
             document.getElementById('finalScore').textContent = resultText;
 
@@ -1214,12 +1226,6 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
     </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9aff443187c73559',t:'MTc2NjA2NzI2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
  
-<script>
-  if (!DEBUG) {
-      if (typeof fbq !== 'undefined') {
-        fbq('trackCustom', 'QuizView');
-      }
-  }
-</script>
+
  </body>
 </html>
