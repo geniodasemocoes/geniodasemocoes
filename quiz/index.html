@@ -416,13 +416,13 @@ Carregando...
    </div>
    <div class="slide active" id="slide0">
     <div class="welcome-screen">
-     <h1 class="welcome-title" id="quizTitle">Na hora da crise, você explode, se cala ou foge?</h1>
+     <h1 class="welcome-title" id="quizTitle">Na hora da crise,<br/> você explode, se cala ou foge?</h1>
      <h1 class="question-subtitle"> Em 3 minutos, descubra qual padrão automático guia suas reações:</h1>
     <br/>
             <!--<h1 class="welcome-subtitle" id="quizTitle">Experimento Prático</h2>-->
            <p align="center"><img src="/quiz/imagens/perfis.png" style="max-width:100%; height:auto;" loading="lazy" /></p>
      <p class="welcome-rules" id="rulesText">
-     <br/>No final, receba um diagnóstico da <b>sua maior dificuldade</b> e um <b>plano de solução</b>.
+     <br/>No final, receba um mapa da <b>sua maior dificuldade</b> e um plano para <b>resolver isso</b>.
 </p><button class="start-button" id="startButton" onclick="startQuiz()">Quero descobrir meu padrão</button>
     </div>
    </div>
@@ -520,8 +520,8 @@ Carregando...
      <h2 class="question-title">Na próxima crise, o que te ajudaria mais?</h2>
      <div class="answers-container">
         <button class="answer-button" onclick="selectAnswer(10, 'Autoritário', 1)">😮‍💨 Ter autocontrole para não gritar</button>
-        <button class="answer-button" onclick="selectAnswer(10, 'Permissivo', 1)">📝 Conseguir manter o limite sem perder conexão</button>
-        <button class="answer-button" onclick="selectAnswer(10, 'Evitativo', 1)">🛡️  Ter um passo a passo simples para saber o que fazer, sem travar</button>
+        <button class="answer-button" onclick="selectAnswer(10, 'Permissivo', 1)">🛡️ Conseguir manter o limite sem perder a conexão</button>
+        <button class="answer-button" onclick="selectAnswer(10, 'Evitativo', 1)">📝 Ter um passo a passo simples para saber o que fazer, sem travar</button>
         <button class="answer-button" onclick="selectAnswer(10, 'Consciente', 1)">❤️ Conseguir ajudar meu filho a lidar com as emoções</button>
      </div>
     </div>
@@ -624,6 +624,7 @@ Paramos de <b>controlar o comportamento</b>.
       O seu resultado mapeia dois pontos importantes:
     </p>
 <br/>
+<br/>
     <div class="space-y-2">
       <p>🔴 Onde você está hoje</p>
       <p>🟢 Sua versão mais consciente</p>
@@ -681,11 +682,13 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
         };
 
         let currentSlide = 0;
+        let lastTrackedStep = -1;
+        const quizSessionId = 'qs_' + Math.random().toString(36).substr(2, 9);
         let userAnswers = [];
         
         //Pega a sessão do usuário
-        const sessionId = localStorage.getItem('quiz_session') || Date.now().toString();
-        localStorage.setItem('quiz_session', sessionId);
+        //const sessionId = localStorage.getItem('quiz_session') || Date.now().toString();
+        //localStorage.setItem('quiz_session', sessionId);
         
         let quizStartTime = Date.now();
         
@@ -777,6 +780,20 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
         function markNeedsAwareness() {
           showsNeedsAwareness = true;
         }
+        
+        function trackQuizStep(stepNumber) 
+        {
+            if (stepNumber > lastTrackedStep) {
+                if (typeof fbq !== 'undefined' && !DEBUG) {
+                    fbq('trackCustom', 'QuizStep', {
+                        step: stepNumber,
+                        session_id: quizSessionId
+                    });
+                }
+                lastTrackedStep = stepNumber;
+            }
+        }
+        
         
         function iniciarAnimacaoSlide13() 
         {
@@ -957,7 +974,7 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
                 if (!DEBUG) 
                 {
                  // informa ao pixel qual pergunta o usuário chegou
-                fbq('trackCustom', 'QuizStep', { step: currentSlide, session_id: sessionId });
+                trackQuizStep(currentSlide);
                 }
             }
             
