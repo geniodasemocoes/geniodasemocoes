@@ -22,8 +22,7 @@ fbq('init', '25353629854325778');
 fbq('track', 'PageView');
 }
 </script>
-<!-- API do YouTube -->
-<script src="https://www.youtube.com/iframe_api"></script>
+
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
 /></noscript>
@@ -51,13 +50,16 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
   </script><!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="...">
+<link rel="stylesheet" href="..." media="print" onload="this.media='all'">
   <style>
     html, body {
       height: 100%;
       margin: 0;
       padding: 0;
     }
+    
+    body { box-sizing: border-box; }
     
     * {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -96,7 +98,6 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
       margin-right: 12px;
     }
   </style>
-  <style>body { box-sizing: border-box; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
  <body class="h-full bg-base text-text">
@@ -204,7 +205,7 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
      
    <section id="how-it-works" class="w-full bg-surface relative">
    
-      <div class="absolute -top-16 left-1/2 transform -translate-x-1/2">
+      <div class="absolute -top-30 left-1/2 transform -translate-x-1/2">
     <img src="/quiz/protocolo/imagens/beneficios.png" class="max-h-60 object-contain drop-shadow-lg" />
     </div>
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -352,7 +353,7 @@ A criança também precisa aprender a transformar emoção em pedido consciente.
         Tudo em linguagem simbólica, acessível e repetitiva, do jeito que o <b>cérebro infantil aprende</b>.
          <br/>
           <br/>
-        <img src="/quiz/protocolo/imagens/terapeuta.png" style="max-height: 200px;" loading="lazy" />
+       <p align="center"> <img src="/quiz/protocolo/imagens/terapeuta.png" style="max-height: 200px;" loading="lazy" /></p>
         <br/>
         
 
@@ -382,9 +383,10 @@ A criança também precisa aprender a transformar emoção em pedido consciente.
         <br/>
         Se desejar aprofundar ainda mais a experiência com seu filho, poderá adquirir a <b>versão física</b> separadamente.
         <br/>
+       <p align="center">
         <img src="/quiz/protocolo/imagens/livro_fisico.png" style="max-height: 200px;" loading="lazy" />
         <br/>
-        <img src="/quiz/protocolo/imagens/livro_fisico2.png" style="max-height: 200px;" loading="lazy" />
+        <img src="/quiz/protocolo/imagens/livro_fisico2.png" style="max-height: 200px;" loading="lazy" /></p>
        </div>
       </div>
 
@@ -623,6 +625,27 @@ Você não precisa ser perfeito, mas precisa dar o <b>primeiro passo</b>.
       font_family: 'Plus Jakarta Sans',
       font_size: 16
     };
+    
+    let ytLoaded = false;
+
+    function loadYouTubeAPI() {
+      if (!ytLoaded) {
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.body.appendChild(tag);
+        ytLoaded = true;
+      }
+    }
+
+    function toggleModule(button) {
+      const content = button.nextElementSibling;
+
+      content.classList.toggle('hidden');
+
+      if (!content.classList.contains('hidden')) {
+        loadYouTubeAPI();
+      }
+    }
     
     function verCheckOut() 
         {
