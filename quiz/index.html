@@ -6,7 +6,7 @@
   <title>Quiz Interativo</title>
   <!-- Meta Pixel Code -->
 <script>
-const DEBUG = false;
+const DEBUG = true;
 
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -472,34 +472,43 @@ Carregando...
    </div>
    <div class="slide" id="slide5">
     <div class="question-screen">
-     <h2 class="question-title">Agora vamos analisar sua relação com a criança...</h2>
-     <h2 class="question-subtitle">Quando ela tem um choro intenso, qual seu primeiro pensamento?</h2>
+     <h2 class="question-title">Seu filho não quer ir embora do parquinho...</h2>
+     <h2 class="question-subtitle">Quando ele faz "birra", qual seu primeiro pensamento?</h2>
      <div class="answers-container">
-     <button class="answer-button" onclick="selectAnswer(5, 'Autoritário', 1)">😠 "Tenho que impor autoridade, senão ela nunca vai me respeitar”</button><button class="answer-button" onclick="selectAnswer(5, 'Permissivo', 1)">🤔 "Ela está chorando muito, vai ficar traumatizada”</button><button class="answer-button" onclick="selectAnswer(5, 'Evitativo', 1)">😓 “Eu só queria 5 minutos de descanso”</button>
-     <button class="answer-button" onclick="selectAnswer(5, 'Consciente', 1)">‍‍‍💨 “Estou com raiva, preciso respirar fundo para me acalmar”</button> <button class="answer-button" onclick="selectAnswer(5, 'Consciente', 1); markNeedsAwareness()">🔍 “Esse choro acontece sempre antes da soneca… Será que é sono?”</button>
+     <button class="answer-button" onclick="selectAnswer(5, 'Autoritário', 1)">😠 "Tenho que impor autoridade, senão nunca vai me respeitar”</button><button class="answer-button" onclick="selectAnswer(5, 'Permissivo', 1)">🤔 "Ele está chorando muito, vai ficar traumatizado”</button><button class="answer-button" onclick="selectAnswer(5, 'Evitativo', 1)">😓 “Eu só queria 5 minutos de descanso”</button>
+     <button class="answer-button" onclick="selectAnswer(5, 'Consciente', 1)">‍‍‍💨 “Estou com raiva, preciso me acalmar”</button> <button class="answer-button" onclick="selectAnswer(5, 'Consciente', 1); markNeedsAwareness()">🔍 “Esse choro acontece sempre antes da soneca… Será que é sono?”</button>
      </div>
     </div>
    </div>
    <div class="slide" id="slide6">
     <div class="question-screen">
      <h2 class="question-title">E depois, o que costuma acontecer?</h2>
-     <div class="answers-container"><button class="answer-button" onclick="selectAnswer(6, 'Autoritário', 1)">😠 Corrijo na hora para ela entender que eu que estou no comando</button><button class="answer-button" onclick="selectAnswer(6, 'Permissivo', 1)">👍 Faço o que ela quer para o choro passar</button><button class="answer-button" onclick="selectAnswer(6, 'Evitativo', 1)">👤 Deixo sozinho(a) até se acalmar</button><button class="answer-button" onclick="selectAnswer(6, 'Consciente', 1)">🫂  Acolho e nomeio a emoção</button><button class="answer-button" onclick="selectAnswer(6, 'Consciente', 1); markNeedsAwareness()">🧭  Acolho, nomeio a emoção e ensino a pedir o que precisa</button>
+     <div class="answers-container">
+     <button class="answer-button" onclick="selectAnswer(6, 'Autoritário', 1)">💥 Perco a paciência e acabo levando a força</button>
+     <button class="answer-button" onclick="selectAnswer(6, 'Permissivo', 1)">👍 Tento convencê-lo, mas ele chora, aí acabo deixando mais tempo</button>
+     <button class="answer-button" onclick="selectAnswer(6, 'Evitativo', 1)">🚶 Vou andando na frente, até ele vir atrás</button>
+     <button class="answer-button" onclick="selectAnswer(6, 'Consciente', 1)">🤝 Aviso que vou pegá-lo minutos antes e sigo o combinado</button>
+     <button class="answer-button" onclick="selectAnswer(6, 'Consciente', 1); markNeedsAwareness()">⚽  Já levo a bola e convido ele para brincarmos no caminho</button>
      </div>
      </div>
     </div>
    <div class="slide" id="slide7">
     <div class="question-screen">
-     <h2 class="question-title">A criança não quer ir embora do parquinho.</h2>
-     <h2 class="question-subtitle">Como você reage?</h2>
-     <div class="answers-container"><button class="answer-button" onclick="selectAnswer(7, 'Autoritário', 1)">💥 Eu tento, mas acabo perdendo a paciência e levo a força</button> <button class="answer-button" onclick="selectAnswer(7, 'Permissivo', 1)">👍 Eu tento, mas ela chora, aí acabo cedendo</button> <button class="answer-button" onclick="selectAnswer(7, 'Evitativo', 1)">🚶 Vou andando na frente, até ela vir atrás</button> <button class="answer-button" onclick="selectAnswer(7, 'Consciente', 1)">🤝 Aviso que vou pegá-la minutos antes e sigo o combinado</button> <button class="answer-button" onclick="selectAnswer(7, 'Consciente', 1); markNeedsAwareness()">⚽  Para destravar a resistência, convido ela para brincarmos de algo no caminho
-</button>
+     <p align="center"><img src="imagens/birra.jpg" alt="Birra não é desobediência" /></p>
+     <div class="answers-container">
+        <button class="answer-button" onclick="selectAnswer(7, 'Autoritário', 0)">🤔 Não sabia</button>
+        <button class="answer-button" onclick="selectAnswer(7, 'Permissivo', 0)">🤓 Já ouvi falar</button>
      </div>
     </div>
    </div>
    <div class="slide" id="slide8">
     <div class="question-screen">
     <h2 class="question-subtitle">Depois que a crise passa, como você se sente?</h2>
-     <div class="answers-container"><button class="answer-button" onclick="selectAnswer(8, 'Autoritário', 1)">💔 Culpa e arrependimento: não queria gritar</button><button class="answer-button" onclick="selectAnswer(8, 'Permissivo', 1)">😔 Cansaço e impotência: nunca é suficiente</button><button class="answer-button" onclick="selectAnswer(8, 'Evitativo', 1)">😶 Distante: como se eu tivesse me desligado</button><button class="answer-button" onclick="selectAnswer(8, 'Consciente', 1)">🤔 Perdido: Já tentei tudo, nada parece funcionar</button>
+     <div class="answers-container">
+     <button class="answer-button" onclick="selectAnswer(8, 'Autoritário', 1)">💔 Culpa e arrependimento: não queria gritar</button>
+     <button class="answer-button" onclick="selectAnswer(8, 'Permissivo', 1)">😔 Cansaço e impotência: nunca é suficiente</button>
+     <button class="answer-button" onclick="selectAnswer(8, 'Evitativo', 1)">😶 Distante: como se eu tivesse me desligado</button>
+     <button class="answer-button" onclick="selectAnswer(8, 'Consciente', 1)">🤔 Perdido: Já tentei tudo, nada parece funcionar</button>
      </div>
     </div>
    </div>
@@ -507,10 +516,10 @@ Carregando...
     <div class="question-screen">
      <h2 class="question-title">O que mais te preocupa sobre o futuro? </h2>
      <div class="answers-container">
-        <button class="answer-button" onclick="selectAnswer(9, 'Autoritário', 1)">🥺 Que ela fique muito dependente</button>
-        <button class="answer-button" onclick="selectAnswer(9, 'Permissivo', 1)">💥 Que ela se rebele e não aceite limites no futuro</button>
+        <button class="answer-button" onclick="selectAnswer(9, 'Autoritário', 1)">🥺 Que ele fique muito dependente</button>
+        <button class="answer-button" onclick="selectAnswer(9, 'Permissivo', 1)">💥 Que ele se rebele e não aceite limites no futuro</button>
         <button class="answer-button" onclick="selectAnswer(9, 'Evitativo', 1)">🤷  Prefiro não pensar sobre isso</button>
-        <button class="answer-button" onclick="selectAnswer(9, 'Consciente', 1)">❤️‍🩹 Repetir, sem perceber, padrões da minha própria infância</button>
+        <button class="answer-button" onclick="selectAnswer(9, 'Consciente', 1)">❤️‍🩹 Repetir padrões da minha própria infância</button>
      </div>
     </div>
    </div>
@@ -520,85 +529,67 @@ Carregando...
      <h2 class="question-title">Na próxima crise, o que te ajudaria mais?</h2>
      <div class="answers-container">
         <button class="answer-button" onclick="selectAnswer(10, 'Autoritário', 1)">😮‍💨 Ter autocontrole para não gritar</button>
-        <button class="answer-button" onclick="selectAnswer(10, 'Permissivo', 1)">🛡️ Conseguir manter o limite sem perder a conexão</button>
-        <button class="answer-button" onclick="selectAnswer(10, 'Evitativo', 1)">📝 Ter um passo a passo simples para saber o que fazer, sem travar</button>
+        <button class="answer-button" onclick="selectAnswer(10, 'Permissivo', 1)">🛡️ Conseguir manter o limite sem perder o vínculo</button>
+        <button class="answer-button" onclick="selectAnswer(10, 'Evitativo', 1)">📝 Ter um passo a passo simples para não travar na hora</button>
         <button class="answer-button" onclick="selectAnswer(10, 'Consciente', 1)">❤️ Conseguir ajudar meu filho a lidar com as emoções</button>
      </div>
     </div>
    </div>
-  
-
-   <div class="slide" id="slide11">
-    <div class="result-screen">
-     <h2 class="result-title">🧠 Seu padrão nas crises hoje:</h2>
-     <div class="result-score" id="finalScore">
-      0
-     </div>
-     <p class="result-message" id="resultMessage"></p>
-     <br />
-        <div id="profileFields" style="text-align: left;"> </div>
-
-      <!--<div id="answersReviewList"></div>-->
- <div style="text-align: left;">
-      Você já entendeu muita coisa até aqui.
-      <br />
-Mas na hora da crise…
- <br />
-<b>👉 tudo isso some.</b>
- <br />
-A emoção vem forte, o impulso fala mais alto...
- <br />
-E quando vê… Já reagiu.
-  <br />
-Não por falta de vontade.
- Mas porque tem algo que você ainda não está vendo...
-</div>
- <br />
-<br />
-
-
-       <p align="center"><button class="start-button" onclick="passarSlide()">➜ Quero VER o que está acontecendo</button> </p>
-       
-    </div>
-   </div>
-   
-      
-      <div class="slide" id="slide12">
+        
+      <div class="slide" id="slide11">
     <div class="question-screen">
-    
+    <h2 class="question-title">Por trás de toda crise emocional… existe uma necessidade.</h2>
+     <br/>
       <div class="slide_imagem">
      <img src="/quiz/imagens/leitura_emocional.jpg" style="max-width:100%; height:auto;" loading="lazy" />
      </div>
      
      <br/>
-     <h2 class="question-title">Por trás de toda crise emocional… existe uma necessidade.</h2>
-     <br/>
-       
-    
-Quando essa necessidade não é vista:
+Um pedido, que  criança ainda não saber fazer… 
 <br/>
+Quando isso é visto, você atua na raíz do problema.
+<br/>
+Se a criança precisa de diversão, por exemplo, um Convite Lúdico muda tudo:
+<br />
+<img src="/quiz/imagens/convite_ludico.jpg" style="max-width:100%; height:auto;" loading="lazy" />
+<br />
+O que antes era tensão… vira conexão.
+<br/>
+Mas quando isso passa despercebido…
  o <b>choro aumenta</b>, a <b>situação escala</b>.
 <br/>
-É por isso que <b>nada parece funcionar</b>.
-<br/>
-<br/>
-➜ Tudo muda quando:
-<br/>
-Paramos de <b>controlar o comportamento</b>.
-<br/>
-👉 E focamos em: <b>entender a raíz do problema</b>.
+➜ E é aí que vem a sensação de que: <b>nada parece funcionar</b>.
+<br/><br/>
 
-<br />
-<br />
-       <p align="center"><button class="start-button" onclick="passarSlide()">➜ Quero entender meu filho de verdade</button> </p>
+Não porque você está fazendo errado.
+
+<br/>
+
+Mas porque, no meio da intensidade, da rotina acelerada e da sobrecarga…
+
+<br/>
+
+👉 o foco vai para o comportamento  
+e não para o que está por trás dele.
+
+<br/><br/>
+
+E sem perceber…
+
+<br/>
+
+um padrão automático assume...
+
+
+       <p align="center"><button class="start-button" onclick="passarSlide()">➜ Ver meu padrão nas crises agora</button> </p>
     </div>
    </div>
-   
-   <div class="slide" id="slide13">
-    <div class="question-screen">
-      <h2 class="question-title">Plano de Solução</h2>
-    <div class="fade-in">
-  <!-- ETAPA 1 (INÍCIO) -->
+
+   <div class="slide" id="slide12">
+
+    <div class="result-screen">
+             <div class="fade-in">
+           <!-- ETAPA 1 (INÍCIO) -->
   <div id="step1" class="text-center space-y-4">
     <p class="text-lg">Analisando seu padrão de resposta emocional...</p>
     <p class="text-lg">Cruzando seus pontos de reação...</p>
@@ -614,12 +605,27 @@ Paramos de <b>controlar o comportamento</b>.
     <div class="loader"></div>
 
   </div>
-
-  <!-- RESULTADO FINAL -->
+   <!-- RESULTADO FINAL -->
   <div id="result" class="hidden text-center space-y-6 mt-6">
 
     <p class="text-xl font-semibold">Pronto.</p>
 <br/>
+     <h2 class="result-title">🧠 Seu padrão nas crises hoje:</h2>
+     <div class="result-score" id="finalScore">
+      0
+     </div>
+     <p class="result-message" id="resultMessage"></p>
+     <br />
+        <div id="profileFields" style="text-align: left;"> </div>
+
+      <!--<div id="answersReviewList"></div>-->
+ <div style="text-align: left;">
+ 
+ <br />
+<br />
+
+  <h2 class="question-title">Plano de Solução</h2>
+
     <p>
       O seu resultado mapeia dois pontos importantes:
     </p>
@@ -629,13 +635,13 @@ Paramos de <b>controlar o comportamento</b>.
       <p>🔴 Onde você está hoje</p>
       <p>🟢 Sua versão mais consciente</p>
     </div>
-
+<br/>
     <!-- MAPA -->
    <p align="center"><img id="resultImage" style="max-width:100%; height:auto;" loading="lazy"></p>
 <br/>
 <br/>
 <p class="mt-4">
-O que separa esses dois pontos não é teoria.
+O que separa esses dois pontos não é no quanto você entende da teoria.
 </p>
 
 <p class="font-semibold">
@@ -663,8 +669,15 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
 </p>
   </div>
   </div>
-</div>
-</div>
+
+
+       
+    </div>
+   </div>
+   
+
+   
+
    
   </div>
   
@@ -673,7 +686,7 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
         const defaultConfig = {
             quiz_title: "Quiz Interativo",
             start_button_text: "Começar",
-            rules_text: "Responda 13 perguntas e descubra seu resultado! Cada resposta possui uma pontuação. No final, você verá sua pontuação total e poderá revisar suas escolhas.",
+            rules_text: "Responda 10 perguntas e descubra seu resultado! Cada resposta possui uma pontuação. No final, você verá sua pontuação total e poderá revisar suas escolhas.",
             background_color: "#667eea",
             surface_color: "#ffffff",
             text_color: "#667eea",
@@ -974,7 +987,7 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
                 // volta para o topo da tela
                 window.scrollTo(0, 0);
                 
-                if (currentSlide === 13) 
+                if (currentSlide === 12) 
                 {
                     setTimeout(() => {
                         iniciarAnimacaoSlide13();
@@ -990,19 +1003,19 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
             
            
             
-            if (currentSlide > 0 && currentSlide <= 13) 
+            if (currentSlide > 0 && currentSlide <= 12) 
             {
                 updateProgress();
             }
             
-            if (currentSlide === 11) 
+            if (currentSlide === 12) 
             {
                 showResults();
             }
         }
 
         function updateProgress() {
-            const progress = (currentSlide / 13) * 100;
+            const progress = (currentSlide / 12) * 100;
             document.getElementById('progressFill').style.width = progress + '%';
             document.getElementById('progressPercent').textContent = Math.round(progress) + '%';
             
@@ -1060,9 +1073,7 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
             pensamento_automatico: getAnswer(5),
             reacao_pos_pensamento: getAnswer(6),
 
-            parquinho: getAnswer(7),
             emocao_pos_crise: getAnswer(8),
-
             medo: getAnswer(9),
             solucao: getAnswer(10),
 
@@ -1077,7 +1088,7 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
 
             };
 
-            fetch("https://script.google.com/macros/s/AKfycbxsBlUIbnJL-_N12s-404ESg7CS_CDwYQLqZCjNNB0nJRGFxyzvaPWGZ6NVbbcolVo/exec",{
+            fetch("https://script.google.com/macros/s/AKfycbyW7WNDOg2kvoYptT-IFLx-eLExW9pc1FJvBVekry4zPewTa80VjuTjzKXqvrolB0rC/exec",{
             method:"POST",
             body: JSON.stringify(dados)
             });
