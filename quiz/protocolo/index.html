@@ -28,8 +28,26 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 
-  <link rel="stylesheet" href="style.css">
-<!-- Google Fonts -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base: '#F2F1EC',
+            primary: '#4A9C92',
+            'primary-dark': '#3D8178',
+            'primary-light': '#5DADA3',
+            text: '#2D3436',
+            'text-light': '#636E72',
+            accent: '#E17055',
+            surface: '#FFFFFF',
+             'base-dark': '#d0e3e1',
+          }
+        }
+      }
+    }
+  </script><!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="...">
@@ -46,19 +64,6 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
     * {
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
-    
-    .bg-primary { background-color: var(--primary); }
-    .bg-base { background-color: var(--base); }
-    .bg-surface { background-color: var(--surface); }
-
-    .text-text { color: var(--text); }
-    .text-text-light { color: var(--text-light); }
-
-    .bg-primary-dark { background-color: var(--primary-dark); }
-    .bg-primary-light { background-color: var(--primary-light); }
-
-    .bg-accent { background-color: var(--accent); }
-    .bg-base-dark { background-color: var(--base-dark); }
     
     .youtube-lite {
       position: relative;
