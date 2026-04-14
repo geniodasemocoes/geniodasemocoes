@@ -6,7 +6,7 @@
   <title>Quiz Interativo</title>
   <!-- Meta Pixel Code -->
 <script>
-const DEBUG = false;
+const DEBUG = true;
 
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -466,17 +466,24 @@ Carregando...
    <div class="slide" id="slide4">
     <div class="question-screen">
      <h2 class="question-title">Hoje, quando emoções fortes aparecem, o que você mais reconhece em você?</h2>
-     <div class="answers-container"><button class="answer-button" onclick="selectAnswer(4, 'Autoritário', 1)">💥 Reajo no impulso e me arrependo</button><button class="answer-button" onclick="selectAnswer(4, 'Permissivo', 1)">👍 Acabo me anulando para evitar conflitos</button><button class="answer-button" onclick="selectAnswer(4, 'Evitativo', 1)">🍬  Me distraio mexendo no celular, comendo chocolate...</button><button class="answer-button" onclick="selectAnswer(4, 'Consciente', 1)">😮‍💨 Geralmente consigo identificar a emoção e tento me regular</button>
+     <div class="answers-container">
+     <button class="answer-button" onclick="selectAnswer(4, 'Autoritário', 1)">💥 Reajo no impulso e me arrependo</button>
+     <button class="answer-button" onclick="selectAnswer(4, 'Permissivo', 1)">👍 Acabo me anulando para evitar conflitos</button>
+     <button class="answer-button" onclick="selectAnswer(4, 'Evitativo', 1)">🍬  Me distraio mexendo no celular, comendo chocolate...</button>
+     <button class="answer-button" onclick="selectAnswer(4, 'Consciente', 1)">😮‍💨 Geralmente consigo identificar a emoção e tento me regular</button>
      </div>
     </div>
    </div>
    <div class="slide" id="slide5">
     <div class="question-screen">
-     <h2 class="question-title">Seu filho não quer ir embora do parquinho...</h2>
+     <h2 class="question-title">Seu filho não quer parar de brincar para ir tomar banho...</h2>
      <h2 class="question-subtitle">Quando ele faz "birra", qual seu primeiro pensamento?</h2>
      <div class="answers-container">
-     <button class="answer-button" onclick="selectAnswer(5, 'Autoritário', 1)">😠 "Tenho que impor autoridade, senão nunca vai me respeitar”</button><button class="answer-button" onclick="selectAnswer(5, 'Permissivo', 1)">🤔 "Ele está chorando muito, vai ficar traumatizado”</button><button class="answer-button" onclick="selectAnswer(5, 'Evitativo', 1)">😓 “Eu só queria 5 minutos de descanso”</button>
-     <button class="answer-button" onclick="selectAnswer(5, 'Consciente', 1)">‍‍‍💨 “Estou com raiva, preciso me acalmar”</button> <button class="answer-button" onclick="selectAnswer(5, 'Consciente', 1); markNeedsAwareness()">🔍 “Esse choro acontece sempre antes da soneca… Será que é sono?”</button>
+     <button class="answer-button" onclick="selectAnswer(5, 'Autoritário', 1)">😠 "Tenho que impor autoridade, senão nunca vai me respeitar”</button>
+     <button class="answer-button" onclick="selectAnswer(5, 'Permissivo', 1)">🤔 "Ele está chorando muito, vai ficar traumatizado”</button>
+     <button class="answer-button" onclick="selectAnswer(5, 'Evitativo', 1)">😓 “Eu só queria 5 minutos de descanso”</button>
+     <button class="answer-button" onclick="selectAnswer(5, 'Consciente', 1)">‍‍‍💨 “Estou com raiva, preciso me acalmar”</button>
+     <button class="answer-button" onclick="selectAnswer(5, 'Consciente', 1); markNeedsAwareness()">🔍 “Esse choro acontece sempre antes da soneca… Será que é sono?”</button>
      </div>
     </div>
    </div>
@@ -488,7 +495,7 @@ Carregando...
      <button class="answer-button" onclick="selectAnswer(6, 'Permissivo', 1)">👍 Tento levá-lo, mas ele chora, aí desisto</button>
      <button class="answer-button" onclick="selectAnswer(6, 'Evitativo', 1)">🚶 Vou andando na frente, até ele vir atrás</button>
      <button class="answer-button" onclick="selectAnswer(6, 'Consciente', 1)">🤝 Aviso que vou pegá-lo minutos antes e sigo o combinado</button>
-     <button class="answer-button" onclick="selectAnswer(6, 'Consciente', 1); markNeedsAwareness()">⚽  Já levo a bola e convido ele para brincarmos no caminho</button>
+     <button class="answer-button" onclick="selectAnswer(6, 'Consciente', 1); markNeedsAwareness()">⚽  Já pego um brinquedo e convido ele para brincarmos no banho</button>
      </div>
      </div>
     </div>
@@ -539,16 +546,16 @@ Carregando...
       <div class="slide" id="slide11">
     <div class="question-screen">
       <div class="slide_imagem">
+      <h2 class="question-title">Por trás de toda crise emocional… existe uma necessidade.</h2>
+       <br/>
+         Um pedido, que a criança ainda não sabe fazer...
+         <br/>
      <img src="/quiz/imagens/leitura_emocional.jpg" style="max-width:100%; height:auto;" loading="lazy" />
      </div>
-      <h2 class="question-title">Por trás de toda crise emocional… existe uma necessidade.</h2>
-     <br/>
+    <br />
+Quando a adulto consegue perceber isso, ele atua na <b>raíz do problema</b>.
 
-Se é diversão:
-<br />
-<img src="/quiz/imagens/convite_ludico.jpg" style="max-width:100%; height:auto;" loading="lazy" />
-<br />
-O que antes era tensão… vira conexão.
+O que era resistência… vira cooperação.
 <br/>
 <br/>
 Mas quando isso passa despercebido…
@@ -556,16 +563,16 @@ O <b>choro aumenta</b>, a <b>situação escala</b>.
 <br/>
 E aí, no meio da rotina acelerada, da sobrecarga e da tensão…
 <br/>
-👉 <b>O foco vai para o comportamento e não para o <u>que está por trás dele</u>.</b>
+👉 <b>O foco vai para o <u>comportamento</u> e não para o <u>que está por trás dele</u>.</b>
 <br/>
 <br/>
 E sem perceber…
 <br/>
-Seu padrão automático assume...
+Seu <b>padrão automático assume</b>...
 <br/>
 <br/>
 
-       <p align="center"><button class="start-button" onclick="passarSlide()">➜ Ver meu padrão nas crises agora</button> </p>
+       <p align="center"><button class="start-button" onclick="passarSlide()">➜ Ver meu padrão automático agora</button> </p>
     </div>
    </div>
 
@@ -584,7 +591,7 @@ Seu padrão automático assume...
   <div id="loading" class="hidden text-center space-y-4 mt-6">
    
     <p class="text-lg font-semibold text-primary">
-      Gerando seu caminho de evolução...
+      Gerando seu plano de solução...
     </p>
     <div class="loader"></div>
 
@@ -818,13 +825,13 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
               setTimeout(() => {
                 step1.classList.add("hidden");
                 loading.classList.remove("hidden");
-              }, 2500);
+              }, 1500);
 
               // Loading → Resultado
               setTimeout(() => {
                 loading.classList.add("hidden");
                 result.classList.remove("hidden");
-              }, 4000);
+              }, 3500);
         }
 
         async function onConfigChange(config) {
