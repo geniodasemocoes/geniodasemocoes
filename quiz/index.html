@@ -429,14 +429,14 @@ Carregando...
    <div class="slide" id="slide1">
     <div class="question-screen">
      <h2 class="question-title">Se você está por aqui, é porque quer ajudar uma criança, né? </h2>
-     <h2 class="question-subtitle">Me conta, qual sua relação com ela(s)?</h2>
+     <h2 class="question-subtitle">Me conta, qual sua relação com ela?</h2>
      <div class="answers-container"><button class="answer-button" onclick="selectAnswer(1, 'Mãe', 0)">🤱 Mãe</button> <button class="answer-button" onclick="selectAnswer(1, 'Pai', 0)">👨‍🍼 Pai</button> <button class="answer-button" onclick="selectAnswer(1, 'Avos', 0)">👩‍🦳 Avô/Avó</button><button class="answer-button" onclick="selectAnswer(1, 'Familiar', 0)">🏠 Outro Familiar Próximo</button><button class="answer-button" onclick="selectAnswer(1, 'Educador', 0)">👨‍🏫 Educador(a)/Professora(a)</button><button class="answer-button" onclick="selectAnswer(1, 'Profissional', 0)">🧑‍⚕️ Psicólogo/Terapeuta</button>
      </div>
     </div>
    </div>
    <div class="slide" id="slide2">
     <div class="question-screen">
-     <h2 class="question-title">Qual o ano de nascimento da(s) criança(s)? </h2>
+     <h2 class="question-title">Qual o ano de nascimento da criança? </h2>
      <div class="answers-container"> 
             <button class="answer-button" onclick="selectAnswer(2, '2026', 0)">2026</button>
             <button class="answer-button" onclick="selectAnswer(2, '2025', 0)">2025</button>
@@ -550,6 +550,7 @@ Carregando...
        <br/>
          Um pedido, que a criança ainda não sabe fazer...
          <br/>
+         <br/>
      <img src="/quiz/imagens/leitura_emocional.jpg" style="max-width:100%; height:auto;" loading="lazy" />
      </div>
     <br />
@@ -563,11 +564,9 @@ Mas quando isso passa despercebido…
 O <b>choro aumenta</b>, a <b>situação escala</b>.
 <br/>
 <br/>
-E no meio da rotina acelerada e da sobrecarga…
+É aí, no meio da rotina acelerada e da sobrecarga que…
 <br/>
-👉 O olhar se fixa no <b>comportamento</b> e não no <b>que está por trás dele</b>.
-<br/>
-É aí que seu <b>padrão automático assume</b>...
+👉 Seu <b>padrão automático assume</b>.
 <br/>
 <br/>
 
@@ -610,15 +609,12 @@ E no meio da rotina acelerada e da sobrecarga…
  <div style="text-align: left;">
  
  <br />
-<br />
-
   <h2 class="question-title">Plano de Solução</h2>
 <p  id="meta"></p>
     <p>
       O seu resultado mapeia dois pontos:
     </p>
-<br/>
-<br/>
+
     <div class="space-y-2">
       <p>🔴 Onde você está hoje</p>
       <p>🟢 Sua versão mais consciente</p>
@@ -703,7 +699,7 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
           autoritario: {
             titulo: "Perfil Autoritário",
             mensagem: "(Quando segurar firme é a única forma de não perder o controle)",
-            texto: "Quando algo sai do esperado, você reage rápido e com firmeza, às vezes até com dureza.<br/>Não porque quer machucar…<br/>Mas porque sente que se não assumir o controle, tudo pode sair do eixo.",
+            texto: "Quando algo sai do esperado, você reage rápido e com firmeza, às vezes com dureza.<br/>Não porque quer machucar…<br/>Mas porque sente que se não assumir o controle, tudo pode sair do eixo.",
             medo: "Desejo genuíno de formar alguém forte, que saiba lidar com frustrações e limites",
             tendencia: "Reações firmes, às vezes duras",
             forca: "Capacidade de colocar limites claros",
@@ -1017,7 +1013,7 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
         }
         
         const hybridIntroByProfile = {
-          autoritario: "Em situações de maior pressão, o <b>perfil autoritário</b> assume o controle. Você reage rápido e com firmeza, às vezes até com dureza. Não porque quer machucar…<br/>Mas porque sente que se não assumir o controle, tudo pode sair do eixo.",
+          autoritario: "Em situações de maior pressão, o <b>perfil autoritário</b> assume o controle. Você reage rápido e com firmeza, às vezes com dureza. Não porque quer machucar…<br/>Mas porque sente que se não assumir o controle, tudo pode sair do eixo.",
           permissivo: "Quando a criança demonstra emoções intensas, surge um medo silencioso: 'E se ela não conseguir lidar?', aí o <b>perfil permissivo</b> assume o controle.<br/>E, naquele momento, aliviar a dor parece mais importante do que sustentar o limite.",
           evitativo: "Em situações de sobrecarga, sua mente tenta se afastar e o <b>perfil evitativo</b> assume o controle. Não é frieza… é sobrecarga. É necessidade de respiro. Mas a conexão pode se perder justamente quando a criança mais precisa.",
           consciente: "Em momentos de mais presença, o <b>perfil consciente</b> assume o controle. Aí você busca se regular antes de agir. Nem sempre consegue, mas existe um esforço genuíno de não repetir padrões da própria infância."
@@ -1156,7 +1152,7 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
                 }
                                 
                 if (showsNeedsAwareness) {
-                   document.getElementById('meta').innerHTML += '<br/>🌱 Suas respostas indicam que já há indícios de leitura emocional.';
+                   document.getElementById('meta').innerHTML += '<br/>🌱 Suas respostas indicam que já há indícios de leitura emocional.<br/>';
                 }
 
             console.log("Respostas do usuário:", userAnswers);
