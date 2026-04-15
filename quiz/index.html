@@ -476,8 +476,8 @@ Carregando...
    </div>
    <div class="slide" id="slide5">
     <div class="question-screen">
-     <h2 class="question-title">Seu filho não quer parar de brincar para ir tomar banho...</h2>
-     <h2 class="question-subtitle">Quando ele faz "birra", qual seu primeiro pensamento?</h2>
+     <h2 class="question-title">Seu filho não quer ir para o banho...</h2>
+     <h2 class="question-subtitle">Quando ele grita e chora, qual seu primeiro pensamento?</h2>
      <div class="answers-container">
      <button class="answer-button" onclick="selectAnswer(5, 'Autoritário', 1)">😠 "Tenho que impor autoridade, senão nunca vai me respeitar”</button>
      <button class="answer-button" onclick="selectAnswer(5, 'Permissivo', 1)">🤔 "Ele está chorando muito, vai ficar traumatizado”</button>
@@ -523,8 +523,8 @@ Carregando...
     <div class="question-screen">
      <h2 class="question-title">O que mais te preocupa sobre o futuro? </h2>
      <div class="answers-container">
-        <button class="answer-button" onclick="selectAnswer(9, 'Autoritário', 1)">🥺 Que ele fique muito dependente</button>
-        <button class="answer-button" onclick="selectAnswer(9, 'Permissivo', 1)">💥 Que ele se rebele e não aceite limites no futuro</button>
+       <button class="answer-button" onclick="selectAnswer(9, 'Autoritário', 1)">💥 Que ele se rebele e não aceite limites</button> 
+        <button class="answer-button" onclick="selectAnswer(9, 'Permissivo', 1)">🥺 Que ele fique muito dependente</button>
         <button class="answer-button" onclick="selectAnswer(9, 'Evitativo', 1)">🤷  Prefiro não pensar sobre isso</button>
         <button class="answer-button" onclick="selectAnswer(9, 'Consciente', 1)">❤️‍🩹 Repetir padrões da minha própria infância</button>
      </div>
@@ -553,24 +553,24 @@ Carregando...
      <img src="/quiz/imagens/leitura_emocional.jpg" style="max-width:100%; height:auto;" loading="lazy" />
      </div>
     <br />
-Quando a adulto consegue perceber isso, ele atua na <b>raíz do problema</b>.
-
-O que era resistência… vira cooperação.
+Quando o adulto sabe ler as emoções, ele entende o que está por trás e age na <b>raíz do problema</b>.
+<br/>
+O que era <b>resistência</b>, vira <b>cooperação</b>.
 <br/>
 <br/>
 Mas quando isso passa despercebido…
+<br/>
 O <b>choro aumenta</b>, a <b>situação escala</b>.
 <br/>
-E aí, no meio da rotina acelerada, da sobrecarga e da tensão…
 <br/>
-👉 <b>O foco vai para o <u>comportamento</u> e não para o <u>que está por trás dele</u>.</b>
+E no meio da rotina acelerada e da sobrecarga…
 <br/>
+👉 O olhar se fixa no <b>comportamento</b> e não no <b>que está por trás dele</b>.
 <br/>
-E sem perceber…
-<br/>
-Seu <b>padrão automático assume</b>...
+É aí que seu <b>padrão automático assume</b>...
 <br/>
 <br/>
+
 
        <p align="center"><button class="start-button" onclick="passarSlide()">➜ Ver meu padrão automático agora</button> </p>
     </div>
@@ -598,10 +598,7 @@ Seu <b>padrão automático assume</b>...
   </div>
    <!-- RESULTADO FINAL -->
   <div id="result" class="hidden text-center space-y-6 mt-6">
-
-    <p class="text-xl font-semibold">Pronto.</p>
-<br/>
-     <h2 class="result-title">🧠 Seu padrão nas crises hoje:</h2>
+     <h2 class="result-title">🧠 Seu Padrão Automático:</h2>
      <div class="result-score" id="finalScore">
       0
      </div>
@@ -616,7 +613,7 @@ Seu <b>padrão automático assume</b>...
 <br />
 
   <h2 class="question-title">Plano de Solução</h2>
-
+<p  id="meta"></p>
     <p>
       O seu resultado mapeia dois pontos:
     </p>
@@ -632,7 +629,7 @@ Seu <b>padrão automático assume</b>...
 <br/>
 <br/>
 <p class="mt-4">
-O que separa esses dois pontos não é no quanto você entende da teoria.
+O que separa esses dois pontos não é o quanto você entende da teoria.
 </p>
 
 <p class="font-semibold">
@@ -646,8 +643,6 @@ Porque é ali que tudo acontece…
 <p>
 E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
 </p>
-
-
 <br/>
 <br/>
     <!-- CTA -->
@@ -707,47 +702,48 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
         const profileResults = {
           autoritario: {
             titulo: "Perfil Autoritário",
-            valor: "Segurança, Ordem e Respeito",
-            medo: "Perder autoridade ou criar uma criança fraca",
+            mensagem: "(Quando segurar firme é a única forma de não perder o controle)",
+            texto: "Quando algo sai do esperado, você reage rápido e com firmeza, às vezes até com dureza.<br/>Não porque quer machucar…<br/>Mas porque sente que se não assumir o controle, tudo pode sair do eixo.",
+            medo: "Desejo genuíno de formar alguém forte, que saiba lidar com frustrações e limites",
+            tendencia: "Reações firmes, às vezes duras",
             forca: "Capacidade de colocar limites claros",
-            risco: "Desconexão emocional e reatividade",
-            tendencia: "reagir com rigidez e agressiividade",
-            crianca: "Diante de reações duras, a criança tende a se retrair, se tornar mais passiva, se anular e evitar conflitos, por medo de desagradar.",
-            mensagem: "(Quando a necessidade de segurança assume o controle)",
-            texto: "Quando algo acontece, você aprendeu a reagir rápido e com firmeza, às vezes até com dureza. Não porque quer machucar, mas porque sente que, se não assumir o controle, tudo pode sair do eixo. Por trás dessa reação, costuma existir uma <u>necessidade forte de segurança, ordem ou respeito</u>. A raiva aparece rápido, como um alarme interno. Essa força que emerge no impulso também nasce do cuidado. Você quer preparar a criança para o mundo. Só que, às vezes, <u>a reatividade deixa pouco espaço para conexão</u>, inclusive com você mesmo(a). A mudança começa quando você percebe a necessidade por trás da reação e ganha espaço para <u>colocar limites</u>, com menos impulso e mais presença."
+            risco: "Pouco espaço para conexão, inclusive com você mesmo(a)",
+            crianca: "O medo pode gerar uma tendência de personalidade mais passiva, que se anula para evitar conflitos",
+            chave: "Limite não precisa vir do impulso, pode vir com presença e afeto"
           },
           permissivo: {
             titulo: "Perfil Permissivo",
-            valor: "Harmonia, Conexão e Bem-estar Emocional",
-            medo: "Machucar emocionalmente a criança",
-            forca: "Empatia e sensibilidade",
-            risco: "Dificuldade em sustentar limites",
-            tendencia: "ceder para evitar conflitos",
-            crianca: "Sem limites consistentes, a criança não reconhece as necessidades do outro, pois, seus desejos sempre prevalecem. Quando contrariada, tende a agressividade por não ter desenvolvido autorregulação.",
             mensagem: "(Quando o amor tenta evitar a dor)",
-            texto: "O choro da criança desperta em você um medo silencioso: “E se ela não conseguir lidar?” Por isso, muitas vezes, você cede.  Não por fraqueza, mas por empatia. Por trás dessa tendência de ceder, existe também uma <u>necessidade profunda de conexão</u>. Evitar o sofrimento do outro é, muitas vezes, uma forma de tentar manter o vínculo intacto. O desafio é que, na tentativa de poupar a criança da dor, você pode <u>silenciar suas próprias necessidades</u>, que acabam transbordando em algum momento. E o limite, que também protege e orienta, acaba sendo adiado. A mudança começa quando você percebe que mais valioso do que <u>dar o que a criança quer, é dar o que ela precisa</u>."
-          },
+            texto: "Quando a criança sofre, algo em você sofre junto.<br/>O choro intenso ativa um medo silencioso: 'E se ela não conseguir lidar?'<br/>E, naquele momento, aliviar a dor parece mais importante do que sustentar o limite.",
+            medo: "Desejo genuíno de evitar traumas ou de manter o vínculo",
+            tendencia: "Ceder para evitar choro ou conflito, silenciando as próprias necessidades",
+            forca: "Empatia e sensibilidade emocional",
+            risco: "Na tentativa de poupar a criança, você pode silenciar suas próprias necessidades, que acabam transbordando em algum momento. E o limite, que também protege e orienta, acaba sendo adiado.",
+            crianca: "Dificuldade em reconhecer limites e lidar com frustrações",
+            chave: "Mais valioso do que dar o que a criança quer, é dar o que ela precisa. 👉 É possível colocar limites com afeto e conexão."
+           },
           evitativo: {
             titulo: "Perfil Evitativo",
-            valor: "Paz, Descanso e Harmonia",
-            medo: "Entrar em contato com emoções difíceis e perder estabilidade",
-            forca: "Autonomia e praticidade",
-            risco: "Distanciamento emocional",
-            tendencia: "ativar gatilhos de afastamento e distração, evitando lidar com a situação",
-            crianca: "Diante do afastamento, a criança pode se fechar emocionalmente, oscilando entre comportamentos de passividade e agressividade.",
             mensagem: "(Quando o silêncio é um pedido de descanso)",
-            texto: "Quando suas emoções ficam intensas, você tende a se afastar ou se distrair. Não é indiferença, é sobrecarga. Por trás desse comportamento, geralmente há uma <u>necessidade legítima de descanso e espaço</u>. O problema é quando o afastamento acontece no automático e a conexão <u>se perde quando a criança mais precisa</u>. A mudança começa quando você percebe esse impulso e aprende a usar estratégias simples de autorregulação para <u>seguir presente, sem se desligar emocionalmente</u>."
+            texto: "Quando suas emoções ficam intensas, sua mente tenta se afastar.<br/>Não é frieza… é sobrecarga.<br/>É necessidade de respiro.",
+            medo: "Necessidade legítima de descanso ou espaço",
+            tendencia: "Ativar gatilhos de afastamento ou distração",
+            forca: "Autonomia e praticidade",
+            risco: "A conexão pode se perder justamente quando a criança mais precisa",
+            crianca: "Tendência de se fechar emocionalmente, oscilando entre comportamentos de passividade e agressividade",
+            chave: "Existem estratégias simples para se regular sem se desligar emocionalmente"
           },
           consciente: {
             titulo: "Perfil Consciente",
-            valor: "Equilíbrio entre Limite e Acolhimento",
-            medo: "Repetir padrões da própria infância",
-            forca: "Consciência emocional",
-            tendencia: "buscar auto regulação para lidar com a situação",
-            crianca: "Diante de presença consciente, a criança aprende a se expressar com mais segurança, autoconfiança e habilidades sociais.",
-            risco: "Sobrecarga e autocobrança",
             mensagem: "(Quando a consciência guia a resposta)",
-            texto: "Você tenta observar antes de agir. Nem sempre consegue, mas existe um desejo genuíno de não repetir padrões da própria infância e isso já diz muito sobre o caminho que você está construindo. O desafio é que essa <u>consciência pode vir acompanhada de autocobrança</u>:  'Eu deveria lidar melhor com isso'. A mudança começa quando você reconhece esse processo conscientemente e passa a <u>conduzi-lo de forma intencional</u>."
+            texto: "Você tenta se ouvir, se acalmar e conduzir a criança de forma mais consciente. Nem sempre consegue, mas existe um esforço genuíno de não repetir padrões da própria infância.",
+            medo: "Propósito de equilibrar limite e afeto para construir uma geração com menos feridas emocionais",
+            tendencia: "Busca se regular antes de agir",
+            forca: "Autoconhecimento e Autoaprimoramento",
+            risco: "Sobrecarga, autocobrança e sensação de nunca ser suficiente",
+            crianca: "Tendência a se expressar com mais segurança e autoconfiança",
+            chave: "Consciência sem direção vira peso. 👉 Com direção: vira transformação. Com poucas mudanças, você desenvolve leitura emocional e passa a conduzir esse processo com clareza e intenção."
+           
           }
         };
         
@@ -906,7 +902,8 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
             return null;
         }
         
-        function buildProfileResult(dominantProfiles) {
+        function buildProfileResult(dominantProfiles) 
+        {
           if (dominantProfiles.length === 1) {
             const p = dominantProfiles[0];
             const data = profileResults[p];
@@ -919,18 +916,15 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
           
        // PERFIL HÍBRIDO — baseado nos perfis ganhadores
         return `
-        <p>Você tem mais de um perfil dominante, ou seja: reage de acordo com a situação, o nível de cansaço e a intensidade emocional do momento.</p>
         ${dominantProfiles.map(profile => {
           const data = profileResults[profile];
           const intro = hybridIntroByProfile[profile];
 
           return `
-            <p><strong>${intro}</strong></p>
-            ${data.texto}
+            ${intro}
           `;
         }).join('')}
-        
-         `;
+         Quando a reação do adulto oscila entre perfis, a criança perde referências claras do que esperar. Essa imprevisibilidade pode gerar padrões de ansiedade e desconfiança.`;
       
      
         
@@ -1013,8 +1007,8 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
             let phaseText = '';
             if (currentSlide >= 1 && currentSlide <= 10) {
                 phaseText = 'Fase 1: Descubra seu Perfil Parental';
-            } else if (currentSlide >= 11 && currentSlide <= 12) {
-                phaseText = 'Fase 2:  Diagnóstico';
+            } else if (currentSlide == 11) {
+                phaseText = 'Fase 2:  Mapa da Maior Dificuldade';
             } else {
                 phaseText = 'Plano de Solução';
             }
@@ -1023,10 +1017,10 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
         }
         
         const hybridIntroByProfile = {
-          autoritario: "Em situações de maior pressão, o perfil autoritário tende a assumir o controle.",
-          permissivo: "Em situações onde a criança demonstra emoções intensas, o perfil permissivo tende a assumir o controle.",
-          evitativo: "Em situações de sobrecarga, o perfil evitativo tende a assumir o controle.",
-          consciente: "Em momentos de mais presença, o perfil consciente tende a assumir o controle."
+          autoritario: "Em situações de maior pressão, o <b>perfil autoritário</b> assume o controle. Você reage rápido e com firmeza, às vezes até com dureza. Não porque quer machucar…<br/>Mas porque sente que se não assumir o controle, tudo pode sair do eixo.",
+          permissivo: "Quando a criança demonstra emoções intensas, surge um medo silencioso: 'E se ela não conseguir lidar?', aí o <b>perfil permissivo</b> assume o controle.<br/>E, naquele momento, aliviar a dor parece mais importante do que sustentar o limite.",
+          evitativo: "Em situações de sobrecarga, sua mente tenta se afastar e o <b>perfil evitativo</b> assume o controle. Não é frieza… é sobrecarga. É necessidade de respiro. Mas a conexão pode se perder justamente quando a criança mais precisa.",
+          consciente: "Em momentos de mais presença, o <b>perfil consciente</b> assume o controle. Aí você busca se regular antes de agir. Nem sempre consegue, mas existe um esforço genuíno de não repetir padrões da própria infância."
         };
         
         function buildProfileFields(profile)
@@ -1035,9 +1029,11 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
 
             return `
                 
-                <b>Força:</b> ${data.forca}<br>
-                <b>Risco:</b> ${data.risco}<br>
-                <b>Impactos na criança:</b> ${data.crianca}<br><br>
+                <b>🔍 O que está por trás:</b> ${data.medo}<br>
+                <b>👶 Impactos na criança:</b> ${data.crianca}<br>
+                <b>💪 Sua força:</b> ${data.forca}<br>
+                <b>⚠️ Ponto de atenção</b> ${data.risco}<br>
+                <b>✨ Virada de chave</b> ${data.chave}<br><br>
             `;
     }
     
@@ -1160,7 +1156,7 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
                 }
                                 
                 if (showsNeedsAwareness) {
-                   document.getElementById('resultMessage').innerHTML += '<br/>🌱 Você já demonstra sensibilidade para identificar a necessidade por trás da emoção. Esse é um sinal claro de consciência emocional em desenvolvimento.';
+                   document.getElementById('meta').innerHTML += '<br/>🌱 Suas respostas indicam que já há indícios de leitura emocional.';
                 }
 
             console.log("Respostas do usuário:", userAnswers);
