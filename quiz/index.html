@@ -416,14 +416,18 @@ Carregando...
    </div>
    <div class="slide active" id="slide0">
     <div class="welcome-screen">
-     <h1 class="welcome-title" id="quizTitle">Na hora da "birra",<br/> você grita, cede ou foge?</h1>
-     <h1 class="question-subtitle"> Em 3 minutos, descubra qual padrão automático guia suas reações:</h1>
+     <h1 class="welcome-title" id="quizTitle">Na hora da "birra", qual padrão está dominando suas reações?</h1>
     <br/>
             <!--<h1 class="welcome-subtitle" id="quizTitle">Experimento Prático</h2>-->
            <p align="center"><img src="/quiz/imagens/perfis.png" style="max-width:100%; height:auto;" loading="lazy" /></p>
      <p class="welcome-rules" id="rulesText">
-     <br/>No final, receba um mapa da <b>sua maior dificuldade</b> e um plano para <b>resolver isso</b>.
-</p><button class="start-button" id="startButton" onclick="startQuiz()">Quero descobrir meu padrão</button>
+     <br/>⏱️ 3 minutos para entender:
+     <br/>
+     👉 <b>por que você trava</b>, mesmo sabendo o que fazer
+     <br/>
+     👉 como quebrar esse ciclo e <b>agir diferente na próxima crise</b>
+</p><button class="start-button" id="startButton" onclick="startQuiz()">Quero descobrir meu padrão e transformá-lo</button>
+
     </div>
    </div>
    <div class="slide" id="slide1">
@@ -521,6 +525,8 @@ Carregando...
    </div>
    <div class="slide" id="slide9">
     <div class="question-screen">
+    Você não está sozinho(a). Isso é mais comum do que parece…
+    <br/>
      <h2 class="question-title">O que mais te preocupa sobre o futuro? </h2>
      <div class="answers-container">
        <button class="answer-button" onclick="selectAnswer(9, 'Autoritário', 1)">💥 Que ele se rebele e não aceite limites</button> 
@@ -533,7 +539,7 @@ Carregando...
 
    <div class="slide" id="slide10">
     <div class="question-screen">
-     <h2 class="question-title">Na próxima crise, o que te ajudaria mais?</h2>
+     <h2 class="question-title">Se você pudesse mudar uma coisa nas crises a partir de hoje, o que seria?</h2>
      <div class="answers-container">
         <button class="answer-button" onclick="selectAnswer(10, 'Autoritário', 1)">😮‍💨 Ter autocontrole para não gritar</button>
         <button class="answer-button" onclick="selectAnswer(10, 'Permissivo', 1)">🛡️ Conseguir manter o limite sem perder o vínculo</button>
@@ -590,7 +596,7 @@ Aí, no meio da rotina acelerada e da sobrecarga…
   <div id="loading" class="hidden text-center space-y-4 mt-6">
    
     <p class="text-lg font-semibold text-primary">
-      Gerando seu plano de solução...
+      Gerando seu plano de ação...
     </p>
     <div class="loader"></div>
 
@@ -609,7 +615,7 @@ Aí, no meio da rotina acelerada e da sobrecarga…
  <div style="text-align: left;">
  
  <br />
-  <h2 class="question-title">Plano de Solução</h2>
+  <h2 class="question-title">Plano de Ação</h2>
 <p  id="meta"></p>
     <p>
       O seu resultado mapeia dois pontos:
@@ -711,17 +717,17 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
             titulo: "Perfil Permissivo",
             mensagem: "(Quando o amor tenta evitar a dor)",
             texto: "O choro da criança desperta em você um medo profundo: 'E se ela não conseguir lidar?'<br/>E, naquele momento, aliviar a dor parece mais importante do que sustentar o limite.",
-            medo: "Desejo genuíno de evitar traumas ou de manter o vínculo",
-            tendencia: "Ceder para evitar choro ou conflito, silenciando as próprias necessidades",
+            medo: "Desejo genuíno de manter o vínculo e evitar traumas",
+            tendencia: "Ceder para evitar choro ou conflito",
             forca: "Empatia e sensibilidade emocional",
-            risco: "Na tentativa de poupar a criança, você pode silenciar suas próprias necessidades, que acabam transbordando em algum momento. E o limite, que também protege e orienta, acaba sendo adiado",
+            risco: "Para poupar a criança, você silencia suas próprias necessidades, que vão transbordar em algum momento. E o limite, que também protege e orienta, acaba sendo adiado",
             crianca: "Tendência a uma personalidade autocentrada, que reconhece apenas as próprias necessidades. Dificuldade em reconhecer limites e lidar com frustrações",
-            chave: "Mais valioso do que dar o que a criança quer, é dar o que ela precisa. 👉 É possível colocar limites com afeto e conexão"
+            chave: "Mais valioso do que dar o que a criança quer, é dar o que ela precisa. 👉 É possível colocar limites com conexão"
            },
           evitativo: {
             titulo: "Perfil Evitativo",
             mensagem: "(Quando o silêncio é um pedido de descanso)",
-            texto: "Quando suas emoções ficam intensas, sua mente tenta se afastar.<br/>Não é frieza… é sobrecarga.<br/>É necessidade de respiro.",
+            texto: "Quando as emoções ficam intensas, sua mente tenta se afastar.<br/>Não é frieza… é sobrecarga.<br/>É necessidade de respiro.",
             medo: "Necessidade legítima de descanso ou espaço",
             tendencia: "Ativar gatilhos de afastamento ou distração",
             forca: "Autonomia e praticidade",
@@ -738,7 +744,7 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
             forca: "Autoconhecimento e Autoaprimoramento",
             risco: "Sobrecarga, autocobrança e sensação de nunca ser suficiente",
             crianca: "Tendência a se expressar com mais segurança e autoconfiança",
-            chave: "Consciência sem direção vira peso. 👉 Com direção: vira transformação. Com poucas mudanças, você desenvolve leitura emocional e passa a conduzir esse processo com clareza e intenção."
+            chave: "Consciência sem direção vira peso. 👉 Com direção: vira transformação. Com poucas mudanças, você desenvolve leitura emocional e passa a conduzir esse processo com clareza e intenção"
            
           }
         };
@@ -823,7 +829,7 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
               setTimeout(() => {
                 loading.classList.add("hidden");
                 result.classList.remove("hidden");
-              }, 2500);
+              }, 3000);
         }
 
         async function onConfigChange(config) {
@@ -920,7 +926,7 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
             ${intro}
           `;
         }).join('')}
-         Quando a reação do adulto oscila entre perfis, a criança perde referências claras do que esperar. Essa imprevisibilidade pode gerar padrões de ansiedade e desconfiança.`;
+         Quando a reação do adulto oscila entre perfis, a criança perde referências claras do que esperar. Essa imprevisibilidade pode gerar padrões de ansiedade e impactar na autoconfiança.`;
       
      
         
@@ -1006,16 +1012,16 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
             } else if (currentSlide == 11) {
                 phaseText = 'Fase 2:  Mapa da Maior Dificuldade';
             } else {
-                phaseText = 'Plano de Solução';
+                phaseText = 'Plano de Ação';
             }
             
             document.getElementById('phaseText').textContent = phaseText;
         }
         
         const hybridIntroByProfile = {
-          autoritario: "Em situações de maior pressão, o <b>perfil autoritário</b> assume o controle. Você reage rápido e com firmeza, às vezes com dureza. Não porque quer machucar…<br/>Mas porque sente que se não assumir o controle, tudo sai do eixo.",
+          autoritario: "Em situações de maior pressão, o <b>perfil autoritário</b> assume o controle rápido e com firmeza, às vezes com dureza. Não porque quer machucar…<br/>Mas porque sente que se não assumir o controle, tudo sai do eixo.",
           permissivo: "Quando a criança demonstra emoções intensas, surge um medo silencioso: 'E se ela não conseguir lidar?', aí o <b>perfil permissivo</b> assume o controle.<br/>E, naquele momento, aliviar a dor parece mais importante do que sustentar o limite.",
-          evitativo: "Em situações de sobrecarga, sua mente tenta se afastar e o <b>perfil evitativo</b> assume o controle. Não é frieza… é sobrecarga. É necessidade de respiro. Mas a conexão pode se perder justamente quando a criança mais precisa.",
+          evitativo: "Em situações de sobrecarga, sua mente tenta se afastar e o <b>perfil evitativo</b> assume o controle. Não é frieza… é necessidade de respiro. Mas a conexão pode se perder justamente quando a criança mais precisa.",
           consciente: "Em momentos de mais presença, o <b>perfil consciente</b> assume o controle. Aí você busca se regular antes de agir. Nem sempre consegue, mas existe um esforço genuíno de não repetir padrões da própria infância."
         };
         
@@ -1028,8 +1034,8 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
                 <b>🔍 O que está por trás:</b> ${data.medo}<br>
                 <b>👶 Impactos na criança:</b> ${data.crianca}<br>
                 <b>💪 Sua força:</b> ${data.forca}<br>
-                <b>⚠️ Ponto de atenção</b> ${data.risco}<br>
-                <b>✨ Virada de chave</b> ${data.chave}<br><br>
+                <b>⚠️ Ponto de atenção:</b> ${data.risco}<br>
+                <b>✨ Virada de Chave:</b> ${data.chave}<br><br>
             `;
     }
     
