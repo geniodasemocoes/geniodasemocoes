@@ -146,7 +146,8 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
             }
         }
 
-        .welcome-screen {
+        .welcome-screen 
+        {
             text-align: center;
             padding: 30px;
             background: #ffffff;
@@ -393,8 +394,7 @@ src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
                 font-size: 36px;
             }
         }
-            
-            
+
     </style>
   <style>@view-transition { navigation: auto; }</style>
   
@@ -417,12 +417,23 @@ Carregando...
 
    <div class="slide active" id="slide1">
     <div class="welcome-screen">
-            <h1 class="welcome-title" id="quizTitle">Você vai descobrir seu padrão e saber <u>o que fazer</u> na próxima crise</h1>
-            <b>⏱️ Em 3 minutos, você sai com um passo a passo simples para <u>conseguir agir</u> na hora H</b>
+   
+           
+            
+                <h2 class="question-title">Descubra o padrão que te trava nas crises, quebre esse ciclo e <u>retome o controle</u> na hora mais crítica</h2>
+      
+                <p align="center"><img src="imagens/protocolo.jpg" alt="Seu protocolo para a hora H" style="max-width:200px; height:auto;"  loading="lazy" />
+              <br/>
+               ⏱️ Em 3 minutos, você tem um passo a passo prático para <u>saber exatamente o que fazer</u> na próxima crise</p>
+                
+         
+                
+  
+            
      <br/>
      <br/>
-     <h2 class="question-title"> Me conta: qual sua relação com a criança?</h2>
-     
+     <h3> Me conta: qual sua relação com a criança?</h3>
+     <br/>
    
      <div class="answers-container"><button class="answer-button" onclick="selectAnswer(1, 'Mãe', 0)">🤱 Mãe</button> <button class="answer-button" onclick="selectAnswer(1, 'Pai', 0)">👨‍🍼 Pai</button> <button class="answer-button" onclick="selectAnswer(1, 'Avos', 0)">👩‍🦳 Avô/Avó</button><button class="answer-button" onclick="selectAnswer(1, 'Familiar', 0)">🏠 Outro Familiar Próximo</button><button class="answer-button" onclick="selectAnswer(1, 'Educador', 0)">👨‍🏫 Educador(a)/Professora(a)</button><button class="answer-button" onclick="selectAnswer(1, 'Profissional', 0)">🧑‍⚕️ Psicólogo/Terapeuta</button>
      </div>
@@ -1074,8 +1085,12 @@ E sem um plano… <b>Você reage do mesmo jeito</b>, de novo.
 
             fetch("https://script.google.com/macros/s/AKfycbyW7WNDOg2kvoYptT-IFLx-eLExW9pc1FJvBVekry4zPewTa80VjuTjzKXqvrolB0rC/exec",{
             method:"POST",
-            body: JSON.stringify(dados)
-            });
+            body: JSON.stringify(dados),
+            mode: "no-cors"
+            
+            }).catch(() => {});
+            
+            
 
             }
        
