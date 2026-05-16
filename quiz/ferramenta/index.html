@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="pt-BR" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jornada Gênio das Emoções</title><!-- Element SDK -->
+    <!-- Meta Pixel Code -->
+<script>
+const DEBUG = false;
+
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+if (!DEBUG) {
+fbq('init', '25353629854325778');
+fbq('track', 'PageView');
+}
+</script>
+
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=25353629854325778&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+  <link rel="stylesheet" href="/quiz/ferramenta/style.css">
+<!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body { box-sizing: border-box; }
+    
+    * {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    
+    .bg-primary { background-color: var(--primary); }
+    .bg-base { background-color: var(--base); }
+    .bg-surface { background-color: var(--surface); }
+
+    .text-text { color: var(--text); }
+    .text-text-light { color: var(--text-light); }
+
+    .bg-primary-dark { background-color: var(--primary-dark); }
+    .bg-primary-light { background-color: var(--primary-light); }
+
+    .bg-accent { background-color: var(--accent); }
+    .bg-base-dark { background-color: var(--base-dark); }
+    
+    .my-badge {
+      display: inline-block;          /* inline-block */
+      background-color: rgba(255, 183, 77, 0.5); /* bg-accent/10 → cor com 10% de opacidade */
+      color: red;                 /* text-accent → cor principal */
+      padding: 0.5rem 1rem;           /* py-2 px-4 → 8px vertical, 16px horizontal */
+      border-radius: 9999px;          /* rounded-full → borda totalmente arredondada */
+      font-size: 0.875rem;            /* text-sm → 14px */
+      font-weight: 600;               /* font-semibold */
+      margin-bottom: 1.5rem;          /* mb-6 → 24px */
+    }
+
+
+    
+    .youtube-lite {
+      position: relative;
+      max-width: 100%;
+      cursor: pointer;
+    }
+
+    .youtube-lite img {
+      width: 100%;
+      display: block;
+    }
+    
+    
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 48px;
+      color: white;
+      background: rgba(0,0,0,0.6);
+      border-radius: 50%;
+      padding: 10px 20px;
+    }
+    
+    .cta-button {
+  display: inline-block;              /* inline-block */
+  background-color: var(--primary);          /* bg-primary → azul padrão, ajuste conforme sua paleta */
+  color: #ffffff;                     /* text-white */
+  font-weight: bold;                  /* font-bold */
+  font-size: 1.125rem;                /* text-lg → 18px */
+  padding: 1rem 2rem;                 /* py-4 px-8 → 16px vertical, 32px horizontal */
+  border-radius: 0.75rem;             /* rounded-xl → 12px */
+  transition: all 0.3s ease;          /* transition-all duration-300 */
+  cursor: pointer;                    /* mãozinha ao passar o mouse */
+}
+
+.cta-white-button {
+  display: inline-block;              /* inline-block */
+  background-color: #ffffff;          /* bg-primary → azul padrão, ajuste conforme sua paleta */
+  color: var(--primary);                     /* text-white */
+  font-weight: bold;                  /* font-bold */
+  font-size: 1.125rem;                /* text-lg → 18px */
+  padding: 1rem 2rem;                 /* py-4 px-8 → 16px vertical, 32px horizontal */
+  border-radius: 0.75rem;             /* rounded-xl → 12px */
+  transition: all 0.3s ease;          /* transition-all duration-300 */
+  cursor: pointer;                    /* mãozinha ao passar o mouse */
+}
+
+/* Hover */
+.cta-button:hover {
+  background-color: var(--primary-dark);         /* hover:bg-primary-dark → tom mais escuro */
+}
+
+.cta-white-button:hover {
+  background-color: var(--base-dark);         /* hover:bg-primary-dark → tom mais escuro */
+}
+
+.aba {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;        /* equivalente ao p-5 */
+  text-align: left;
+  cursor: pointer;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* Animação de pulso (cta-pulse) */
+.cta-pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+  }
+}
+    
+    /* Animações suaves */
+    .fade-in {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Botão CTA com efeito de pulso sutil */
+    .cta-pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(74, 156, 146, 0.4); }
+      50% { box-shadow: 0 0 0 12px rgba(74, 156, 146, 0); }
+    }
+    
+    /* Scroll suave */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Estilo para listas de benefícios */
+    .benefit-check::before {
+      content: "✓";
+      color: #4A9C92;
+      font-weight: bold;
+      margin-right: 12px;
+    }
+  </style>
+ </head>
+ <body class="h-full bg-base text-text">
+ 
+  <div id="app-wrapper" class="w-full h-full overflow-auto"><!-- ===== SEÇÃO 1: HERO ===== -->
+   <section id="hero" class="w-full bg-base">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+     <div class="text-center"><!-- Badge de urgência --> <span class="my-badge"> 🔥 Oferta por tempo limitado </span> <!-- Título principal -->
+     
+
+    <div>
+    
+    <h1 id="hero-title" class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6">Transforme a <u>hora da leitura</u> em um <u>treino emocional</u> que ajuda seu filho a lidar com situações difíceis. 
+    <h2 id="hero-subtitle">Com 10 minutos por dia, vocês vivem uma <u>experiência lúdica guiada</u>, para promover <u>abertura emocional</u> e revelar o que as emoções difíceis <u>tentam comunicar</u>.</h2>
+     <p align="center"><img src="/quiz/ferramenta/imagens/header3.png" alt="" style="max-width: 100%; height: auto;" /></p>
+     </div>
+
+     </div>
+    </div>
+   </section>
+   
+   
+
+   <section id="benefits" class="w-full bg-base -mt-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 md:py-10 relative">
+
+ 
+     <div class="text-center mt-10">
+        <button class="cta-button cta-pulse" onclick="scrollToPrice()">👉 QUERO VIVER ESSA EXPERIÊNCIA</button> 
+      <p class="mt-2 flex justify-center gap-6 text-text-secondary/60 text-sm font-sans">
+         ✓ Acesso imediato &nbsp;&nbsp;
+         ✓ Método 100% prático &nbsp;&nbsp;
+         ✓ Garantia de 7 dias
+      </p>
+     </div>
+    </div>
+    <br/>
+    <br/>
+   </section>
+
+   
+     
+   <section id="how-it-works" class="w-full bg-surface relative">
+   
+      <div style="position: absolute; top: -36px; left: 50%; transform: translateX(-50%);">
+    </div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4">Às vezes, começa com algo pequeno.</h2>
+     
+
+Um jogo perdido.
+  <br/>
+Um “não”.
+  <br/>
+Um conflito qualquer.
+  <br/>
+    <br/>
+De repente, uma <b>porta se fecha</b>.
+  <br/>
+E você fica ali... Tentando encontrar as palavras certas para atravessar, para alcançar...
+  <br/>
+Mas as palavras sempre chegam no <b>lugar errado</b>.
+  <br/>
+    <br/>
+    O problema não é falta de amor.
+     <br/>
+    Nem de esforço.
+     <br/>
+     Tem algo que você <b>não está vendo</b>...
+       <br/>
+        <br/>
+        <br/>
+  <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4">O comportamento é só a parte visível da emoção.</h2>
+   <br/>
+   Por trás dele, existe algo muito maior que seu filho ainda não sabe explicar.
+
+   <br/>
+             <img src="/quiz/ferramenta/imagens/autoridade.jpg" alt="" style="max-width: 100%; height: auto;" />
+
+   <br/>
+   Por trás de toda emoção existe uma <b>necessidade humana universal</b>.
+   <br/>
+   <br/>
+   Essa premissa é baseada na CNV, uma abordagem psicológica <b>mundialmente reconhecida</b> por sua alta capacidade de gerar <b>abertura emocional</b> e <b>fortalecimento de vínculos</b>.
+
+     <div class="text-center mt-10"><button class="cta-button cta-pulse" onclick="scrollToPrice()">👉 QUERO ENTENDER MEU FILHO DE VERDADE</button>
+     </div>
+    </div>
+   </section>
+   
+   
+   
+
+   <section id="modules" class="w-full bg-base-dark">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+
+     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4">🌟 Você não precisa virar especialista em emoções para ajudar seu filho.</h2>
+
+
+           
+<br/>
+ <br/>
+    <p align="center"><img src="/quiz/ferramenta/imagens/jornada.png" alt="" style="max-width: auto; max-height: 200px;" loading="lazy" /></p>
+     <div class="space-y-4"><!-- Módulos com accordion -->
+      <div class="module-item bg-surface rounded-xl overflow-hidden"><button onclick="toggleModule(this)" class="aba"> <span class="font-semibold">📖 O que é a Jornada?</span> <span class="module-icon text-primary transition-transform duration-300">▼</span> </button>
+       <div class="module-content hidden px-5 pb-5 text-text-light text-sm">
+       <br/>
+        Em 3 minutos, conheça a <b>Jornada Gênio das Emoções</b>, uma experiência visual guiada que ajuda crianças a expressarem emoções difíceis de forma leve, simbólica e natural.
+        <br/>
+        <br/>
+        <p align="center">
+        
+               <div class="youtube-lite" data-id="mxFL37kdoCg">
+          <img 
+            src="https://img.youtube.com/vi/mxFL37kdoCg/hqdefault.jpg" 
+            alt="Assistir vídeo"
+            loading="lazy"
+            class="cursor-pointer rounded-lg"
+          >
+          <div class="play-button">▶</div>
+        </div>
+        
+       <p>
+       </div>
+      </div>
+      <div class="module-item bg-surface rounded-xl overflow-hidden"><button onclick="toggleModule(this)" class="aba"> <span class="font-semibold">🧠 Por que isso é tão poderoso?</span> <span class="module-icon text-primary transition-transform duration-300">▼</span> </button>
+       <div class="module-content hidden px-5 pb-5 text-text-light text-sm">
+        Essa experiência ajuda a criança a:
+ <br/>
+✔ Reconhecer o que está sentindo
+ <br/>
+✔ Lidar com a emoção
+  <br/>
+✔ Reconhecer a necessidade que desencadeou a emoção
+  <br/>
+✔ Pedir o que precisa com clareza literal
+ <br/>
+  <br/>
+         <b>🌿 Ao falar sobre a história, a criança <u>projeta seus sentimentos nos personagens</u></b>. 
+        <br/>
+        Assim, ela encontra palavras para falar de si, <b>sem se sentir exposta</b>.
+        <br/>
+        Tudo em linguagem simbólica, acessível e repetitiva, do jeito que o <b>cérebro infantil aprende</b>.
+         <br/>
+          <br/>
+        <br/>
+
+
+
+       
+       <p align="center"> <img src="/quiz/ferramenta/imagens/terapeuta.png" alt="" style="max-width: auto; max-height: 200px;" loading="lazy" /></p>
+        <br/>
+        
+
+       </div>
+      </div>
+      <div class="module-item bg-surface rounded-xl overflow-hidden"><button onclick="toggleModule(this)" class="aba"> <span class="font-semibold">📱 O que você recebe nesta oferta</span> <span class="module-icon text-primary transition-transform duration-300">▼</span> </button>
+       <div class="module-content hidden px-5 pb-5 text-text-light text-sm">
+        <b>Você recebe:</b>
+        <br/>
+        ✔ Livro "O Gênio das Emoções"
+        <br/>
+        ✔ Guia para imprimir e montar o "Kit Super Poderes Emocionais"
+        <br/>
+        ✔ Guia Prático de Aplicação
+        <br/>
+        <br/>
+         <br/>
+        <p>Além da versão para imprimir, você recebe a <b>versão interativa de bolso</b>, que inclui:</p>
+        <br/>
+        ✔ Interface que <u>simula a experiência do livro físico</u>
+        <br/>
+        ✔ Menu inteligente para <u>acesso rápido</u>
+        <br/>
+        ✔ Painel Dinâmico que <u>simula os cartões físicos</u> do Kit
+        <br/>
+        <br/>
+        Tudo acessível pelo celular, tablet ou computador.
+        <br/>
+        Sempre à mão, dentro ou fora de casa, onde surgir uma <b>oportunidade de reflexão</b>.
+         <p align="center"><img src="/quiz/ferramenta/imagens/jornada_digital.jpg"  alt="" style="max-width: auto; max-height: 300px;" loading="lazy" /></p>
+        <br/>
+        <br/>
+        
+       <p align="center">
+        <img src="/quiz/ferramenta/imagens/livro_fisico.png"  alt="" style="max-width: auto; max-height: 200px;" loading="lazy" />
+        <br/>
+        <img src="/quiz/ferramenta/imagens/livro_fisico2.png"  alt="" style="max-width: auto; max-height: 200px;" loading="lazy" /></p>
+       </div>
+      </div>
+
+     <div class="text-center mt-10"><button class="cta-button cta-pulse" onclick="scrollToPrice()"> 👉 QUERO VIVER ESSA EXPERIÊNCIA COM MEU FILHO</button>
+     </div>
+    </div>
+   </section>
+
+
+ 
+   <section id="pricing" class="w-full bg-base">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4">📦 Você recebe:</h2>
+     <p class="text-text-light text-center mb-12">(Se entrar hoje)</p><!-- Card de preço principal -->
+
+<div class="max-w-xl mx-auto bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
+  <div class="space-y-6">
+    <!-- Item 1 -->
+    <div>
+      <!-- Faixa de propósito -->
+
+      <!-- Conteúdo do item -->
+      <div class="flex justify-between items-start bg-white px-6 py-4 border-b">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Jornada "Gênio das Emoções"</h3>
+            <p class="text-xs text-gray-500 italic">Versão para Imprimir e Montar</p>
+          <br/>
+            
+             <p class="text-xs text-gray-500">✔ Livro "O Gênio das Emoções"</p>
+              <p class="text-xs text-gray-500">✔ Kit "Super Poderes Emocionais"</p>
+               <p class="text-xs text-gray-500">✔ Guia Prático de Aplicação</p>
+            
+
+        </div>
+        <p class="text-red-600 font-bold line-through">R$67</p>
+      </div>
+    </div>
+
+
+    <!-- Item 3 -->
+    <div>
+
+      <div class="flex justify-between items-start bg-white px-6 py-4">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">🎁 Jornada Digital Interativa</h3>
+          <p class="text-xs text-gray-500 italic">Versão de Bolso</p>
+             <br/>
+          <p class="text-xs text-gray-500">✔ Interface que <u>simula a experiência do livro físico</u></p>
+          <p class="text-xs text-gray-500">✔ Menu inteligente para <u>acesso rápido</u></p>
+          <p class="text-xs text-gray-500">✔ Painel Dinâmico que <u>simula os cartões físicos</u> do Kit</p>
+          
+          <br/>
+          <ul class="list-disc list-inside text-gray-600 text-sm mt-1 space-y-1">
+          </ul>
+        </div>
+        <p class="text-red-600 font-bold line-through">R$49</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Total -->
+  <div class="bg-gray-50 border-t px-6 py-4 flex justify-between items-center">
+    <p class="text-gray-500 text-sm">Valor total original</p>
+    <p class="text-2xl font-bold text-red-600 line-through">R$116</p>
+  </div>
+</div>
+
+
+
+      
+      
+     <div class="bg-surface rounded-2xl p-8 shadow-xl border-2 border-primary relative"><!-- Badge -->
+      <div class="absolute -top-4 left-1/2 -translate-x-1/2"><span class="bg-accent text-white px-4 py-1 rounded-full text-sm font-bold whitespace-nowrap">Oferta Promocional</span>
+      </div>
+      <h3 class="text-2xl font-bold text-center mb-6">Acesso Completo</h3><!-- Preço -->
+      <div class="text-center mb-6">
+       <p class="text-text-light line-through text-lg">De R$ 116,00</p>
+       <p class="text-5xl font-extrabold text-primary" id="price-value">R$ 67,00</p>
+       <p class="text-text-light" id="price-installments">ou 9x de R$ 8,80</p>
+
+       
+
+      </div><!-- O que está incluído -->
+
+      <!-- CTA --> <button class="cta-button cta-pulse" style="width:100%;" onclick="verCheckOut()"> QUERO COMEÇAR AGORA </button> <!-- Segurança -->
+      <div class="flex items-center justify-center gap-4 mt-6 text-sm text-text-light"><span>🔒 Pagamento Seguro</span> <span>💳 Todos os cartões</span>
+      
+      
+
+      </div>
+     </div>
+    </div>
+   </section>
+
+   <!-- ===== SEÇÃO 11: GARANTIA ===== -->
+   <section id="guarantee" class="w-full bg-surface">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+    
+    <div class="grid gap-4 md:grid-cols-2">
+     <div>
+      <img src="/quiz/ferramenta/imagens/garantia.png" loading="lazy"  alt="" style="max-width: auto; max-height: 500px;" /></span>
+      </div>
+      <div>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">E se eu não gostar?</h2>
+      <p class="text-text-light max-w-xl mx-auto mb-8">Você tem <b><u>7 dias</u></b> para acessar o material e avaliar com calma. 
+      Se sentir que não ganhou mais <b><u>clareza emocional</u></b> e <b><u>direção prática</u></b>, basta solicitar o reembolso.
+      </p>
+      <p class="text-primary font-semibold mb-8">Sem complicação, sem constrangimento, apenas respeito pela sua escolha.</p>
+      <div class="text-center mt-10">
+      <button class="cta-button cta-pulse" onclick="scrollToPrice()">👉 QUERO TESTAR POR 7 DIAS</button>
+      </div>
+     
+      </div>
+      </div>
+      </div>
+
+   </section><!-- ===== SEÇÃO 12: FAQ ===== -->
+   <section id="faq" class="w-full bg-base">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4">Perguntas Frequentes</h2>
+     <p class="text-text-light text-center mb-12">Tire suas dúvidas antes de começar</p>
+     <div class="space-y-4"><!-- FAQ Items -->
+      <div class="faq-item bg-surface rounded-xl overflow-hidden"><button onclick="toggleFaq(this)" class="aba"> <span class="font-semibold pr-4">Não tenho muito tempo para estudar ou aplicar algo novo. Ainda assim, consigo usar o método?</span> <span class="faq-icon text-primary transition-transform duration-300 flex-shrink-0">▼</span> </button>
+       <div class="faq-content hidden px-5 pb-5 text-text-light text-sm">
+        <p>Sim. O método foi todo pensado para se adaptar à rotina corrida de quem cuida. 
+        <br/>Os materiais são objetivos, ilustrativos, fáceis de ler e práticos de aplicar.
+        <br/>Em poucos minutos, você compreende o método e já consegue montar o kit junto com a criança. 
+        <br/>﻿﻿Depois, o uso é leve, intuitivo e pode acontecer em pequenos momentos da rotina: antes de dormir, depois da escola ou em um dia difícil. São poucos minutos por dia que se transformam em laços, escuta e presença verdadeira.</p>
+       </div>
+      </div>
+       <div class="faq-item bg-surface rounded-xl overflow-hidden"><button onclick="toggleFaq(this)" class="aba"> <span class="font-semibold pr-4">Preciso ter algum conhecimento prévio para aplicar o método?</span> <span class="faq-icon text-primary transition-transform duration-300 flex-shrink-0">▼</span> </button>
+       <div class="faq-content hidden px-5 pb-5 text-text-light text-sm">
+        <p>O método é flexível e pode ser utilizado em ambientes familiares, escolares e clínicos, mas foi desenvolvido para ser acessível a qualquer adulto que deseja trabalhar educação emocional com crianças, mesmo sem nenhuma experiência. Basta ter interesse em aprender e disponibilidade para se conectar.  
+        <br/>O Guia Prático do Adulto te acompanha passo a passo. Ele foi escrito para transformar a teoria em prática, com linguagem acessível para conduzir diferentes modos de aplicação.</p>
+       </div>
+      </div>
+      <div class="faq-item bg-surface rounded-xl overflow-hidden"><button onclick="toggleFaq(this)" class="aba"> <span class="font-semibold pr-4">Para que faixa etária o método é indicado?</span> <span class="faq-icon text-primary transition-transform duration-300 flex-shrink-0">▼</span> </button>
+       <div class="faq-content hidden px-5 pb-5 text-text-light text-sm">
+        <p>O método foi desenvolvido para aplicação, com maior efetividade, para crianças entre 4 e 10 anos, que é uma faixa etária onde o lúdico é uma linguagem natural e funciona como uma ponte poderosa para o aprendizado.
+        <br/>﻿Contudo, o olhar do método vai além da idade: escutar com empatia, nomear emoções e reconhecer necessidades são princípios universais que podem ser aplicados desde os primeiros anos de vida, com adolescentes e até com adultos, desde que adaptada a linguagem e o contexto.
+</p>
+       </div>
+      </div>
+      <div class="faq-item bg-surface rounded-xl overflow-hidden"><button onclick="toggleFaq(this)" class="aba"> <span class="font-semibold pr-4">Como vou receber o acesso?</span> <span class="faq-icon text-primary transition-transform duration-300 flex-shrink-0">▼</span> </button>
+       <div class="faq-content hidden px-5 pb-5 text-text-light text-sm">
+        <p>Logo após a compra, você receberá um e-mail de confirmação com todas as orientações de acesso a todos os materiais do método, que são disponibilizados em formato digital para imprimir e montar. O acesso é imediato e disponível 24 horas por dia, em qualquer dispositivo com internet.
+        <br/>
+        Posteriormente, se desejar, você poderá adquirir o livro físico com acabamento profissional.</p>
+       </div>
+      </div>
+      <div class="faq-item bg-surface rounded-xl overflow-hidden"><button onclick="toggleFaq(this)" class="aba"> <span class="font-semibold pr-4">Por quanto tempo terei acesso ao material?</span> <span class="faq-icon text-primary transition-transform duration-300 flex-shrink-0">▼</span> </button>
+       <div class="faq-content hidden px-5 pb-5 text-text-light text-sm">
+        <p>Você terá acesso vitalício. Uma vez inscrito, o conteúdo é seu para sempre, incluindo todas as atualizações futuras.</p>
+       </div>
+      </div>
+      <div class="faq-item bg-surface rounded-xl overflow-hidden"><button onclick="toggleFaq(this)" class="aba"> <span class="font-semibold pr-4">A compra é segura?</span> <span class="faq-icon text-primary transition-transform duration-300 flex-shrink-0">▼</span> </button>
+       <div class="faq-content hidden px-5 pb-5 text-text-light text-sm">
+        <p>Sim.  A transação é 100% segura e processada pela Hotmart, a maior plataforma de cursos e produtos digitais da América Latina.
+        <br/>Seus dados e informações de pagamento ficam completamente protegidos nesta plataforma.
+        <br/>Nem mesmo nossa equipe tem acesso aos seus dados.</p>
+       </div>
+      </div>
+     </div>
+     <div class="text-center mt-10"><button class="cta-button cta-pulse" onclick="scrollToPrice()">👉 QUERO COMEÇAR HOJE</button>
+     </div>
+    </div>
+   </section>
+         <section id="testimonials" class="w-full bg-base-dark">
+   <br/>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 relative">
+    
+     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4">Crianças não aprendem <br/>sobre emoções no <u>meio da crise</u>.</h2>
+     <p class="text-text-light text-center mb-12">Elas aprendem antes. Nos pequenos momentos de <u>conexão, descoberta e escuta</u>.</p>
+     <div class="grid gap-4 md:grid-cols-2">
+     <div>
+
+
+Quando uma criança aprende a reconhecer o que sente e por que sente, ela aprende a <b>pedir o que precisa</b> antes de recorrer ao <b>choro</b>.
+<br/>
+Ela desenvolve algo que muitos adultos nunca tiveram: <b>vocabulário emocional</b>.
+<br/>
+<br/>
+E isso muda a forma como ela irá se <b>comunicar consigo mesma e com o mundo</b> pelo resto da vida.
+</div>
+
+    <div class="flex items-end">
+ <img src="/quiz/ferramenta/imagens/umdia.png" class="max-h-200 object-contain drop-shadow-lg" loading="lazy"  alt="" style="max-width: auto; max-height: 200px;" />
+ </div>
+</div>
+<br/>
+<p>
+Cada desafio que ela vive hoje é uma oportunidade de <b>formação emocional</b>.
+
+</p>
+     <div class="text-center mt-10"><button class="cta-button cta-pulse" onclick="scrollToPrice()">👉 QUERO FAZER A DIFERENÇA NA FORMAÇÂO EMOCIONAL DO MEU FILHO</button>
+     </div>
+
+    </div>
+    
+   </section>
+   <!-- ===== SEÇÃO 14: FOOTER CTA ===== -->
+   <section id="final-cta" class="w-full bg-text text-white" style="background: #2D3436;">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+    
+    <div class="grid gap-4 md:grid-cols-2">
+    
+    
+     <div>     
+     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">O melhor presente que uma criança pode receber é <u>vocabulário emocional</u></h2>
+    
+      <button class="cta-button cta-pulse" onclick="scrollToPrice()">👉 QUERO DAR ESSE PRESENTE</button>
+     </div>
+     
+      <div class="text-center">
+     <img src="/quiz/ferramenta/imagens/melhor_versao.png" loading="lazy" />
+     </div>
+     
+     
+     
+     </div>
+     <p class="mt-8 text-sm text-white/60">© 2026 Método VER - Universo Gênio das Emoções. Todos os direitos reservados.</p>
+    </div>
+   </section>
+  </div>
+  <script>
+    // ===== CONFIGURAÇÃO INICIAL =====
+    const defaultConfig = {
+      hero_title: 'Transforme Sua Vida em<br><span class="text-primary">Apenas 30 Dias</span>',
+      hero_subtitle: 'Descubra o método comprovado que já ajudou mais de 10.000 pessoas a alcançarem seus objetivos de forma rápida e definitiva.',
+      cta_text: 'Quero Começar Agora →',
+      price_value: 'R$ 297',
+      price_installments: 'ou 12x de R$ 29,70',
+      
+      // Cores
+      background_color: '#F2F1EC',
+      surface_color: '#FFFFFF',
+      text_color: '#2D3436',
+      primary_color: '#4A9C92',
+      secondary_color: '#E17055',
+      
+      // Fonte
+      font_family: 'Plus Jakarta Sans',
+      font_size: 16
+    };
+    
+    let ytLoaded = false;
+
+    function loadYouTubeAPI() {
+      if (!ytLoaded) {
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.body.appendChild(tag);
+        ytLoaded = true;
+      }
+    }
+
+
+    
+    document.querySelectorAll('.youtube-lite').forEach(el => {
+  el.addEventListener('click', function() {
+    const videoId = this.dataset.id;
+    const iframe = document.createElement('iframe');
+    
+    iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1`);
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allow', 'autoplay; encrypted-media');
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.style.width = '100%';
+    iframe.style.height = '315px';
+
+    this.innerHTML = '';
+    this.appendChild(iframe);
+
+    // dispara pixel se quiser
+    if (typeof fbq !== 'undefined') {
+      fbq('trackCustom', 'VideoPlay');
+    }
+  });
+});
+    
+    function verCheckOut() 
+        {
+            //Envia para o Pixel clique no CTA para ver o checkout
+            if (!DEBUG) 
+            {
+                fbq('track', 'InitiateCheckout', {
+                  value: 67.00,
+                  currency: 'BRL'
+                });
+            }
+            
+            
+            // 1. Pega os parâmetros da URL atual (ex: ?utm_source=fb)
+            localStorage.setItem('utm_params', window.location.search);
+            const searchParams = localStorage.getItem('utm_params');
+
+            // 2. O link base - mudei para LET para permitir a alteração abaixo
+            let urlFinal = "https://pay.hotmart.com/L105825897L";
+
+            // 3. Verifica se existem parâmetros para anexar
+            if (searchParams && searchParams.length > 1) 
+            {
+                // .substring(1) remove o primeiro caractere (o '?')
+                const paramsLimpos = searchParams.substring(1);
+                
+                // Adiciona os parâmetros ao link final usando o '&'
+                urlFinal = urlFinal + "&" + paramsLimpos;
+            } 
+
+            // 4. Redireciona
+            window.location.href = urlFinal;
+
+        }
+        
+        
+        //Avisa o Pixel se a pessoa chegou a seção de preço
+  
+        const priceSection = document.getElementById("pricing");
+        let priceTracked = false;
+
+        if(priceSection){
+
+        const observer = new IntersectionObserver((entries)=>{
+
+        entries.forEach(entry => {
+
+        if(entry.isIntersecting && !priceTracked){
+
+        priceTracked = true;
+        
+        if (!DEBUG) {
+            fbq('trackCustom','PriceViewTool');
+        }
+        console.log("PriceViewTool enviado via scroll");
+
+        }
+
+        });
+
+        },{
+        threshold:0.4
+        });
+
+        observer.observe(priceSection);
+
+        }
+  
+    
+    //Avisa o Pixel de play no video
+        let player;
+
+        function onYouTubeIframeAPIReady() {
+
+        player = new YT.Player('ytplayer', {
+
+        events: {
+        'onStateChange': onPlayerStateChange
+        }
+
+        });
+
+        }
+
+        function onPlayerStateChange(event){
+
+        if(event.data === YT.PlayerState.PLAYING)
+        {
+            if (!DEBUG) 
+            {
+                fbq('trackCustom', 'VideoPlayTool');
+            }
+
+        }
+
+        }
+        
+        //Clique em qualquer botão da página para ver oferta
+function scrollToPrice()
+{
+  const priceSection = document.getElementById("pricing");
+  const wrapper = document.getElementById("app-wrapper");
+
+  if(priceSection && wrapper){
+
+    const y = priceSection.offsetTop - 20; // margem opcional
+
+    wrapper.scrollTo({
+      top: y,
+      behavior: "smooth"
+    });
+  }
+
+  if (typeof fbq !== 'undefined') 
+  {
+        if (!DEBUG) 
+        {
+            fbq('trackCustom', 'PriceViewToolButton');
+        }
+  }
+}
+        
+    
+
+
+    
+    // ===== FUNÇÕES DE TOGGLE PARA ACCORDION =====
+    function toggleModule(button) {
+      const content = button.nextElementSibling;
+      const icon = button.querySelector('.module-icon');
+      
+      content.classList.toggle('hidden');
+      icon.style.transform = content.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
+    
+    function toggleFaq(button) {
+      const content = button.nextElementSibling;
+      const icon = button.querySelector('.faq-icon');
+      
+      content.classList.toggle('hidden');
+      icon.style.transform = content.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
+    
+    // ===== CONTADOR REGRESSIVO =====
+    function startCountdown() {
+      // Define um tempo de 24 horas a partir do carregamento
+      let totalSeconds = 24 * 60 * 60;
+      
+      function updateDisplay() {
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        
+        if (totalSeconds > 0) {
+          totalSeconds--;
+        }
+      }
+      
+      updateDisplay();
+      setInterval(updateDisplay, 1000);
+    }
+    
+    // ===== ELEMENT SDK =====
+    async function onConfigChange(config) {
+      // Atualiza título do hero
+      const heroTitle = document.getElementById('hero-title');
+      if (heroTitle) {
+        heroTitle.innerHTML = config.hero_title || defaultConfig.hero_title;
+      }
+      
+      // Atualiza subtítulo
+      const heroSubtitle = document.getElementById('hero-subtitle');
+      if (heroSubtitle) {
+        heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+      }
+      
+      // Atualiza texto dos CTAs
+      const ctaButtons = document.querySelectorAll('.cta-button');
+      const ctaText = config.cta_text || defaultConfig.cta_text;
+      if (ctaButtons.length > 0) {
+        ctaButtons[0].textContent = ctaText;
+      }
+      
+      // Atualiza preço
+      const priceValue = document.getElementById('price-value');
+      if (priceValue) {
+        priceValue.textContent = config.price_value || defaultConfig.price_value;
+      }
+      
+      const priceInstallments = document.getElementById('price-installments');
+      if (priceInstallments) {
+        priceInstallments.textContent = config.price_installments || defaultConfig.price_installments;
+      }
+      
+      // Aplica cores
+      document.documentElement.style.setProperty('--bg-color', config.background_color || defaultConfig.background_color);
+      document.documentElement.style.setProperty('--primary-color', config.primary_color || defaultConfig.primary_color);
+      
+      // Aplica fonte
+      const fontFamily = config.font_family || defaultConfig.font_family;
+      document.body.style.fontFamily = `${fontFamily}, sans-serif`;
+      
+      // Aplica tamanho de fonte base
+      const fontSize = config.font_size || defaultConfig.font_size;
+      document.documentElement.style.fontSize = `${fontSize}px`;
+    }
+    
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (value) => {
+              config.surface_color = value;
+              window.elementSdk.setConfig({ surface_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => {
+              config.primary_color = value;
+              window.elementSdk.setConfig({ primary_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (value) => {
+              config.secondary_color = value;
+              window.elementSdk.setConfig({ secondary_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            config.font_size = value;
+            window.elementSdk.setConfig({ font_size: value });
+          }
+        }
+      };
+    }
+    
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ['hero_title', config.hero_title || defaultConfig.hero_title],
+        ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
+        ['cta_text', config.cta_text || defaultConfig.cta_text],
+        ['price_value', config.price_value || defaultConfig.price_value],
+        ['price_installments', config.price_installments || defaultConfig.price_installments]
+      ]);
+    }
+    
+
+    
+    // ===== INICIALIZAÇÃO =====
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+    
+    // Inicia o contador
+    startCountdown();
+  </script>
+  
+  
+  
+  
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d717e79e62e3559',t:'MTc3MjYzMzczNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+  <script>
+  if (!DEBUG) {
+      if (typeof fbq !== 'undefined') {
+        fbq('trackCustom', 'SalesPageViewTool');
+      }
+  }
+</script>
+ </body>
+</html>
