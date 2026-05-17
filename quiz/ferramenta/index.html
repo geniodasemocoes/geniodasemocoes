@@ -354,21 +354,21 @@ Mas as palavras sempre chegam no <b>lugar errado</b>.
       </div>
       <div class="module-item bg-surface rounded-xl overflow-hidden"><button onclick="toggleModule(this)" class="aba"> <span class="font-semibold">📱 O que você recebe nesta oferta</span> <span class="module-icon text-primary transition-transform duration-300">▼</span> </button>
        <div class="module-content hidden px-5 pb-5 text-text-light text-sm">
-        <b>Você recebe:</b>
+        <b>Versão para baixar e imprimir:</b>
         <br/>
         ✔ Livro "O Gênio das Emoções"
         <br/>
-        ✔ Guia para imprimir e montar o "Kit Super Poderes Emocionais"
+        ✔ Kit "Super Poderes Emocionais"
         <br/>
         ✔ Guia Prático de Aplicação
                <p align="center">
         <img src="/quiz/ferramenta/imagens/livro_fisico.png"  alt="" style="max-width: auto; max-height: 200px;" loading="lazy" />
         <br/>
-        <img src="/quiz/ferramenta/imagens/livro_fisico2.png"  alt="" style="max-width: auto; max-height: 200px;" loading="lazy" /></p>
+        <img src="/quiz/ferramenta/imagens/guia.png"  alt="" style="max-width: auto; max-height: 200px;" loading="lazy" /></p>
         <br/>
         <br/>
          <br/>
-        <p>Além da versão para imprimir, você recebe a <b>versão interativa de bolso</b>, que inclui:</p>
+        <p><b>Versão interativa de bolso</b>, que inclui:</p>
         <br/>
         ✔ Interface que <u>simula a experiência do livro físico</u>
         <br/>
@@ -489,8 +489,7 @@ Mas as palavras sempre chegam no <b>lugar errado</b>.
       </div>
       <div>
       <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">E se eu não gostar?</h2>
-      <p class="text-text-light max-w-xl mx-auto mb-8">Você tem <b><u>7 dias</u></b> para acessar o material e avaliar com calma. 
-      Se sentir que não ganhou mais <b><u>clareza emocional</u></b> e <b><u>direção prática</u></b>, basta solicitar o reembolso.
+      <p class="text-text-light max-w-xl mx-auto mb-8">Nós acreditamos na transformação que a jornada pode proporcionar, mas se, por algum motivo, ela não fizer sentido para você, é só solicitar o reembolso dentro de 7 dias.
       </p>
       <p class="text-primary font-semibold mb-8">Sem complicação, sem constrangimento, apenas respeito pela sua escolha.</p>
       <div class="text-center mt-10">
@@ -660,7 +659,7 @@ Cada desafio que ela vive hoje é uma oportunidade de <b>formação emocional</b
 
     // dispara pixel se quiser
     if (typeof fbq !== 'undefined') {
-      fbq('trackCustom', 'VideoPlay');
+      fbq('trackCustom', 'VideoPlayTool');
     }
   });
 });
@@ -670,7 +669,7 @@ Cada desafio que ela vive hoje é uma oportunidade de <b>formação emocional</b
             //Envia para o Pixel clique no CTA para ver o checkout
             if (!DEBUG) 
             {
-                fbq('track', 'InitiateCheckout', {
+                fbq('track', 'InitiateCheckoutTool', {
                   value: 67.00,
                   currency: 'BRL'
                 });
