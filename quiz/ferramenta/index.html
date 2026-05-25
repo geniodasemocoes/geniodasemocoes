@@ -421,7 +421,7 @@ E você desenvolve um novo olhar para os conflitos, passando a enxergar o que re
       <!-- Passo 1 -->
       <div class="text-center space-y-3">
         <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4">
-          <img src="/quiz/ferramenta/imagens/1.png" alt="" class="max-h-16" loading="lazy" />
+          <img src="/quiz/ferramenta/imagens/1.png" alt="" class="max-h-16" style="max-height:100px" loading="lazy" />
         </div>
         <h3 class="font-bold text-xl mb-2">Passo 1:</h3>
         <p class="text-text-light text-sm">Imprimir e montar o kit juntos, transformando o processo em encontro</p>
@@ -431,7 +431,7 @@ E você desenvolve um novo olhar para os conflitos, passando a enxergar o que re
       <!-- Passo 2 -->
       <div class="text-center space-y-3">
         <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4">
-          <img src="/quiz/ferramenta/imagens/2.png" alt="" class="max-h-16" loading="lazy" />
+          <img src="/quiz/ferramenta/imagens/2.png" alt="" class="max-h-16" style="max-height:100px" loading="lazy" />
         </div>
         <h3 class="font-bold text-xl mb-2">Passo 2:</h3>
         <p class="text-text-light text-sm">Viver pequenos rituais de conexão que deixam marcas profundas</p>
@@ -441,7 +441,7 @@ E você desenvolve um novo olhar para os conflitos, passando a enxergar o que re
       <!-- Passo 3 -->
       <div class="text-center space-y-3">
         <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4">
-          <img src="/quiz/ferramenta/imagens/3.png" alt="" class="max-h-16" loading="lazy" />
+          <img src="/quiz/ferramenta/imagens/3.png" alt="" class="max-h-16" style="max-height:100px" loading="lazy" />
         </div>
         <h3 class="font-bold text-xl mb-2">Passo 3</h3>
         <p class="text-text-light text-sm">Ter um recurso pedagógico de bolso, para lidar com conflitos em qualquer hora, qualquer lugar</p>
@@ -801,22 +801,25 @@ Cada desafio que ela vive hoje é uma oportunidade de <b>formação emocional</b
             }
             
             
-            // 1. Pega os parâmetros da URL atual (ex: ?utm_source=fb)
+            // 1. Pega os parâmetros da URL atual
             localStorage.setItem('utm_params', window.location.search);
             const searchParams = localStorage.getItem('utm_params');
 
-            // 2. O link base - mudei para LET para permitir a alteração abaixo
+            // 2. Link base
             let urlFinal = "https://pay.hotmart.com/L105825897L";
 
-            // 3. Verifica se existem parâmetros para anexar
-            if (searchParams && searchParams.length > 1) 
-            {
-                // .substring(1) remove o primeiro caractere (o '?')
+            // 3. Se existirem parâmetros
+            if (searchParams && searchParams.length > 1) {
+
                 const paramsLimpos = searchParams.substring(1);
-                
-                // Adiciona os parâmetros ao link final usando o '&'
-                urlFinal = urlFinal + "&" + paramsLimpos;
-            } 
+
+                // Se o link base NÃO tem "?"
+                if (urlFinal.includes("?")) {
+                    urlFinal = urlFinal + "&" + paramsLimpos;
+                } else {
+                    urlFinal = urlFinal + "?" + paramsLimpos;
+                }
+            }
 
             // 4. Redireciona
             window.location.href = urlFinal;
