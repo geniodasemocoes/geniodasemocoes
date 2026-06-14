@@ -877,16 +877,10 @@ E existe uma ferramenta que transforma esse conhecimento em uma <b>experiência 
         
         function verProtocolo() 
         {
-         if (!DEBUG && typeof fbq === 'function') 
-            {
-                //Envia para o Pixel clique no CTA para ver o protocolo
-                fbq('trackCustom', 'QuizCTA');
-            }
+
             
-            // Captura os parâmetros da URL atual
-            const params = window.location.search;
-            
-            window.location.href = window.location.origin + "/quiz/ferramenta/index.html" + params;
+
+            window.location.href = window.location.origin + "/quiz/ferramenta/index.html";
 
         }
         
@@ -998,7 +992,7 @@ E existe uma ferramenta que transforma esse conhecimento em uma <b>experiência 
             
             if (currentSlide === 12) 
             {
-                //showResults();
+                showResults();
             }
         }
 
