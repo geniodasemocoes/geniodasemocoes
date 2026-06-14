@@ -885,8 +885,12 @@ E existe uma ferramenta que transforma esse conhecimento em uma <b>experiência 
             
             // Captura os parâmetros da URL atual
             const params = window.location.search;
+            
+            window.open(
+  window.location.origin + "/quiz/ferramenta/index.html" + params,
+  "_self"
+);
 
-            window.location.href = "https://www.geniodasemocoes.com.br/quiz/ferramenta/index.html";
 
         }
         
