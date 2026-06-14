@@ -641,7 +641,7 @@ O que separa esses dois pontos não é o quanto você entende da teoria.
 <br/>
 <br/>
 <p>
-E existe uma ferramenta prática que transforma esse conhecimento em uma <b>experiência simples, visual e prática</b>, possível de aplicar na rotina real, em 10 minutos por dia.
+E existe uma ferramenta que transforma esse conhecimento em uma <b>experiência simples, visual e prática</b>, possível de aplicar na rotina real, em 10 minutos por dia.
 </p>
 
 
@@ -877,13 +877,9 @@ E existe uma ferramenta prática que transforma esse conhecimento em uma <b>expe
         
         function verProtocolo() 
         {
-         if (!DEBUG && typeof fbq === 'function') 
-            {
-                //Envia para o Pixel clique no CTA para ver o protocolo
-                fbq('trackCustom', 'QuizCTA');
-            }
+             alert("clicou");
             
-            // 1. Captura os parâmetros da URL atual
+            // Captura os parâmetros da URL atual
             const params = window.location.search;
 
             window.location.href = window.location.origin + "/quiz/ferramenta/index.html" + params;
