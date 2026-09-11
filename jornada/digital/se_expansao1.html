@@ -1,0 +1,1143 @@
+<!doctype html>
+<!doctype html>
+<html lang="pt-BR"><head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260827-05-ff67167","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YAHO2-t-jNE,0","Arial":"YAGyDvJ_4Ts,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Canva Sans":"YAFLd8sKbwc,2","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAHO2VMiyZo,0","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAEul-FRQw4,0","Georgia":"YAGzXkO0pEM,0","Helvetica Neue":"YAFcf6CtJfI,0","Impact":"YAFcfnjI7Vk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YAHO2a5g66Q,0","JetBrains Mono":"YAFdJksXcAk,0","Libre Baskerville":"YACgEUFdPdA,0","Manrope":"YAHO2b2feC4,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YADLjI9qxTA,0","Nunito":"YACgEX8C5Gg,0","Oleo Script":"YACgEQQ14jI,0","Phantom Sans":"YAHO2E8Pb88,0","Playfair Display":"YACgEYmuCJE,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YADWjpfPmdk,0","Raleway":"YACgEVg3xZg,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Spectral":"YAHO2rVUHIM,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Ubuntu":"YACgERDU--Q,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0","ui-monospace":"YADlN8CFZ8Q,0","ui-sans-serif":"YACkoN-xg4g,0"}}');</script><script src="/_sdk/50d846425a1e5082.telemetry_sdk.js" integrity="sha512-Otbex+ztlVbcEGql0rXGd/3E3ee/hqAntg6DeuUEMG6pIPbXGOSvZbFZVzknAXi1tH/itQ+ijEhOTr2aWj6CXg=="></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gênio das Emoções</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/32b5df5c9e791b84.editing_sdk.js" integrity="sha512-GR6onBO6a4OXCEWjJr3J5SnC5JY67X7RCAiMRpOa2PonluOQlBKrbHUWMck4+e73st/dspPngOjAjH//UV4K2Q=="></script>
+  <style>
+    :root {
+      --azul-escuro: #18395b;
+      --creme: #fff9eb;
+      --amarelo: #edcf33;
+      --amarelo-cartao: #ffd83d;
+      --vermelho: #e63950;
+      --verde: #7dae49;
+      --texto: #19324b;
+      --branco: #ffffff;
+      --sombra: 0 14px 34px rgba(31, 68, 100, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { background: #eff6f2; }
+
+    body {
+      width: 100%;
+      min-height: calc(100 * min(var(--vh, 1vh), 1vh));
+      margin: 0;
+      color: var(--texto);
+      font-family: "Work Sans", sans-serif;
+      overflow-x: hidden;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    .entrada:focus-visible,
+    .cartao:focus-visible {
+      outline: 4px solid #18395b;
+      outline-offset: 4px;
+    }
+
+    .pagina-jogo {
+      width: 100%;
+      min-height: calc(100 * min(var(--vh, 1vh), 1vh));
+      background:
+        radial-gradient(circle at 6% 14%, rgba(255, 216, 61, 0.34) 0 9%, transparent 9.2%),
+        radial-gradient(circle at 92% 82%, rgba(125, 174, 73, 0.22) 0 10%, transparent 10.2%),
+        linear-gradient(135deg, #f8fbf7 0%, #eef7f0 100%);
+    }
+
+    .cabecalho {
+      width: 100%;
+      min-height: 78px;
+      padding: 14px clamp(18px, 4vw, 54px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      width: min(160px, 38vw);
+      max-height: 180px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .progresso {
+      background: rgba(255,255,255,0.85);
+      border: 2px solid rgba(24,57,91,0.12);
+      border-radius: 999px;
+      padding: 9px 15px;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .tela {
+      width: 100%;
+      min-height: calc(100 * min(var(--vh, 1vh), 1vh) - 78px);
+      padding: 16px clamp(18px, 4vw, 54px) 38px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tela.ativa { display: flex; }
+
+    .painel-inicial,
+    .painel-introducao,
+    .painel-final {
+      width: min(100%, 960px);
+      padding: clamp(26px, 5vw, 64px);
+      text-align: center;
+      background: rgba(255,255,255,0.92);
+      border: 2px solid rgba(24,57,91,0.10);
+      border-radius: 34px;
+      box-shadow: var(--sombra);
+      animation: aparecer 0.45s ease both;
+    }
+
+    .selo {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #fff3ac;
+      color: #715c00;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    .titulo {
+      margin: 18px auto 12px;
+      max-width: 760px;
+      font-size: clamp(2.1rem, 6vw, 3.4rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+    }
+
+    .subtitulo {
+      max-width: 590px;
+      margin: 0 auto 30px;
+      font-size: clamp(1.4rem, 2.2vw, 0.8rem);
+      line-height: 1.55;
+    }
+
+    .botao-principal,
+    .botao-secundario {
+      min-height: 52px;
+      padding: 14px 24px;
+      border: 0;
+      border-radius: 16px;
+      font-weight: 800;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .botao-principal {
+      color: #4c3b00;
+      background: var(--amarelo-cartao);
+      box-shadow: 0 7px 0 #c4a416, 0 13px 24px rgba(185, 147, 0, .2);
+    }
+
+    .botao-principal:hover { transform: translateY(-3px); }
+    .botao-principal:active { transform: translateY(3px); box-shadow: 0 3px 0 #c4a416; }
+
+    .botao-secundario {
+      color: white;
+      background: var(--azul-escuro);
+      box-shadow: 0 6px 0 #0c2744;
+    }
+
+    .cena-introducao {
+      width: min(100%, 620px);
+      aspect-ratio: 1000 / 708;
+      display: block;
+      margin: 22px auto 28px;
+      border-radius: 22px;
+      object-fit: cover;
+      background: #dceee1;
+      box-shadow: 0 10px 22px rgba(31,68,100,.18);
+    }
+
+    .palco {
+      width: min(100%, 1220px);
+      min-height: 650px;
+      overflow: hidden;
+      position: relative;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 18px;
+      padding: clamp(16px, 3vw, 30px);
+      border-radius: 32px;
+      background: rgba(255,255,255,.91);
+      box-shadow: var(--sombra);
+      animation: aparecer 0.4s ease both;
+    }
+
+    .cena-fase {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .18;
+    }
+
+    .camada-palco { position: relative; z-index: 1; }
+
+    .painel-desafio {
+      width: min(100%, 760px);
+      margin: 0 auto;
+      padding: 16px 20px;
+      border-radius: 18px;
+      text-align: center;
+      background: rgba(255,255,255,.9);
+      border: 2px solid rgba(24,57,91,.10);
+    }
+
+    .cor-atual {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 5px;
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .ponto-cor {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .instrucao {
+      margin: 0;
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      font-weight: 700;
+    }
+
+    .mensagem-status {
+      min-height: 26px;
+      margin: 10px auto 0;
+      font-weight: 800;
+    }
+
+    .mensagem-status.erro { color: #b42235; }
+    .mensagem-status.sucesso { color: #397126; }
+
+    .area-cartoes {
+      align-self: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: clamp(20px, 5vw, 62px);
+      min-height: 155px;
+    }
+
+    .cartao {
+      width: 124px;
+      height: 124px;
+      padding: 17px;
+      display: grid;
+      place-items: center;
+      border: 4px solid rgba(255,255,255,.9);
+      border-radius: 17px;
+      box-shadow: 0 10px 18px rgba(33, 59, 81, .2);
+      color: #1f2937;
+      font-size: .92rem;
+      font-weight: 800;
+      line-height: 1.1;
+      text-align: center;
+      transform: rotate(45deg);
+      transition: transform .2s ease, opacity .2s ease, filter .2s ease;
+      touch-action: none;
+      user-select: none;
+    }
+
+    .cartao > span {
+      display: block;
+      transform: rotate(-45deg);
+    }
+
+    .cartao:hover,
+    .cartao.selecionado {
+      transform: rotate(45deg) translate(-5px, -5px) scale(1.05);
+      filter: brightness(1.04);
+    }
+
+    .cartao.arrastando { opacity: .48; }
+    .cartao.sumindo { opacity: 0; pointer-events: none; transform: rotate(45deg) scale(.65); }
+
+    .cartao-amarelo { background: var(--amarelo-cartao); }
+    .cartao-vermelho { background: var(--vermelho); color: white; }
+    .cartao-verde { background: var(--verde); color: white; }
+
+    .zona-chave {
+      min-height: 245px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .conjunto-chave {
+      width: min(100%, 910px);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-left: 168px;
+      background: url('imagens/chave.png') no-repeat center;
+      background-size: contain; 
+    }
+
+    .personagem-wrap {
+      width: 200px;
+      height: 200px;
+      z-index: 3;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      border: 14px solid var(--amarelo);
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 8px 18px rgba(86,73,7,.18);
+    }
+
+    .personagem {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .linha-conexao {
+      width: 760px;
+      height: 100px;
+      position: absolute;
+      bottom: 10px;
+      left: 120px;
+      z-index: 1;
+      background: var(--amarelo);
+    }
+
+    .chave-wrap {
+      width: min(100%, 720px);
+      min-height: 176px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chave {
+      width: 100%;
+      min-height: 176px;
+      object-fit: contain;
+      object-position: center;
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .entradas {
+      margin-left: 10%;
+      width: 83%;
+      height: 100%;
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      align-items: center;
+      padding: 0 6%;
+    }
+
+    .entrada {
+      min-height: 118px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      padding: 8px;
+      border: 3px dashed rgba(24,57,91,.30);
+      border-radius: 16px;
+      background: rgba(255,255,255,.38);
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .entrada.sobre { transform: translateY(-7px); border-color: var(--azul-escuro); background: rgba(255,255,255,.75); }
+    .entrada.preenchida { border-style: solid; border-color: rgba(24,57,91,.25); background: rgba(255,255,255,.63); }
+
+    .entrada-titulo1 {
+      position: absolute;
+      bottom: -26px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      color: #000000;
+      background: #f5e593;
+      font-size: .69rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    
+    .entrada-titulo2 {
+      position: absolute;
+      bottom: -26px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      color: #000000;
+      background: #e63950;
+      font-size: .69rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    
+    .entrada-titulo3 {
+      position: absolute;
+      bottom: -26px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      color: #000000;
+      background: #7dae49;
+      font-size: .69rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .cartao-fixo {
+      width: 78px;
+      height: 78px;
+      display: grid;
+      place-items: center;
+      padding: 9px;
+      border-radius: 12px;
+      color: white;
+      font-size: .7rem;
+      font-weight: 800;
+      text-align: center;
+      transform: rotate(45deg);
+      box-shadow: 0 5px 10px rgba(31,44,54,.18);
+      animation: fixar .32s ease both;
+    }
+
+    .cartao-fixo span { transform: rotate(-45deg); }
+    .cartao-fixo.amarelo { color: #443700; background: var(--amarelo-cartao); }
+    .cartao-fixo.vermelho { background: var(--vermelho); }
+    .cartao-fixo.verde { background: var(--verde); }
+
+    .erro-animacao { animation: tremer .35s ease; }
+
+    .chave-completa {
+      width: min(100%, 620px);
+      min-height: 214px;
+      position: relative;
+      margin: 18px 0%;
+      background: url('imagens/chave.png') no-repeat top left;
+      background-size: contain; 
+    }
+
+    .chave-completa .entradas {
+      width: 88%;
+      margin: auto;
+      margin-left: 20%;
+      padding: 0 8%;
+    }
+
+    .tela-final-icone {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 16px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #654f00;
+      background: var(--amarelo-cartao);
+      font-size: 3rem;
+      box-shadow: 0 9px 0 #c4a416;
+    }
+
+    .aviso-imagem {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes tremer {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+
+    @keyframes fixar {
+      from { opacity: 0; transform: rotate(45deg) scale(.35); }
+      to { opacity: 1; transform: rotate(45deg) scale(1); }
+    }
+
+    @media (max-width: 720px) {
+      .cabecalho { min-height: 68px; }
+      .progresso { font-size: .78rem; padding: 8px 11px; }
+
+      .palco {
+        min-height: 300px;
+        border-radius: 23px;
+      }
+
+      .area-cartoes {
+        gap: 18px 34px;
+        min-height: 230px;
+      }
+
+      .cartao { width: 98px; height: 98px; font-size: .75rem; }
+
+      .zona-chave 
+      { 
+        min-height: 300px; 
+        align-items: flex-end;         
+      }
+
+      .conjunto-chave {
+        padding: 0;
+        flex-direction: column;
+      }
+
+      .personagem-wrap {
+        width: 110px;
+        height: 110px;
+        bottom: auto;
+        top: -23px;
+        left: 4%;
+        border-width: 9px;
+      }
+
+      .linha-conexao {
+        width: 28px;
+        height: 78px;
+        bottom: auto;
+        top: 68px;
+        left: 22%;
+        transform: rotate(50deg);
+      }
+
+      .chave-wrap {
+        width: 100%;
+        min-height: 175px;
+        margin-top: 45px;
+      }
+
+      .entradas { gap: 5px; padding: 0 5%; }
+      .entrada { min-height: 89px; border-width: 2px; }
+      .entrada-titulo { font-size: .56rem; bottom: -23px; padding: 3px 6px; }
+      .cartao-fixo { width: 58px; height: 58px; font-size: .55rem; }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="/_sdk/b3bf9e8ac58e6ad6.data_sdk.js" type="text/javascript" integrity="sha512-otc1u9NYq9Ms5Jt//7vmhrrqR5CLPr8Jdgs6741gqniClfLMcfmC+jK/cKuQdhLv6G0esJ/FzaMS9tv0T/vj/Q=="></script>
+  <script src="/_sdk/a6de989e8af05ea5.resizing_sdk.js" type="text/javascript" integrity="sha512-cceAQMIleYr/3eg7o5WzN46w0HpgI1sxi+5kDUb7CmTjHEpgBtINDxtOpnNeUtujjui8NG0OSDgUMl0/E2lT2A=="></script>
+ </head>
+ <body data-template-id="__page-root" class="pagina-jogo" style="background: linear-gradient(135deg, rgb(248, 251, 247), rgb(238, 247, 240));">
+  <header class="cabecalho"><img id="logo" class="logo" src="../../imagens/logomarca.png" alt="Logomarca do jogo">
+   <p id="progresso" class="progresso" aria-live="polite">Pronto para jogar</p>
+  </header>
+  <main>
+   <section id="telaInicial" class="tela ativa" aria-labelledby="tituloInicial">
+    <div class="painel-inicial"><span class="selo"><img src="imagens/logo_se.png" style="height: 200px" /></span>
+     <h1 id="tituloInicial" class="titulo">Kit Superpoderes Emocionais</h1>
+     <p class="subtitulo">Observe a situação, escolha os cartões que mais de adequam e encaixe cada um na entrada da mesma cor.</p><button id="botaoComecar" class="botao-principal" type="button">Começar</button>
+    </div>
+   </section>
+   <section id="telaIntroducao" class="tela" aria-labelledby="tituloIntroducao">
+    <div class="painel-introducao">
+     <h2 id="tituloIntroducao" class="titulo">Cena:</h2> <p id="textoIntroducao" class="subtitulo"></p><img id="imagemIntroducao" class="cena-introducao" src="" alt="">
+     <button id="botaoIniciar" class="botao-principal" type="button">Iniciar</button>
+    </div>
+   </section>
+   <section id="telaJogo" class="tela" aria-labelledby="tituloDesafio">
+    <div class="palco"><img id="cenaFase" class="cena-fase" src="" alt="">
+     <div class="painel-desafio camada-palco">
+      <div id="corAtual" class="cor-atual">
+       <span class="ponto-cor"></span><span>Desafio</span>
+      </div>
+      <h2 id="tituloDesafio" class="instrucao">Escolha um cartão</h2>
+      <p id="mensagemStatus" class="mensagem-status" role="status" aria-live="assertive"></p>
+     </div>
+     <div id="areaCartoes" class="area-cartoes camada-palco" aria-label="Opções de cartões"></div>
+     <div class="zona-chave camada-palco">
+      <div class="conjunto-chave">
+       <!--<div class="linha-conexao" aria-hidden="true"></div>
+       <div class="personagem-wrap"><img id="personagemFase" class="personagem" src="" alt="" />-->
+       <!--</div>-->
+       <div class="chave-wrap">
+        <div id="entradasChave" class="entradas" aria-label="Entradas da chave"></div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section id="telaFimFase" class="tela" aria-labelledby="tituloFimFase">
+    <div class="painel-final"><span class="selo">Chave completa</span>
+     <h2 id="tituloFimFase" class="titulo">Muito bem!</h2>
+     <div id="resumoChave" class="chave-completa" aria-label="Chave preenchida"></div>
+     <button id="botaoContinuar" class="botao-principal" type="button">Continuar</button>
+    </div>
+   </section>
+   <section id="telaFinal" class="tela" aria-labelledby="tituloFinal">
+    <div class="painel-final">
+     <div class="tela-final-icone" aria-hidden="true">
+      ★
+     </div><span class="selo">Missão concluída</span>
+     <h2 id="tituloFinal" class="titulo">Parabéns!</h2>
+     <p class="subtitulo">Você está avançando no seu autoconhecimento!</p><button id="botaoReiniciar" class="botao-secundario" type="button">Jogar novamente</button>
+    </div>
+   </section>
+  </main>
+  <p id="avisoImagem" class="aviso-imagem" aria-live="polite"></p>
+  <script>
+    "use strict";
+
+    /* =========================================================
+       CONFIGURAÇÃO E DADOS
+       Cada fase possui IDs estáveis. O texto exibido é separado
+       do ID para facilitar futuras alterações de conteúdo.
+    ========================================================== */
+
+    const CORES = ["amarelo", "vermelho", "verde"];
+
+    const mapaEntradas = {
+      amarelo: 1,
+      vermelho: 2,
+      verde: 3
+    };
+
+    const rotulosEntradas = {
+      amarelo: "Necessidade",
+      vermelho: "Emoção",
+      verde: "Ação"
+    };
+
+    const rotulosCores = {
+      amarelo: "Cartão amarelo",
+      vermelho: "Cartão vermelho",
+      verde: "Cartão verde"
+    };
+
+    const textosCartoes = {
+        autonomia: "Autonomia",
+        vergonha: "Vergonha",
+        contar: "Contar até 10",
+        autoestima: "Autoestima",
+        inveja: "Inveja",
+        caminhar: "Caminhar",
+        comemorar: "Comemorar",
+        alegria: "Alegria",
+        dancar: "Dançar",
+        justica: "Justiça",
+        culpa: "Culpa",
+        pedir_desculpa: "Pedir desculpa",
+        pertencimento: "Pertencimento",
+        raiva: "Raiva",
+        pular_corda: "Pular corda",
+        conexao: "Conexão",
+        ciumes: "Ciúmes",
+        conversar: "Conversar",
+        respeito: "Respeito",
+        comocao: "Comoção",
+        abracar: "Abraçar",
+        seguranca: "Segurança",
+        medo: "Medo",
+        respirar: "Respirar",
+        luto: "Luto",
+        tristeza: "Tristeza",
+        chorar: "Chorar",
+        diversao: "Diversão",
+        ansiedade: "Ansiedade",
+        desenhar: "Desenhar",
+		autenticidade: "Autenticidade",
+    };
+
+    /*
+      Novas fases podem ser adicionadas mantendo a mesma estrutura:
+      id, cena, personagem, correto e opcoes para as três cores.
+    */
+    const fases = [
+      {
+        id: 1,
+        cena: "paginas/e_p11a.jpg",
+        personagem: "/img/personagem1.png",
+        introducao: "Será que existe algo errado comigo?",
+        opcoes: {
+          amarelo: ["pertencimento", "autoestima", "conexao"],
+          vermelho: ["vergonha", "medo", "tristeza"],
+          verde: ["conversar", "desenhar", "chorar"]
+        }
+      },
+	   {
+        id: 2,
+        cena: "paginas/e_p11b.jpg",
+        personagem: "/img/personagem1.png",
+        introducao: "Tentando se encaixar",
+        opcoes: {
+          amarelo: ["pertencimento", "autoestima", "autenticidade"],
+          vermelho: ["vergonha", "medo", "tristeza"],
+          verde: ["contar", "respirar", "chorar"]
+        }
+      },
+	  {
+        id: 3,
+        cena: "paginas/p11.jpg",
+        personagem: "/img/personagem1.png",
+        introducao: "Posso contar para a mamãe?",
+        opcoes: {
+          amarelo: ["respeito", "autoestima", "conexao"],
+          vermelho: ["vergonha", "medo", "tristeza","ansiedade"],
+          verde: ["conversar", "respirar", "chorar"]
+        }
+      }
+    ];
+
+    /* =========================================================
+       ESTADO CENTRAL DO JOGO
+    ========================================================== */
+    const estadoJogo = {
+      indiceFase: 0,
+      indiceDesafio: 0,
+      cartaoSelecionado: null,
+      entradasPreenchidas: {},
+      bloqueado: false,
+      ponteiroAtivo: null
+    };
+
+    /* =========================================================
+       REFERÊNCIAS DOM
+    ========================================================== */
+    const dom = {
+      telas: document.querySelectorAll(".tela"),
+      telaInicial: document.getElementById("telaInicial"),
+      telaIntroducao: document.getElementById("telaIntroducao"),
+      telaJogo: document.getElementById("telaJogo"),
+      telaFimFase: document.getElementById("telaFimFase"),
+      telaFinal: document.getElementById("telaFinal"),
+      progresso: document.getElementById("progresso"),
+      identificadorFase: document.getElementById("identificadorFase"),
+      imagemIntroducao: document.getElementById("imagemIntroducao"),
+      textoIntroducao: document.getElementById("textoIntroducao"),
+      cenaFase: document.getElementById("cenaFase"),
+      <!--personagemFase: document.getElementById("personagemFase"),-->
+      corAtual: document.getElementById("corAtual"),
+      tituloDesafio: document.getElementById("tituloDesafio"),
+      mensagemStatus: document.getElementById("mensagemStatus"),
+      areaCartoes: document.getElementById("areaCartoes"),
+      entradasChave: document.getElementById("entradasChave"),
+      resumoChave: document.getElementById("resumoChave"),
+      tituloFimFase: document.getElementById("tituloFimFase"),
+      textoFimFase: document.getElementById("textoFimFase"),
+      avisoImagem: document.getElementById("avisoImagem"),
+      botaoComecar: document.getElementById("botaoComecar"),
+      botaoIniciar: document.getElementById("botaoIniciar"),
+      botaoContinuar: document.getElementById("botaoContinuar"),
+      botaoReiniciar: document.getElementById("botaoReiniciar")
+    };
+
+    /* =========================================================
+       UTILITÁRIOS DE TELA E IMAGENS
+    ========================================================== */
+    function mostrarTela(tela) {
+      dom.telas.forEach((item) => item.classList.remove("ativa"));
+      tela.classList.add("ativa");
+    }
+
+    function atualizarProgresso() {
+      const fase = estadoJogo.indiceFase + 1;
+      dom.progresso.textContent = `Fase ${fase} de ${fases.length}`;
+    }
+
+    function definirImagem(elemento, caminho, descricao) {
+      elemento.alt = descricao;
+      elemento.onerror = () => {
+        elemento.style.display = "none";
+        dom.avisoImagem.textContent = "Uma imagem do jogo não foi encontrada. O desafio continua disponível.";
+        console.warn(`Asset não encontrado: ${caminho}`);
+      };
+      elemento.src = caminho;
+      elemento.style.display = "";
+    }
+
+    function faseAtual() {
+      return fases[estadoJogo.indiceFase];
+    }
+
+    function corAtual() {
+      return CORES[estadoJogo.indiceDesafio];
+    }
+
+    function limparStatus() {
+      dom.mensagemStatus.textContent = "";
+      dom.mensagemStatus.className = "mensagem-status";
+    }
+
+    function exibirStatus(texto, tipo) {
+      dom.mensagemStatus.textContent = texto;
+      dom.mensagemStatus.className = `mensagem-status ${tipo}`;
+    }
+
+    /* =========================================================
+       NAVEGAÇÃO ENTRE AS TELAS
+    ========================================================== */
+    function iniciarJogo() {
+      estadoJogo.indiceFase = 0;
+      <!--Para remover a tela de introdução é só comendar a linha mostrarIntroducaoDaFase(); e descomentar a  iniciarFase();
+      mostrarIntroducaoDaFase();
+      //iniciarFase();
+    }
+
+    function mostrarIntroducaoDaFase() {
+      const fase = faseAtual();
+      atualizarProgresso();
+      dom.textoIntroducao.textContent = fase.introducao;
+      definirImagem(dom.imagemIntroducao, fase.cena, `Cena ilustrada da fase ${fase.id}`);
+      mostrarTela(dom.telaIntroducao);
+    }
+
+    function iniciarFase() {
+      estadoJogo.indiceDesafio = 0;
+      estadoJogo.cartaoSelecionado = null;
+      estadoJogo.entradasPreenchidas = {};
+      estadoJogo.bloqueado = false;
+
+      const fase = faseAtual();
+      definirImagem(dom.cenaFase, fase.cena, `Cenário da fase ${fase.id}`);
+     <!-- definirImagem(dom.personagemFase, fase.personagem, `Personagem da fase ${fase.id}`);-->
+
+      renderizarChave();
+      renderizarDesafioAtual();
+      mostrarTela(dom.telaJogo);
+    }
+
+    /* =========================================================
+       RENDERIZAÇÃO DE DESAFIOS E DA CHAVE
+    ========================================================== */
+    function renderizarChave() {
+      dom.entradasChave.innerHTML = "";
+
+      CORES.forEach((cor) => {
+        const entrada = document.createElement("button");
+        entrada.type = "button";
+        entrada.className = "entrada";
+        entrada.dataset.cor = cor;
+        entrada.dataset.entrada = mapaEntradas[cor];
+        entrada.setAttribute("aria-label", `Entrada ${mapaEntradas[cor]}: ${rotulosEntradas[cor]}. Recebe o cartão ${cor}.`);
+
+        const titulo = document.createElement("span");
+        titulo.className = "entrada-titulo" + `${mapaEntradas[cor]}`;
+        titulo.textContent = `${mapaEntradas[cor]} · ${rotulosEntradas[cor]}`;
+        entrada.appendChild(titulo);
+
+        if (estadoJogo.entradasPreenchidas[cor]) {
+          entrada.classList.add("preenchida");
+          entrada.appendChild(criarCartaoFixo(cor, estadoJogo.entradasPreenchidas[cor]));
+          entrada.disabled = true;
+        } else {
+          configurarEntrada(entrada);
+        }
+
+        dom.entradasChave.appendChild(entrada);
+      });
+    }
+
+    function criarCartaoFixo(cor, idCartao) {
+      const cartao = document.createElement("span");
+      cartao.className = `cartao-fixo ${cor}`;
+      cartao.innerHTML = `<span>${textosCartoes[idCartao]}</span>`;
+      return cartao;
+    }
+
+    function renderizarDesafioAtual() {
+      const fase = faseAtual();
+      const cor = corAtual();
+      const entrada = mapaEntradas[cor];
+
+      limparStatus();
+      dom.corAtual.style.color = getComputedStyle(document.documentElement)
+        .getPropertyValue(`--${cor === "amarelo" ? "amarelo" : cor}`).trim();
+
+      dom.corAtual.innerHTML = `<span class="ponto-cor"></span><span>${rotulosCores[cor]}</span>`;
+      dom.tituloDesafio.textContent = `Arraste o cartão ${cor} mais adequado para a entrada ${entrada} da chave.`;
+
+      dom.areaCartoes.innerHTML = "";
+      fase.opcoes[cor].forEach((idCartao) => {
+        dom.areaCartoes.appendChild(criarCartao(cor, idCartao));
+      });
+    }
+
+    function criarCartao(cor, idCartao) {
+      const cartao = document.createElement("button");
+      cartao.type = "button";
+      cartao.className = `cartao cartao-${cor}`;
+      cartao.dataset.cor = cor;
+      cartao.dataset.cartaoId = idCartao;
+      cartao.draggable = true;
+      cartao.setAttribute("aria-label", `Cartão ${textosCartoes[idCartao]}. Selecione e clique na entrada ${mapaEntradas[cor]}, ou arraste até ela.`);
+      cartao.innerHTML = `<span>${textosCartoes[idCartao]}</span>`;
+
+      configurarCartao(cartao);
+      return cartao;
+    }
+
+    /* =========================================================
+       DRAG AND DROP, TOQUE E TECLADO
+    ========================================================== */
+    function configurarCartao(cartao) {
+      cartao.addEventListener("dragstart", (evento) => {
+        if (estadoJogo.bloqueado) {
+          evento.preventDefault();
+          return;
+        }
+
+        estadoJogo.cartaoSelecionado = dadosDoCartao(cartao);
+        cartao.classList.add("arrastando");
+        evento.dataTransfer.effectAllowed = "move";
+        evento.dataTransfer.setData("text/plain", JSON.stringify(estadoJogo.cartaoSelecionado));
+      });
+
+      cartao.addEventListener("dragend", () => {
+        cartao.classList.remove("arrastando");
+      });
+
+      cartao.addEventListener("click", () => selecionarCartao(cartao));
+
+      /* Pointer Events permitem arrastar os cartões em telas touch. */
+      cartao.addEventListener("pointerdown", (evento) => iniciarArrastePorToque(evento, cartao));
+    }
+
+    function configurarEntrada(entrada) {
+      entrada.addEventListener("dragover", (evento) => {
+        evento.preventDefault();
+        if (!estadoJogo.bloqueado) {
+          entrada.classList.add("sobre");
+          evento.dataTransfer.dropEffect = "move";
+        }
+      });
+
+      entrada.addEventListener("dragleave", () => entrada.classList.remove("sobre"));
+
+      entrada.addEventListener("drop", (evento) => {
+        evento.preventDefault();
+        entrada.classList.remove("sobre");
+        if (estadoJogo.bloqueado) return;
+
+        let cartao;
+        try {
+          cartao = JSON.parse(evento.dataTransfer.getData("text/plain"));
+        } catch {
+          cartao = estadoJogo.cartaoSelecionado;
+        }
+        lidarComDrop(cartao, entrada);
+      });
+
+      entrada.addEventListener("click", () => {
+        if (estadoJogo.cartaoSelecionado && !estadoJogo.bloqueado) {
+          lidarComDrop(estadoJogo.cartaoSelecionado, entrada);
+        }
+      });
+    }
+
+    function dadosDoCartao(cartao) {
+      return {
+        id: cartao.dataset.cartaoId,
+        cor: cartao.dataset.cor
+      };
+    }
+
+    function selecionarCartao(cartao) {
+      if (estadoJogo.bloqueado) return;
+
+      document.querySelectorAll(".cartao").forEach((item) => item.classList.remove("selecionado"));
+      cartao.classList.add("selecionado");
+      estadoJogo.cartaoSelecionado = dadosDoCartao(cartao);
+      exibirStatus(`Cartão "${textosCartoes[estadoJogo.cartaoSelecionado.id]}" selecionado. Agora clique na entrada ${mapaEntradas[estadoJogo.cartaoSelecionado.cor]}.`, "");
+    }
+
+    function iniciarArrastePorToque(evento, cartao) {
+      if (estadoJogo.bloqueado || evento.pointerType === "mouse") return;
+
+      evento.preventDefault();
+      estadoJogo.ponteiroAtivo = cartao;
+      estadoJogo.cartaoSelecionado = dadosDoCartao(cartao);
+      cartao.classList.add("arrastando");
+
+      const mover = (eventoMover) => {
+        if (!estadoJogo.ponteiroAtivo) return;
+        const alvo = document.elementFromPoint(eventoMover.clientX, eventoMover.clientY);
+        document.querySelectorAll(".entrada").forEach((entrada) => entrada.classList.remove("sobre"));
+        const entrada = alvo && alvo.closest(".entrada");
+        if (entrada) entrada.classList.add("sobre");
+      };
+
+      const soltar = (eventoSoltar) => {
+        document.removeEventListener("pointermove", mover);
+        document.removeEventListener("pointerup", soltar);
+        document.querySelectorAll(".entrada").forEach((entrada) => entrada.classList.remove("sobre"));
+
+        const alvo = document.elementFromPoint(eventoSoltar.clientX, eventoSoltar.clientY);
+        const entrada = alvo && alvo.closest(".entrada");
+
+        cartao.classList.remove("arrastando");
+        estadoJogo.ponteiroAtivo = null;
+
+        if (entrada) lidarComDrop(estadoJogo.cartaoSelecionado, entrada);
+      };
+
+      document.addEventListener("pointermove", mover);
+      document.addEventListener("pointerup", soltar, { once: true });
+    }
+
+    /* =========================================================
+       VALIDAÇÃO E AVANÇO DE DESAFIOS
+    ========================================================== */
+    function lidarComDrop(cartao, entrada) {
+      if (!cartao || estadoJogo.bloqueado) return;
+
+      const cor = corAtual();
+      const entradaEsperada = mapaEntradas[cor];
+      const entradaRecebida = Number(entrada.dataset.entrada);
+
+      if (cartao.cor !== cor || entradaRecebida !== entradaEsperada) {
+        respostaIncorreta(entrada);
+        return;
+      }
+
+      validarCartao(cartao, entrada);
+    }
+
+    function validarCartao(cartao, entrada) 
+    {
+          const cor = corAtual();
+
+          respostaCorreta(cor, cartao.id, entrada);
+    }
+
+    function respostaCorreta(cor, idCartao, entrada) {
+      estadoJogo.bloqueado = true;
+      estadoJogo.entradasPreenchidas[cor] = idCartao;
+
+      exibirStatus("Muito bem! Essa é a escolha certa.", "sucesso");
+
+      document.querySelectorAll(".cartao").forEach((cartao) => {
+        if (cartao.dataset.cartaoId !== idCartao) cartao.classList.add("sumindo");
+      });
+
+      entrada.classList.add("preenchida");
+      entrada.innerHTML = "";
+      entrada.appendChild(criarCartaoFixo(cor, idCartao));
+
+      window.setTimeout(() => {
+        avancarDesafio();
+      }, 900);
+    }
+
+    function respostaIncorreta(entrada) {
+      exibirStatus("Tente novamente.", "erro");
+      entrada.classList.remove("erro-animacao");
+      void entrada.offsetWidth;
+      entrada.classList.add("erro-animacao");
+
+      document.querySelectorAll(".cartao").forEach((cartao) => cartao.classList.remove("selecionado"));
+      estadoJogo.cartaoSelecionado = null;
+    }
+
+    function avancarDesafio() {
+      estadoJogo.indiceDesafio += 1;
+      estadoJogo.cartaoSelecionado = null;
+      estadoJogo.bloqueado = false;
+
+      if (estadoJogo.indiceDesafio >= CORES.length) {
+        finalizarFase();
+        return;
+      }
+
+      renderizarChave();
+      renderizarDesafioAtual();
+    }
+
+    function finalizarFase() {
+      const fase = faseAtual();
+      dom.tituloFimFase.textContent = `Você completou a chave!`;
+      renderizarResumoDaChave();
+      mostrarTela(dom.telaFimFase);
+    }
+
+    function renderizarResumoDaChave() {
+      dom.resumoChave.innerHTML = `
+        <!--<img class="chave" src="imagens/chave.png" alt="Chave amarela preenchida com os três cartões corretos"/>-->
+        <div class="entradas"></div>
+      `;
+
+      const entradas = dom.resumoChave.querySelector(".entradas");
+      CORES.forEach((cor) => {
+        const entrada = document.createElement("div");
+        entrada.className = "entrada preenchida";
+        entrada.appendChild(criarCartaoFixo(cor, estadoJogo.entradasPreenchidas[cor]));
+        entradas.appendChild(entrada);
+      });
+    }
+
+    function continuarJogo() {
+      if (estadoJogo.indiceFase >= fases.length - 1) {
+        dom.progresso.textContent = "1 fase concluída";
+        mostrarTela(dom.telaFinal);
+        return;
+      }
+
+      estadoJogo.indiceFase += 1;
+      mostrarIntroducaoDaFase();
+    }
+
+    function reiniciarJogo() {
+      estadoJogo.indiceFase = 0;
+      estadoJogo.indiceDesafio = 0;
+      estadoJogo.cartaoSelecionado = null;
+      estadoJogo.entradasPreenchidas = {};
+      estadoJogo.bloqueado = false;
+      mostrarTela(dom.telaInicial);
+      dom.progresso.textContent = "Pronto para jogar";
+    }
+
+    /* =========================================================
+       EVENTOS PRINCIPAIS
+    ========================================================== */
+    dom.botaoComecar.addEventListener("click", iniciarJogo);
+    dom.botaoIniciar.addEventListener("click", iniciarFase);
+    dom.botaoContinuar.addEventListener("click", continuarJogo);
+    dom.botaoReiniciar.addEventListener("click", reiniciarJogo);
+
+    document.querySelectorAll("img").forEach((imagem) => {
+      imagem.addEventListener("error", () => {
+        if (imagem.id === "logo" || imagem.id === "imagemChave") {
+          console.warn(`Asset não encontrado: ${imagem.getAttribute("src")}`);
+        }
+      });
+    });
+  </script>
+ 
+</body></html>
